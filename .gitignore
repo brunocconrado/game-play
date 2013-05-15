@@ -7,8 +7,10 @@
 .metadata
 bin/
 tmp/
+target/
 *.tmp
 *.bak
+*.class
 *.swp
 *~.nib
 local.properties
