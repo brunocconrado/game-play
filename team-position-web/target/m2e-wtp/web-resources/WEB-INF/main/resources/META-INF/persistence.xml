@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<persistence version="1.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
+	<persistence-unit name="team-positon" transaction-type="JTA">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<!--<jta-data-source>ds/team-position</jta-data-source> -->
+		<jta-data-source>java:/team-position</jta-data-source>
+
+		<class>br.com.embracon.teamposition.domain.entity.Administrative</class>
+		<class>br.com.embracon.teamposition.domain.entity.Approvation</class>
+		<class>br.com.embracon.teamposition.domain.entity.Ata</class>
+		<class>br.com.embracon.teamposition.domain.entity.AtaExcecao</class>
+		<class>br.com.embracon.teamposition.domain.entity.Branch</class>
+		<class>br.com.embracon.teamposition.domain.entity.Collaborator</class>
+		<class>br.com.embracon.teamposition.domain.entity.Configuration</class>
+		<class>br.com.embracon.teamposition.domain.entity.Menu</class>
+		<class>br.com.embracon.teamposition.domain.entity.MenuProfile</class>
+		<class>br.com.embracon.teamposition.domain.entity.Regional</class>
+		<class>br.com.embracon.teamposition.domain.entity.Situation</class>
+		<class>br.com.embracon.teamposition.domain.entity.Status</class>
+		<class>br.com.embracon.teamposition.domain.entity.TeamSeller</class>
+		<class>br.com.embracon.teamposition.domain.entity.SoldCode</class>
+
+		<class>br.com.embracon.teamposition.domain.entity.log.AtaLog</class>
+		<class>br.com.embracon.teamposition.domain.entity.log.ApprovationLog</class> 
+		<class>br.com.embracon.teamposition.domain.entity.log.BranchLog</class> 
+		<class>br.com.embracon.teamposition.domain.entity.log.TeamSellerLog</class>
+
+		<properties>
+			<!-- <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" 
+				/> -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.generate_statistics" value="false" />
+			<!-- <property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
+
+			<property name="hibernate.cache.use_minimal_puts" value="false" />
+			<property name="hibernate.cache.use_query_cache" value="false" />
+			<property name="hibernate.cache.use_second_level_cache"
+				value="false" />
+			<property name="hibernate.cache.use_structured_entries"
+				value="false" />
+			<property name="hibernate.cache.query_cache_factory" value="false" />
+
+			<property name="hibernate.bytecode.use_reflection_optimizer"
+				value="true" />
+			<property name="hibernate.connection.autocommit" value="false" />
+			<property name="hibernate.connection.release_mode" value="after_transaction" />
+			<property name="hibernate.connection.autoReconnect" value="true" /> -->
+
+		</properties>
+	</persistence-unit>
+
+</persistence>

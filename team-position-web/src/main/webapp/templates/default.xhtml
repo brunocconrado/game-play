@@ -1,0 +1,97 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"      
+      xmlns:p="http://primefaces.prime.com.tr/ui"
+      xmlns:f="http://java.sun.com/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta http-equiv='pragma' content='no-cache'/>
+		<meta http-equiv='expires' content='0'/> 
+        <link rel="stylesheet" type="text/css" href="#{request.contextPath}/resources/themes/team-position/skin.css" />
+        <h:outputStylesheet name="team-position.css" library="css" />
+        <h:outputStylesheet name="default.css" library="css" />
+
+		<title>#{msg.resolve('application.name')}</title>
+       
+    </h:head>
+
+    <h:body style="background:url('#{request.contextPath}/resources/images/bg_main_shadow.gif');">
+        <div id="wrapper">
+            <div id="header">
+                <div style="background-color: red; height: 10px; margin-top: 20px;" />
+                <ui:include src="inc/header.xhtml"/>
+            </div>
+
+            <div id="navigation">
+               	<p:menubar model="#{menuBean.menuModel}" autoSubmenuDisplay="true"/>
+            </div>
+
+            <div id="breadcrumb" style="padding: 5px 0 0 0;">
+            </div>
+
+            <div id="content">
+                <div style="padding: 10px 0px;">
+                    <ui:insert name="content"></ui:insert>
+                </div>
+            </div>
+
+			<div id="mask" class="ui-team-position-mask"/>
+
+            <div id="footer">
+                <ui:include src="inc/footer.xhtml"/>
+                <p:ajaxStatus onstart="$('#mask').loading(); loading.show()" oncomplete="loading.hide(); $('#mask').hide()"/>
+                
+                <p:idleMonitor timeout="3600000" >
+				    <p:ajax event="idle" onstart="idle.show()" />
+				</p:idleMonitor>
+				
+                <h:form>
+                <p:dialog header="Sessão Expirada" widgetVar="idle" modal="true" closable="false" resizable="false" draggable="false" width="350">
+	                <h:panelGrid cellspacing="20">
+		                <h:outputText value="Por favor clique em ok para restaurar a aplicação." />
+                	</h:panelGrid>
+                	<f:facet name="footer">
+						<p:toolbar style="margin: 10px !important" styleClass="menu-toolbar">  
+						    <p:toolbarGroup align="right">
+						    	<h:outputLink value="http://www.embraconnet.com.br/prod/cice/arquivo.php">
+									<button type="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-icon-primary" role="button" aria-disabled="false">
+										<span class="ui-button-icon-primary ui-icon ui-icon ui-icon-check"></span>
+										<span class="ui-button-text">OK</span>
+									</button>
+								</h:outputLink>
+							</p:toolbarGroup>
+						</p:toolbar>
+                	</f:facet>
+                </p:dialog>
+                </h:form>
+                
+                <h:form>
+	                <p:dialog id="loading" 
+	                		  showHeader="false"
+	                          header="Processando"
+	                          widgetVar="loading"
+	                          width="150" draggable="false" resizable="false" closable="false" zindex="4000">
+	                    <h:graphicImage style="padding: 10px 43%;" name="ajaxloading.gif" library="images" />
+	                </p:dialog>
+                </h:form>
+            </div>
+        </div>
+    </h:body>
+    
+  
+    <script type="text/javascript" src="#{request.contextPath}/resources/js/price_format.1.6.js"></script>
+    <script type="text/javascript" src="#{request.contextPath}/resources/js/prime_override.js"></script>
+
+    <script type="text/javascript">    
+       <ui:insert name="script">
+       </ui:insert>
+
+		$(document).ready(function() {           
+	       <ui:insert name="onload">
+	       </ui:insert>
+		});
+    </script>
+</html>

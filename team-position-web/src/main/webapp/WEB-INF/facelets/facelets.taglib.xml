@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE facelet-taglib PUBLIC
+"-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
+"http://java.sun.com/dtd/web-facesconfig_1_0.dtd">
+<facelet-taglib>
+    <namespace>http://embracon.com.br/team-position</namespace>
+    <!-- <tag>
+        <tag-name>loading</tag-name>
+        <source>../../taglibs/processandoDialog.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>dadosBancarios</tag-name>
+        <source>../../taglibs/dadosBancarios.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>admissionRegister</tag-name>
+        <source>../../taglibs/admissaoDialog.xhtml</source>
+    </tag>
+    <tag>
+        <tag-name>title</tag-name>
+        <source>../../taglibs/title.xhtml</source>
+    </tag> -->
+</facelet-taglib>

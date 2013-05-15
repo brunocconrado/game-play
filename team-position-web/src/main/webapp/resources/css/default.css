@@ -1,0 +1,49 @@
+#wrapper {
+    margin: 0 auto;
+    width: 1000px;
+}
+
+#content {
+    float: left;
+    color: #333;
+    background: #FFFFFF;
+    height: 420px !important;
+    width: 1000px;
+    display: table;
+}
+
+#header {
+    color: #333;
+    width: 1000px;
+    float: left;
+    background: none;
+}
+
+#footer {
+    width: 1000px;
+    height: 25px;
+    clear: both;
+    color: #222222;
+    background: #fff;
+    font-size: 10px;
+    font-weight: normal;
+    display: table;
+    margin-bottom: 48px;
+}
+
+#footer p {
+    color: #222222;
+}
+
+#breadcrumb {
+    background: white;
+    float: left;
+    width: 1000px;
+
+}
+
+#navigation {
+    background: white;
+    float: left;
+    width: 1000px;
+}

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.prime.com.tr/ui"
+	template="../../templates/default.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	 
+	<ui:define name="content">
+		<h:form prependId="false">
+			<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+			<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
+			  		
+			<p:tabView id="tvListAta" style="height: 400px;"> 
+				<p:tab id="tabListAta" title="#{msg.resolve('tab.ata.list')}">
+					<p:spacer width="20" height="15"/>
+				
+					<h:panelGroup id="pgroupAtaSearch"> 
+						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName"/>
+								<p:inputText id="txtName" value="#{listAtaBean.search.name}" size="40"/>
+						</h:panelGrid>
+						<h:panelGrid columns="7" cellpadding="3" cellspacing="5">
+								<h:outputLabel value="#{msg.resolve('label.start')}" for="txtStart">
+									<p:spacer width="5"/>
+								</h:outputLabel>
+								<p:calendar id="txtStart" value="#{listAtaBean.search.start}" 
+											pattern="dd/MM/yyyy" showOn="button"  size="11"/>
+								
+								<p:spacer width="6"/>
+								
+								<h:outputLabel value="#{msg.resolve('label.end')}" for="txtEnd"/>
+								<p:calendar id="txtEnd" value="#{listAtaBean.search.end}" 
+											pattern="dd/MM/yyyy" showOn="button" size="11"/>
+								
+								<p:spacer width="3"/>
+								
+								<p:commandLink title="#{msg.resolve('label.search')}" 
+										actionListener="#{listAtaBean.searchAtas}" process="pgroupAtaSearch" update="dgAtas">
+									<h:graphicImage name="busca.png" library="images"/>
+								</p:commandLink>
+								
+						</h:panelGrid>
+						
+						<p:spacer width="20" height="20"/>
+						
+						<p:dataTable widgetVar="dgAta" id="dgAtas" style="width: 90%;" var="ata" value="#{listAtaBean.atas}"
+								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
+								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
+						
+							<f:facet name="header">  
+					            <h:outputLabel value="#{msg.resolve('data.table.ata.header')}" />
+					        </f:facet> 
+					         
+					        <p:column headerText="#{msg.resolve('label.branch.name')}" style="width: 180px !important; text-align: left;">  
+					            <h:outputText value="#{ata.name}"/>  
+					        </p:column>  
+					        
+					        <p:column headerText="#{msg.resolve('label.description')}" style="width: 220px !important; text-align: left;">  
+					            <h:outputText value="#{ata.description}"/>  
+					        </p:column>  
+					  
+					        <p:column headerText="#{msg.resolve('label.start')}" style="text-align: center;">  
+					            <h:outputText value="#{ata.start}" >
+					            	 <f:convertDateTime pattern="dd/MM/yyyy"/>
+					            </h:outputText>  
+					        </p:column>  
+					  
+					        <p:column headerText="#{msg.resolve('label.end')}" style="text-align: center;">  
+					            <h:outputText value="#{ata.end}" >
+					            	 <f:convertDateTime pattern="dd/MM/yyyy"/>
+					            </h:outputText>    
+					        </p:column>  
+					        
+					        <p:column headerText="#{msg.resolve('label.actions')}" style="width: 35px !important;">  
+					            <p:commandLink title="#{msg.resolve('label.edit')}" action="/pages/ata/cadastro"
+					            		 ajax="false" process="@this" immediate="true" update="messages">
+									<h:graphicImage name="pencil.png" library="images"/>
+									<f:setPropertyActionListener target="#{ataBean.ata}" value="#{ata}"/>
+								</p:commandLink>
+					        
+					        	<p:spacer width="3" height="2"/>
+					        
+					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();">
+									<h:graphicImage name="delete.png" library="images"/>
+									<f:setPropertyActionListener target="#{listAtaBean.ataSelected}" value="#{ata}"/>
+								</p:commandLink>
+					        </p:column>  
+						</p:dataTable> 
+						
+						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.ata')}" 
+									header="#{msg.resolve('dialog.header.remove.ata')}" severity="alert">
+			                <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
+			                
+			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" 
+			                    		actionListener="#{listAtaBean.remove}" update="messages, tvListAta:dgAtas, glMessages" immediate="true"/>
+			                    		
+			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgAtas"/>
+			                    
+			                </h:panelGrid>
+			            </p:confirmDialog>
+						
+					</h:panelGroup>
+				</p:tab>
+			</p:tabView>
+		</h:form>	
+	</ui:define>
+</ui:composition>
