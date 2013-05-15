@@ -1,0 +1,134 @@
+package br.com.gp.inventory.domain.bean;
+
+import javax.annotation.PostConstruct;
+
+import org.primefaces.component.menuitem.MenuItem;
+import org.primefaces.component.submenu.Submenu;
+import org.primefaces.model.DefaultMenuModel;
+import org.primefaces.model.MenuModel;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
+
+import br.com.embracon.j4e.i18n.Messages;
+import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Menu;
+import br.com.gp.inventory.domain.service.MenuService;
+import br.com.gp.inventory.domain.vo.UserSession;
+import br.com.gp.inventory.utils.TeamPositionProperties;
+
+@Controller("menuBean")
+@Scope(value = "globalSession")
+public class MenuBean extends DefaultBean {
+ 
+	private static final Long TEAM_SELLER_MENU = 5L;
+	
+	private static final Long REPOR_MENU = 6L;
+	
+	private static final Long TEAM_SELLER_SEARCH = 12L;
+
+	private static final Long TEAM_SELLER_SAVE = 13L;
+	
+	private static final Long REPOR_MENU_SEARCH = 14L;
+	
+	@Autowired
+	@Qualifier("menuService")
+	private MenuService service;
+	
+	/*@Autowired
+	@Qualifier("teamSellerService")
+	private TeamSellerService teamSellerService;*/
+
+	private MenuModel menuModel;
+
+	public MenuBean() {
+		super("menuBean");
+		this.menuModel = new DefaultMenuModel();
+	}
+
+	public MenuModel getMenuModel() {
+		return menuModel;
+	}
+
+	public void setMenuModel(MenuModel menuModel) {
+		this.menuModel = menuModel;
+	}
+
+	@PostConstruct
+	public void init() {
+		
+		try {
+			UserSession user = (UserSession) getFromSession(TeamPositionProperties.USER_LOGGED);
+			if(user == null) {
+				throw new IllegalArgumentException("no user found in session");
+			}
+			
+			Menu root = service.findRootMenu();
+			
+			//boolean showTeamSellerMenu = teamSellerService.validateRegistryPeriod();
+			boolean isAdm = user.isAdm();
+			boolean isManager = user.isManager();
+			boolean isCommercial = user.isCommercial();
+			
+			for (Menu menu : root.getChildren()) {
+				Submenu submenu = createSubMenu(menu);
+				for (Menu child : menu.getChildren()) {
+					if(child.hasChildren()) {
+						submenu.getChildren().add(createSubMenu(child));
+					} else {
+						MenuItem menuItem = createMenuItem(child);
+
+						if((isAdm || isManager) && !isCommercial) {
+							
+							menuItem.setRendered(Boolean.FALSE);	
+							submenu.setRendered(Boolean.FALSE);
+							if(isAdm && (child.getId().equals(TEAM_SELLER_MENU) || 
+									child.getId().equals(TEAM_SELLER_SEARCH) || 
+											child.getId().equals(TEAM_SELLER_SAVE))) {
+								menuItem.setRendered(isAdm);	
+								submenu.setRendered(isAdm);
+							} else if(isManager && 
+									(child.getId().equals(REPOR_MENU) 
+											|| child.getId().equals(REPOR_MENU_SEARCH))) {
+								menuItem.setRendered(isManager);	
+								submenu.setRendered(isManager);
+							}
+						}
+						
+						submenu.getChildren().add(menuItem);
+					}
+				}
+				menuModel.addSubmenu(submenu);
+			}
+		
+		} catch (ServiceException e) {
+			errorMessage("error.message.init", e, "Menu");
+			destroy("menuBean");
+		} catch (Exception e) {
+			fatalMessage("error.message.init", e);
+			destroy("menuBean");
+		}
+	}
+
+	private Submenu createSubMenu(Menu menu) {
+		Submenu submenu = new Submenu();
+		submenu.setId("subMenu_" + menu.getId().intValue());
+		submenu.setIcon(menu.getIcon());
+		submenu.setLabel(Messages.getMessage(menu.getValue()));
+
+		return submenu;
+	}
+
+	private MenuItem createMenuItem(Menu menu) {
+		MenuItem menuItem = new MenuItem();
+		menuItem.setId("menuItem_" + menu.getId());
+		menuItem.setIcon(menu.getIcon());
+		menuItem.setUrl(menu.getUrl());
+		menuItem.setImmediate(true);
+		menuItem.setValue(Messages.getMessage(menu.getValue()));
+		menuItem.setAjax(true);
+
+		return menuItem;
+	}
+}

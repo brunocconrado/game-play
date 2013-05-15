@@ -26,12 +26,12 @@
 
 		<dependency>
 			<groupId>br.com.embracon</groupId>
-			<artifactId>team-position-entity</artifactId>
+			<artifactId>inventory-gp-entity</artifactId>
 			<version>1.0</version>
 		</dependency>
 		<dependency>
 			<groupId>br.com.embracon</groupId>
-			<artifactId>team-position-persistence</artifactId>
+			<artifactId>inventory-gp-persistence</artifactId>
 			<version>1.0</version>
 		</dependency>
 
@@ -39,9 +39,9 @@
 
 	<parent>
 		<groupId>br.com.embracon</groupId>
-		<artifactId>team-position-module</artifactId>
+		<artifactId>inventory-gp-module</artifactId>
 		<version>1.0</version>
-		<relativePath>../team-position-module</relativePath>
+		<relativePath>../inventory-gp-module</relativePath>
 	</parent>
 
 </project>
