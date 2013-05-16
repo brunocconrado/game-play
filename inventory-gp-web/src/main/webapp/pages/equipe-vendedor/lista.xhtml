@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.prime.com.tr/ui"
 	template="../../templates/default.xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html"> 
+	xmlns:h="http://java.sun.com/jsf/html">
 	
 	<ui:define name="content">
 		<h:form prependId="false">
@@ -29,7 +29,7 @@
 								<h:outputLabel value="#{msg.resolve('label.seller.registry')}" for="txtSellerRegistry"/>
 								<p:inputText id="txtSellerRegistry" size="10" maxlength="10"
 										value="#{listTeamSellerBean.tsSearch.sellerRegsitry}"/>
-								 
+								
 								<h:outputLabel value="#{msg.resolve('label.supervisor.name')}" for="txtSellerName"/>
 								<p:inputText id="txtSellerName" size="40" maxlength="80"
 										value="#{listTeamSellerBean.tsSearch.sellerName}"/>

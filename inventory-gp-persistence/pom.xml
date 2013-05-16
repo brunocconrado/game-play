@@ -37,8 +37,9 @@
 
 	<parent>
 		<groupId>br.com.embracon</groupId>
-		<artifactId>inventory-gp-module</artifactId>
+		<artifactId>team-position-module</artifactId>
 		<version>1.0</version>
+		<relativePath>../team-position-module</relativePath>
 	</parent>
 
 </project>

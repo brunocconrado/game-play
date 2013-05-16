@@ -10,49 +10,49 @@
 	
 	<managed-bean>
 		<managed-bean-name>menuBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.MenuBean</managed-bean-class>
+		<managed-bean-class>br.com.embracon.teamposition.domain.bean.MenuBean</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 
 	<managed-bean>
 		<managed-bean-name>msg</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.MessagePropertiesBean</managed-bean-class>
+		<managed-bean-class>br.com.embracon.teamposition.domain.bean.MessagePropertiesBean</managed-bean-class>
 		<managed-bean-scope>application</managed-bean-scope>
 	</managed-bean>
 	
 	<managed-bean>
 		<managed-bean-name>ataBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.AtaBean</managed-bean-class>
+		<managed-bean-class>br.com.embracon.teamposition.domain.bean.AtaBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>branchBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.BranchBean</managed-bean-class>
+		<managed-bean-class>br.com.embracon.teamposition.domain.bean.BranchBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>listAtaBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.ListAtaBean</managed-bean-class>
+		<managed-bean-class>br.com.embracon.teamposition.domain.bean.ListAtaBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>listBranchBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.ListBranchBean</managed-bean-class>
+		<managed-bean-class>br.com.embracon.teamposition.domain.bean.ListBranchBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>listTeamSellerBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.ListTeamSellerBean</managed-bean-class>
+		<managed-bean-class>br.com.embracon.teamposition.domain.bean.ListTeamSellerBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>reportBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.ReportBean</managed-bean-class>
+		<managed-bean-class>br.com.embracon.teamposition.domain.bean.ReportBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	<managed-bean>
 		<managed-bean-name>teamSellerBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.TeamSellerBean</managed-bean-class>
+		<managed-bean-class>br.com.embracon.teamposition.domain.bean.TeamSellerBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 

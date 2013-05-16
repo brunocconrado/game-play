@@ -1,9 +1,9 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>team-position-web</artifactId>
+	<artifactId>inventory-gp-web</artifactId>
 	<packaging>war</packaging>
-	<name>team-position-web Maven Webapp</name>
+	<name>inventory-gp-web Maven Webapp</name>
 	<url>http://maven.apache.org</url>
 
 	<dependencies>
@@ -62,7 +62,7 @@
 		<!-- Team Position Dependences -->
 		<dependency>
 			<groupId>br.com.embracon</groupId>
-			<artifactId>team-position-service</artifactId>
+			<artifactId>inventory-gp-service</artifactId>
 			<version>1.0</version>
 		</dependency>
 
@@ -75,9 +75,9 @@
 
 	<parent>
 		<groupId>br.com.embracon</groupId>
-		<artifactId>inventory-gp-module</artifactId>
+		<artifactId>team-position-module</artifactId>
 		<version>1.0</version>
-		<relativePath>../inventory-gp-module</relativePath>
+		<relativePath>../team-position-module</relativePath>
 	</parent>
 	
 	<build>

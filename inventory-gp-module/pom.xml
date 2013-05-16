@@ -2,7 +2,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>br.com.embracon</groupId>
-	<artifactId>inventory-gp-module</artifactId>
+	<artifactId>team-position-module</artifactId>
 	<version>1.0</version>
 	<packaging>pom</packaging>
 
@@ -15,6 +15,12 @@
 			<groupId>br.com.gameplay</groupId>
 			<artifactId>gameplay</artifactId>
 			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.25</version>
 		</dependency>
 
 		<dependency>
@@ -93,8 +99,8 @@
 	<modules>
 		<module>../inventory-gp-entity</module>
 		<module>../inventory-gp-persistence</module>
-		<module>../team-position-service</module>
-		<module>../team-position-web</module>
+		<module>../inventory-gp-service</module>
+		<module>../inventory-gp-web</module>
 	</modules>
 
 </project>

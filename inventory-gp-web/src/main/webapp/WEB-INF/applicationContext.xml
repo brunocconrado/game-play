@@ -18,7 +18,7 @@
 
 	<bean name="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-			<value>java:/team-position</value>
+			<value>java:jboss/gp-inventory</value>
 		</property>
 	</bean>
 
@@ -47,10 +47,10 @@
 				<value>br.com.embracon.teamposition.domain.entity.Status</value>
 				<value>br.com.embracon.teamposition.domain.entity.TeamSeller</value>
 
-				<value>br.com.gp.inventory.domain.entity.log.AtaLog</value>
-				<value>br.com.gp.inventory.domain.entity.log.ApprovationLog</value> 
-				<value>br.com.gp.inventory.domain.entity.log.BranchLog</value> 
-				<value>br.com.gp.inventory.domain.entity.log.TeamSellerLog</value>
+				<value>br.com.embracon.teamposition.domain.entity.log.AtaLog</value>
+				<value>br.com.embracon.teamposition.domain.entity.log.ApprovationLog</value> 
+				<value>br.com.embracon.teamposition.domain.entity.log.BranchLog</value> 
+				<value>br.com.embracon.teamposition.domain.entity.log.TeamSellerLog</value>
 			</list>
 		</property>
 
