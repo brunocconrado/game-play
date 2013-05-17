@@ -5,7 +5,7 @@ import org.hibernate.criterion.Restrictions;
 import org.hibernate.sql.JoinType;
 import org.springframework.stereotype.Repository;
 
-import br.com.embracon.teamposition.domain.entity.Approvation;
+import br.com.embracon.teamposition.domain.entity.tmp.Approvation;
 import br.com.embracon.teamposition.domain.repository.ApprovationRepository;
 
 @Repository("approvationRepository")

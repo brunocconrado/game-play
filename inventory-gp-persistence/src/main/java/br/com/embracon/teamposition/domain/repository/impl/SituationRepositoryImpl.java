@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.embracon.j4e.domain.repository.RepositoryException;
-import br.com.embracon.teamposition.domain.entity.Situation;
+import br.com.embracon.teamposition.domain.entity.tmp.Situation;
 import br.com.embracon.teamposition.domain.repository.SituationRepository;
 
 @Repository("situationRepository")

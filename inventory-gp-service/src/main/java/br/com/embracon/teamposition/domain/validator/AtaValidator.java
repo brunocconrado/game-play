@@ -3,7 +3,7 @@ package br.com.embracon.teamposition.domain.validator;
 import br.com.embracon.j4e.validation.LocalizableReason;
 import br.com.embracon.j4e.validation.ValidationResult;
 import br.com.embracon.j4e.validation.Validator;
-import br.com.embracon.teamposition.domain.entity.Ata;
+import br.com.embracon.teamposition.domain.entity.tmp.Ata;
 import br.com.embracon.teamposition.domain.repository.AtaRepository;
 
 public class AtaValidator implements Validator<Ata> {

@@ -3,9 +3,9 @@ package br.com.embracon.teamposition.domain.validator;
 import br.com.embracon.j4e.validation.LocalizableReason;
 import br.com.embracon.j4e.validation.ValidationResult;
 import br.com.embracon.j4e.validation.Validator;
-import br.com.embracon.teamposition.domain.entity.Branch;
-import br.com.embracon.teamposition.domain.entity.Collaborator;
-import br.com.embracon.teamposition.domain.entity.Regional;
+import br.com.embracon.teamposition.domain.entity.tmp.Branch;
+import br.com.embracon.teamposition.domain.entity.tmp.Collaborator;
+import br.com.embracon.teamposition.domain.entity.tmp.Regional;
 import br.com.embracon.teamposition.domain.repository.BranchRepository;
 
 public class BranchValidator  implements Validator<Branch> {

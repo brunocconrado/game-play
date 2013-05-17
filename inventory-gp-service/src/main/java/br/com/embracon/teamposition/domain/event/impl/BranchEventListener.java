@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.util.DateUtils;
-import br.com.embracon.teamposition.domain.entity.Branch;
 import br.com.embracon.teamposition.domain.entity.log.BranchLog;
+import br.com.embracon.teamposition.domain.entity.tmp.Branch;
 import br.com.embracon.teamposition.domain.enumeration.LogEnum;
 import br.com.embracon.teamposition.domain.event.Event;
 import br.com.embracon.teamposition.domain.event.EventListener;

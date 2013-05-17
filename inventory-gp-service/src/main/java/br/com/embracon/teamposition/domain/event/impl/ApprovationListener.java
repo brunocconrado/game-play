@@ -5,8 +5,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.util.DateUtils;
-import br.com.embracon.teamposition.domain.entity.Approvation;
 import br.com.embracon.teamposition.domain.entity.log.ApprovationLog;
+import br.com.embracon.teamposition.domain.entity.tmp.Approvation;
 import br.com.embracon.teamposition.domain.event.Event;
 import br.com.embracon.teamposition.domain.event.EventListener;
 import br.com.embracon.teamposition.domain.event.exception.EventListenerException;

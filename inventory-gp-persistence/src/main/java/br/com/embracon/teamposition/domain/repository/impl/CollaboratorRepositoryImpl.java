@@ -8,8 +8,8 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.embracon.teamposition.domain.entity.Collaborator;
-import br.com.embracon.teamposition.domain.entity.TeamSeller;
+import br.com.embracon.teamposition.domain.entity.tmp.Collaborator;
+import br.com.embracon.teamposition.domain.entity.tmp.TeamSeller;
 import br.com.embracon.teamposition.domain.repository.CollaboratorRepository;
 
 @Repository("collaboratorRepository")

@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.embracon.j4e.domain.repository.RepositoryException;
-import br.com.embracon.teamposition.domain.entity.Branch;
+import br.com.embracon.teamposition.domain.entity.tmp.Branch;
 import br.com.embracon.teamposition.domain.enumeration.StatusEnum;
 import br.com.embracon.teamposition.domain.repository.BranchRepository;
 import br.com.embracon.teamposition.domain.repository.StatusRepository;

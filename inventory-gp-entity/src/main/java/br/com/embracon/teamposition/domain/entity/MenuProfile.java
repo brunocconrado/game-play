@@ -17,7 +17,6 @@ public class MenuProfile {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "SEQ_TP_MENU_PERFIL_MF")
-	@SequenceGenerator(name = "SEQ_TP_MENU_PERFIL_MF", sequenceName = "SEQ_TP_MENU_PERFIL_MF")
 	@Column(name = "COD_MENU_PERFIL", scale = 0, precision = 0)
 	private Long id;
 	

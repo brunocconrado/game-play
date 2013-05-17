@@ -2,7 +2,7 @@ package br.com.embracon.teamposition.domain.repository.impl;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.embracon.teamposition.domain.entity.Administrative;
+import br.com.embracon.teamposition.domain.entity.tmp.Administrative;
 import br.com.embracon.teamposition.domain.repository.AdministrativeRepository;
 
 @Repository("administrativeRepository")

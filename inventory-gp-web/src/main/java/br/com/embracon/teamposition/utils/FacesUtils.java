@@ -11,7 +11,7 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 
-import br.com.embracon.teamposition.domain.entity.Collaborator;
+import br.com.embracon.teamposition.domain.entity.tmp.Collaborator;
 
 public class FacesUtils {
 

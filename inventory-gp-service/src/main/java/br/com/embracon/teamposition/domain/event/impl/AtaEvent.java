@@ -1,6 +1,6 @@
 package br.com.embracon.teamposition.domain.event.impl;
 
-import br.com.embracon.teamposition.domain.entity.Ata;
+import br.com.embracon.teamposition.domain.entity.tmp.Ata;
 import br.com.embracon.teamposition.domain.event.Event;
 
 public class AtaEvent implements Event<Ata> {

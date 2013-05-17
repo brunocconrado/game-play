@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import br.com.embracon.j4e.domain.repository.Repository;
-import br.com.embracon.teamposition.domain.entity.Ata;
+import br.com.embracon.teamposition.domain.entity.tmp.Ata;
 import br.com.embracon.teamposition.domain.search.AtaSearch;
 
 

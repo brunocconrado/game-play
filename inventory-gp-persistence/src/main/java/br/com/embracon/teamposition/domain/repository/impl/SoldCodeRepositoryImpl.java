@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.embracon.teamposition.domain.entity.SoldCode;
+import br.com.embracon.teamposition.domain.entity.tmp.SoldCode;
 import br.com.embracon.teamposition.domain.enumeration.SoldCodeEnum;
 import br.com.embracon.teamposition.domain.repository.SoldCodeRepository;
 

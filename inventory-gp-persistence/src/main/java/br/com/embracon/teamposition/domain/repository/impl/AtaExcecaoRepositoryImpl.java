@@ -2,7 +2,7 @@ package br.com.embracon.teamposition.domain.repository.impl;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.embracon.teamposition.domain.entity.AtaExcecao;
+import br.com.embracon.teamposition.domain.entity.tmp.AtaExcecao;
 import br.com.embracon.teamposition.domain.repository.AtaExcecaoRepository;
 
 @Repository("ataExcecaoRepository")

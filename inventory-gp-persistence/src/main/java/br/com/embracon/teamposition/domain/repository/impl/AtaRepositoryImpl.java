@@ -15,8 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import br.com.embracon.j4e.domain.repository.RepositoryException;
 import br.com.embracon.j4e.util.ConvertUtils;
-import br.com.embracon.teamposition.domain.entity.Ata;
-import br.com.embracon.teamposition.domain.entity.AtaExcecao;
+import br.com.embracon.teamposition.domain.entity.tmp.Ata;
+import br.com.embracon.teamposition.domain.entity.tmp.AtaExcecao;
 import br.com.embracon.teamposition.domain.repository.AtaRepository;
 import br.com.embracon.teamposition.domain.search.AtaSearch;
 

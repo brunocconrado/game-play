@@ -3,7 +3,7 @@ package br.com.embracon.teamposition.domain.repository;
 import java.util.List;
 
 import br.com.embracon.j4e.domain.repository.Repository;
-import br.com.embracon.teamposition.domain.entity.Situation;
+import br.com.embracon.teamposition.domain.entity.tmp.Situation;
 
 
 public interface SituationRepository extends Repository<Situation> {

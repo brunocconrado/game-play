@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.com.embracon.teamposition.domain.entity.Configuration;
+import br.com.embracon.teamposition.domain.entity.tmp.Configuration;
 import br.com.embracon.teamposition.domain.repository.ConfigurationRepository;
 
 @Repository("configurationRepository")
