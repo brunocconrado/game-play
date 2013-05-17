@@ -36,10 +36,6 @@ public class MenuBean extends DefaultBean {
 	@Qualifier("menuService")
 	private MenuService service;
 	
-	/*@Autowired
-	@Qualifier("teamSellerService")
-	private TeamSellerService teamSellerService;*/
-
 	private MenuModel menuModel;
 
 	public MenuBean() {
@@ -66,37 +62,13 @@ public class MenuBean extends DefaultBean {
 			
 			Menu root = service.findRootMenu();
 			
-			//boolean showTeamSellerMenu = teamSellerService.validateRegistryPeriod();
-			boolean isAdm = user.isAdm();
-			boolean isManager = user.isManager();
-			boolean isCommercial = user.isCommercial();
-			
 			for (Menu menu : root.getChildren()) {
 				Submenu submenu = createSubMenu(menu);
 				for (Menu child : menu.getChildren()) {
 					if(child.hasChildren()) {
 						submenu.getChildren().add(createSubMenu(child));
 					} else {
-						MenuItem menuItem = createMenuItem(child);
-
-						if((isAdm || isManager) && !isCommercial) {
-							
-							menuItem.setRendered(Boolean.FALSE);	
-							submenu.setRendered(Boolean.FALSE);
-							if(isAdm && (child.getId().equals(TEAM_SELLER_MENU) || 
-									child.getId().equals(TEAM_SELLER_SEARCH) || 
-											child.getId().equals(TEAM_SELLER_SAVE))) {
-								menuItem.setRendered(isAdm);	
-								submenu.setRendered(isAdm);
-							} else if(isManager && 
-									(child.getId().equals(REPOR_MENU) 
-											|| child.getId().equals(REPOR_MENU_SEARCH))) {
-								menuItem.setRendered(isManager);	
-								submenu.setRendered(isManager);
-							}
-						}
-						
-						submenu.getChildren().add(menuItem);
+						submenu.getChildren().add(createMenuItem(child));
 					}
 				}
 				menuModel.addSubmenu(submenu);
