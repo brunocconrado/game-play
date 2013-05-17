@@ -18,12 +18,7 @@
 
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
-			<artifactId>cupertino</artifactId>
-			<version>1.0.6</version>
-		</dependency>
-		<dependency>
-			<groupId>org.primefaces.themes</groupId>
-			<artifactId>south-street</artifactId>
+			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
 		</dependency>
 
@@ -73,11 +68,11 @@
 		</dependency>
 	</dependencies>
 
-	<parent>
+	<parent> 
 		<groupId>br.com.embracon</groupId>
-		<artifactId>team-position-module</artifactId>
+		<artifactId>inventory-gp-module</artifactId>
 		<version>1.0</version>
-		<relativePath>../team-position-module</relativePath>
+		<relativePath>../inventory-gp-module</relativePath>
 	</parent>
 	
 	<build>
@@ -104,7 +99,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
-		<finalName>team-position</finalName>
+		<finalName>inventory-gp</finalName>
 	</build>
 
 </project>

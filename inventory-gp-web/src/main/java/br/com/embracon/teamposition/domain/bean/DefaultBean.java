@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
 import br.com.embracon.j4e.i18n.Messages;
+import br.com.embracon.j4e.util.Objects;
 import br.com.embracon.j4e.validation.InvalidationReason;
 import br.com.embracon.j4e.validation.LocalizableReason;
 import br.com.embracon.teamposition.domain.vo.UserSession;
@@ -28,6 +29,11 @@ public class DefaultBean {
 		
 		UserSession user = ((UserSession)
 				getFromSession(TeamPositionProperties.USER_LOGGED));
+		
+		if(Objects.isNull(user)) {
+			user = new UserSession();
+		}
+		
 		user.addBean(name);
 		
 		addInSession(user, TeamPositionProperties.USER_LOGGED);

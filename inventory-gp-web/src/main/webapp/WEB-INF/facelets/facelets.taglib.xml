@@ -3,7 +3,7 @@
 "-//Sun Microsystems, Inc.//DTD Facelet Taglib 1.0//EN"
 "http://java.sun.com/dtd/web-facesconfig_1_0.dtd">
 <facelet-taglib>
-    <namespace>http://embracon.com.br/team-position</namespace>
+    <namespace>http://gameplaycomputatores.com.br/inventory-gp</namespace>
     <!-- <tag>
         <tag-name>loading</tag-name>
         <source>../../taglibs/processandoDialog.xhtml</source>

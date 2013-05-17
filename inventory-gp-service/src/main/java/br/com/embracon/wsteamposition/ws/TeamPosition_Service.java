@@ -17,20 +17,20 @@ import javax.xml.ws.WebServiceFeature;
  * Generated source version: 2.2
  * 
  */
-@WebServiceClient(name = "team-position", targetNamespace = "http://ws.wsteamposition.embracon.com.br/", wsdlLocation = "http://cetomcat-des.embraconnet.com.br:8080/ws-team-position/team-position?wsdl")
+@WebServiceClient(name = "inventory-gp", targetNamespace = "http://ws.wsteamposition.embracon.com.br/", wsdlLocation = "http://cetomcat-des.embraconnet.com.br:8080/ws-inventory-gp/inventory-gp?wsdl")
 public class TeamPosition_Service
     extends Service
 {
 
     private final static URL TEAMPOSITION_WSDL_LOCATION;
     private final static WebServiceException TEAMPOSITION_EXCEPTION;
-    private final static QName TEAMPOSITION_QNAME = new QName("http://ws.wsteamposition.embracon.com.br/", "team-position");
+    private final static QName TEAMPOSITION_QNAME = new QName("http://ws.wsteamposition.embracon.com.br/", "inventory-gp");
 
     static {
         URL url = null;
         WebServiceException e = null;
         try {
-            url = new URL("http://cetomcat-des.embraconnet.com.br:8080/ws-team-position/team-position?wsdl");
+            url = new URL("http://cetomcat-des.embraconnet.com.br:8080/ws-inventory-gp/inventory-gp?wsdl");
         } catch (MalformedURLException ex) {
             e = new WebServiceException(ex);
         }
@@ -67,9 +67,9 @@ public class TeamPosition_Service
      * @return
      *     returns TeamPosition
      */
-    @WebEndpoint(name = "team-positionPort")
+    @WebEndpoint(name = "inventory-gpPort")
     public TeamPosition getTeamPositionPort() {
-        return super.getPort(new QName("http://ws.wsteamposition.embracon.com.br/", "team-positionPort"), TeamPosition.class);
+        return super.getPort(new QName("http://ws.wsteamposition.embracon.com.br/", "inventory-gpPort"), TeamPosition.class);
     }
 
     /**
@@ -79,9 +79,9 @@ public class TeamPosition_Service
      * @return
      *     returns TeamPosition
      */
-    @WebEndpoint(name = "team-positionPort")
+    @WebEndpoint(name = "inventory-gpPort")
     public TeamPosition getTeamPositionPort(WebServiceFeature... features) {
-        return super.getPort(new QName("http://ws.wsteamposition.embracon.com.br/", "team-positionPort"), TeamPosition.class, features);
+        return super.getPort(new QName("http://ws.wsteamposition.embracon.com.br/", "inventory-gpPort"), TeamPosition.class, features);
     }
 
     private static URL __getWsdlLocation() {

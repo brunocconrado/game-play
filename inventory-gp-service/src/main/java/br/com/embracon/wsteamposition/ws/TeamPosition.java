@@ -22,7 +22,7 @@ import br.com.embracon.wsentity.domain.entity.teamposition.RegionalInfo;
  * Generated source version: 2.2
  * 
  */
-@WebService(name = "team-position", targetNamespace = "http://ws.wsteamposition.embracon.com.br/")
+@WebService(name = "inventory-gp", targetNamespace = "http://ws.wsteamposition.embracon.com.br/")
 @XmlSeeAlso({
     br.com.embracon.wsembraconvo.ObjectFactory.class,
     br.com.embracon.wsembraconvo.authenticator.ObjectFactory.class,
