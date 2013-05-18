@@ -15,9 +15,9 @@ import br.com.embracon.j4e.i18n.Messages;
 import br.com.embracon.j4e.util.Objects;
 import br.com.embracon.j4e.validation.InvalidationReason;
 import br.com.embracon.j4e.validation.LocalizableReason;
-import br.com.embracon.teamposition.domain.vo.UserSession;
-import br.com.embracon.teamposition.utils.FacesUtils;
-import br.com.embracon.teamposition.utils.TeamPositionProperties;
+import br.com.gp.inventory.domain.vo.UserSession;
+import br.com.gp.inventory.utils.FacesUtils;
+import br.com.gp.inventory.utils.TeamPositionProperties;
 
 public class DefaultBean {
 	

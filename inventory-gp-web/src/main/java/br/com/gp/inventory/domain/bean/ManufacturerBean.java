@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import br.com.embracon.teamposition.domain.service.ManufacturerService;
+import br.com.gp.inventory.domain.service.ManufacturerService;
 
 
-@Controller("processorBean")
+@Controller("manufacturerBean")
 @Scope(value = "session")
 public class ManufacturerBean extends DefaultBean {
 
@@ -18,7 +18,7 @@ public class ManufacturerBean extends DefaultBean {
 	private ManufacturerService service;
 	
 	public ManufacturerBean() {
-		super("processorBean");
+		super("manufacturerBean");
 	}
 
 	

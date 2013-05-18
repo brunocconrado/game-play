@@ -13,10 +13,10 @@ import org.springframework.stereotype.Controller;
 
 import br.com.embracon.j4e.i18n.Messages;
 import br.com.embracon.j4e.services.exception.ServiceException;
-import br.com.embracon.teamposition.domain.entity.Menu;
-import br.com.embracon.teamposition.domain.service.MenuService;
-import br.com.embracon.teamposition.domain.vo.UserSession;
-import br.com.embracon.teamposition.utils.TeamPositionProperties;
+import br.com.gp.inventory.domain.entity.Menu;
+import br.com.gp.inventory.domain.service.MenuService;
+import br.com.gp.inventory.domain.vo.UserSession;
+import br.com.gp.inventory.utils.TeamPositionProperties;
 
 @Controller("menuBean")
 @Scope(value = "globalSession")

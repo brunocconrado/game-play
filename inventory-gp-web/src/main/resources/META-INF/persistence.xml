@@ -8,18 +8,18 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/gp-inventory</jta-data-source>
 
-		<class>br.com.embracon.teamposition.domain.entity.Category</class>
-		<class>br.com.embracon.teamposition.domain.entity.Manufacturer</class>
-		<class>br.com.embracon.teamposition.domain.entity.Menu</class>
-		<class>br.com.embracon.teamposition.domain.entity.MenuProfile</class>
-		<class>br.com.embracon.teamposition.domain.entity.Processor</class>
-		<class>br.com.embracon.teamposition.domain.entity.Socket</class>
-		<class>br.com.embracon.teamposition.domain.entity.Status</class>
+		<class>br.com.gp.inventory.domain.entity.Category</class>
+		<class>br.com.gp.inventory.domain.entity.Manufacturer</class>
+		<class>br.com.gp.inventory.domain.entity.Menu</class>
+		<class>br.com.gp.inventory.domain.entity.MenuProfile</class>
+		<class>br.com.gp.inventory.domain.entity.Processor</class>
+		<class>br.com.gp.inventory.domain.entity.Socket</class>
+		<class>br.com.gp.inventory.domain.entity.Status</class>
 
-		<class>br.com.embracon.teamposition.domain.entity.log.AtaLog</class>
-		<class>br.com.embracon.teamposition.domain.entity.log.ApprovationLog</class> 
-		<class>br.com.embracon.teamposition.domain.entity.log.BranchLog</class> 
-		<class>br.com.embracon.teamposition.domain.entity.log.TeamSellerLog</class>
+		<class>br.com.gp.inventory.domain.entity.log.AtaLog</class>
+		<class>br.com.gp.inventory.domain.entity.log.ApprovationLog</class> 
+		<class>br.com.gp.inventory.domain.entity.log.BranchLog</class> 
+		<class>br.com.gp.inventory.domain.entity.log.TeamSellerLog</class>
 
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

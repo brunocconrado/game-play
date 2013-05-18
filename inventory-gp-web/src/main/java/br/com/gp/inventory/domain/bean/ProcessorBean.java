@@ -10,12 +10,12 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
-import br.com.embracon.teamposition.domain.entity.Manufacturer;
-import br.com.embracon.teamposition.domain.entity.Processor;
-import br.com.embracon.teamposition.domain.entity.Socket;
-import br.com.embracon.teamposition.domain.service.ManufacturerService;
-import br.com.embracon.teamposition.domain.service.ProcessorService;
-import br.com.embracon.teamposition.domain.service.SocketService;
+import br.com.gp.inventory.domain.entity.Manufacturer;
+import br.com.gp.inventory.domain.entity.Processor;
+import br.com.gp.inventory.domain.entity.Socket;
+import br.com.gp.inventory.domain.service.ManufacturerService;
+import br.com.gp.inventory.domain.service.ProcessorService;
+import br.com.gp.inventory.domain.service.SocketService;
 
 
 @Controller("processorBean")

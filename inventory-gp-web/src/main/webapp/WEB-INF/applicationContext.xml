@@ -10,7 +10,7 @@
 			 http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 			 http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
 
-	<context:component-scan base-package="br.com.embracon.teamposition" />
+	<context:component-scan base-package="br.com.gp.inventory" />
 	<context:annotation-config /> 
 
 	<!-- Interpretador de anotacoes @Transactional -->
@@ -32,19 +32,19 @@
 		<property name="dataSource" ref="jndiDataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>br.com.embracon.teamposition.domain.entity.Category</value>
-				<value>br.com.embracon.teamposition.domain.entity.Manufacturer</value>
-				<value>br.com.embracon.teamposition.domain.entity.Menu</value>
-				<value>br.com.embracon.teamposition.domain.entity.MenuProfile</value>
-				<value>br.com.embracon.teamposition.domain.entity.Processor</value>
-				<value>br.com.embracon.teamposition.domain.entity.Socket</value>
-				<value>br.com.embracon.teamposition.domain.entity.Status</value>
+				<value>br.com.gp.inventory.domain.entity.Category</value>
+				<value>br.com.gp.inventory.domain.entity.Manufacturer</value>
+				<value>br.com.gp.inventory.domain.entity.Menu</value>
+				<value>br.com.gp.inventory.domain.entity.MenuProfile</value>
+				<value>br.com.gp.inventory.domain.entity.Processor</value>
+				<value>br.com.gp.inventory.domain.entity.Socket</value>
+				<value>br.com.gp.inventory.domain.entity.Status</value>
 
 
-				<value>br.com.embracon.teamposition.domain.entity.log.AtaLog</value>
-				<value>br.com.embracon.teamposition.domain.entity.log.ApprovationLog</value> 
-				<value>br.com.embracon.teamposition.domain.entity.log.BranchLog</value> 
-				<value>br.com.embracon.teamposition.domain.entity.log.TeamSellerLog</value>
+				<value>br.com.gp.inventory.domain.entity.log.AtaLog</value>
+				<value>br.com.gp.inventory.domain.entity.log.ApprovationLog</value> 
+				<value>br.com.gp.inventory.domain.entity.log.BranchLog</value> 
+				<value>br.com.gp.inventory.domain.entity.log.TeamSellerLog</value>
 			</list>
 		</property>
 
