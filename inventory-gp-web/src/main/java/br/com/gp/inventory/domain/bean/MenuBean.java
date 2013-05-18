@@ -1,4 +1,4 @@
-package br.com.embracon.teamposition.domain.bean;
+package br.com.gp.inventory.domain.bean;
 
 import javax.annotation.PostConstruct;
 
@@ -21,16 +21,6 @@ import br.com.embracon.teamposition.utils.TeamPositionProperties;
 @Controller("menuBean")
 @Scope(value = "globalSession")
 public class MenuBean extends DefaultBean {
- 
-	private static final Long TEAM_SELLER_MENU = 5L;
-	
-	private static final Long REPOR_MENU = 6L;
-	
-	private static final Long TEAM_SELLER_SEARCH = 12L;
-
-	private static final Long TEAM_SELLER_SAVE = 13L;
-	
-	private static final Long REPOR_MENU_SEARCH = 14L;
 	
 	@Autowired
 	@Qualifier("menuService")

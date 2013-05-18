@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.embracon.teamposition.domain.bean;
+package br.com.gp.inventory.domain.bean;
 
 import java.util.HashMap;
 import java.util.Locale;

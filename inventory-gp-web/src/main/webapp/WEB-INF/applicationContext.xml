@@ -32,20 +32,14 @@
 		<property name="dataSource" ref="jndiDataSource" />
 		<property name="annotatedClasses">
 			<list>
-				<value>br.com.embracon.teamposition.domain.entity.Administrative</value>
-				<value>br.com.embracon.teamposition.domain.entity.Approvation</value>
-				<value>br.com.embracon.teamposition.domain.entity.Ata</value>
-				<value>br.com.embracon.teamposition.domain.entity.AtaExcecao</value>
-				<value>br.com.embracon.teamposition.domain.entity.Branch</value>
-				<value>br.com.embracon.teamposition.domain.entity.Collaborator</value>
-				<value>br.com.embracon.teamposition.domain.entity.Configuration</value>
+				<value>br.com.embracon.teamposition.domain.entity.Category</value>
+				<value>br.com.embracon.teamposition.domain.entity.Manufacturer</value>
 				<value>br.com.embracon.teamposition.domain.entity.Menu</value>
 				<value>br.com.embracon.teamposition.domain.entity.MenuProfile</value>
-				<value>br.com.embracon.teamposition.domain.entity.Regional</value>
-				<value>br.com.embracon.teamposition.domain.entity.Situation</value>
-				<value>br.com.embracon.teamposition.domain.entity.SoldCode</value>
+				<value>br.com.embracon.teamposition.domain.entity.Processor</value>
+				<value>br.com.embracon.teamposition.domain.entity.Socket</value>
 				<value>br.com.embracon.teamposition.domain.entity.Status</value>
-				<value>br.com.embracon.teamposition.domain.entity.TeamSeller</value>
+
 
 				<value>br.com.embracon.teamposition.domain.entity.log.AtaLog</value>
 				<value>br.com.embracon.teamposition.domain.entity.log.ApprovationLog</value> 
@@ -54,7 +48,7 @@
 			</list>
 		</property>
 
-		<property name="hibernateProperties">
+		 <property name="hibernateProperties">
 			<props>
 
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
@@ -75,7 +69,7 @@
 				<prop key="hibernate.connection.autoReconnect">true</prop>
 			</props>
 		</property>
-	</bean>
+	</bean> 
 
 	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
 		<property name="sessionFactory" ref="sessionFactory"></property>

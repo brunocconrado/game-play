@@ -8,20 +8,13 @@
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/gp-inventory</jta-data-source>
 
-		<class>br.com.embracon.teamposition.domain.entity.Administrative</class>
-		<class>br.com.embracon.teamposition.domain.entity.Approvation</class>
-		<class>br.com.embracon.teamposition.domain.entity.Ata</class>
-		<class>br.com.embracon.teamposition.domain.entity.AtaExcecao</class>
-		<class>br.com.embracon.teamposition.domain.entity.Branch</class>
-		<class>br.com.embracon.teamposition.domain.entity.Collaborator</class>
-		<class>br.com.embracon.teamposition.domain.entity.Configuration</class>
+		<class>br.com.embracon.teamposition.domain.entity.Category</class>
+		<class>br.com.embracon.teamposition.domain.entity.Manufacturer</class>
 		<class>br.com.embracon.teamposition.domain.entity.Menu</class>
 		<class>br.com.embracon.teamposition.domain.entity.MenuProfile</class>
-		<class>br.com.embracon.teamposition.domain.entity.Regional</class>
-		<class>br.com.embracon.teamposition.domain.entity.Situation</class>
+		<class>br.com.embracon.teamposition.domain.entity.Processor</class>
+		<class>br.com.embracon.teamposition.domain.entity.Socket</class>
 		<class>br.com.embracon.teamposition.domain.entity.Status</class>
-		<class>br.com.embracon.teamposition.domain.entity.TeamSeller</class>
-		<class>br.com.embracon.teamposition.domain.entity.SoldCode</class>
 
 		<class>br.com.embracon.teamposition.domain.entity.log.AtaLog</class>
 		<class>br.com.embracon.teamposition.domain.entity.log.ApprovationLog</class> 

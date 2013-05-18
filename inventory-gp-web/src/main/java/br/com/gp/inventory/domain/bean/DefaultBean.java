@@ -1,4 +1,4 @@
-package br.com.embracon.teamposition.domain.bean;
+package br.com.gp.inventory.domain.bean;
 
 import java.util.Collection;
 import java.util.List;
@@ -40,24 +40,16 @@ public class DefaultBean {
 	}
 	
 	protected String getLoginUserInSession() {
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) 
-				context.getExternalContext().getSession(false);
-		return (String) session.getAttribute(TeamPositionProperties.USER_LOGIN);
+		
+		return (String) getSession().getAttribute(TeamPositionProperties.USER_LOGIN);
 	}
 	
 	protected void addInSession(Object obj, String key) {
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) 
-				context.getExternalContext().getSession(false);
-		session.setAttribute(key, obj);
+		getSession().setAttribute(key, obj);
 	}
 	
 	protected Object getFromSession(String key) {
-		FacesContext context = FacesContext.getCurrentInstance();
-		HttpSession session = (HttpSession) 
-				context.getExternalContext().getSession(false);
-		return session.getAttribute(key);
+		return getSession().getAttribute(key);
 	}
 	
 	protected void addCallbackParam(String param, Object value) {
@@ -185,5 +177,16 @@ public class DefaultBean {
 		String detail = isI18n ? Messages.getMessage(keyDetail) : keyDetail;
 		
 		return new FacesMessage(severity, message, detail);
+	}
+	
+	private HttpSession getSession() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpSession session = (HttpSession) 
+				context.getExternalContext().getSession(false);
+		if(Objects.isNull(session)) {
+			session = (HttpSession) context.getExternalContext().getSession(true);
+		}
+		
+		return session;
 	}
 }

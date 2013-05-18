@@ -18,11 +18,11 @@
 				 
 					<h:panelGroup id="pgroupAta">
 						<h:panelGrid columns="2" cellpadding="2" cellspacing="1">
-								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtCodigo">
+								<h:outputLabel value="#{msg.resolve('label.codigo')}" for="txtCodigo">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
 								<p:inputText id="txtCodigo" value="" required="true" size="10" 
-											requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/>
+											requiredMessage="#{msg.resolveMsg('required.field', 'label.codigo')}"/>
 											
 								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName">
 									<p:spacer  width="28" height="2"/>
@@ -30,47 +30,53 @@
 								<p:inputText id="txtName" value="" required="true" size="40" 
 											requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/>
 											
-								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtFabricante">
+								<h:outputLabel value="#{msg.resolve('label.fabricante')}" for="cbxManufacturer">
 									<p:spacer  width="28" height="2"/>
-								</h:outputLabel>  
-								<p:inputText id="txtFabricante" value="" required="true" size="40" 
-											requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/>
+								</h:outputLabel>
+								<p:selectOneMenu id="cbxManufacturer" style="width: 250px;" 
+											value="#{processorBean.manufacturerId}" >
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{processorBean.manufacturers}" var="manufacturer" itemValue="#{manufacturer.id}"	itemLabel="#{manufacturer.name}"/>
+								</p:selectOneMenu>  
 											
-								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtSocket">
+								<h:outputLabel value="#{msg.resolve('label.socket')}" for="cbxSocket">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:inputText id="txtSocket" value="" required="true" size="40" 
-											requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/>
+								<p:selectOneMenu id="cbxSocket" style="width: 250px;" 
+											value="#{processorBean.socketId}" >
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{processorBean.sockets}" var="socket" itemValue="#{socket.id}" itemLabel="#{socket.name}"/>
+								</p:selectOneMenu>  
 											
-								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtTitle">
+								<h:outputLabel value="#{msg.resolve('label.title')}" for="txtTitle">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:inputText id="txtTitle" value="" required="true" size="40" maxlength="150"
-											requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/>
+								<p:inputText id="txtTitle" value="#{processorBean.processor.title}" required="true" size="40" maxlength="150"
+											requiredMessage="#{msg.resolveMsg('required.field', 'label.title')}"/>
 								
 						</h:panelGrid>
 						
 					</h:panelGroup>
 				</p:tab>
-				<p:tab id="tabDescription" title="#{msg.resolve('tab.ata.register')}">
+				<p:tab id="tabDescription" title="#{msg.resolve('tab.commercial.desciption')}">
 					<h:panelGroup id="pgroupDescription">
 						<h:panelGrid columns="2" cellpadding="2" cellspacing="1">
-							<h:outputLabel value="#{msg.resolve('label.name')}" for="txaDescription">
+							<h:outputLabel value="#{msg.resolve('label.description')}" for="txaDescription">
 								<p:spacer  width="28" height="2"/>
 							</h:outputLabel>  
 							<p:inputTextarea id="txaDescription" value="" required="true" rows="15" cols="40"
-										requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/>
+										requiredMessage="#{msg.resolveMsg('required.field', 'label.desciption')}"/>
 						</h:panelGrid>
 					</h:panelGroup>					
 				</p:tab>
-				<p:tab id="tabEspecification" title="#{msg.resolve('tab.ata.register')}" >
+				<p:tab id="tabEspecification" title="#{msg.resolve('tab.technical.specification')}" >
 					<h:panelGroup id="pgroupEspecification">
 						<h:panelGrid columns="2" cellpadding="2" cellspacing="1">
-							<h:outputLabel value="#{msg.resolve('label.name')}" for="txaEspecification">
+							<h:outputLabel value="#{msg.resolve('label.specification')}" for="txaEspecification">
 								<p:spacer  width="28" height="2"/>
 							</h:outputLabel>  
 							<p:inputTextarea id="txaEspecification" value="" required="true" rows="15" cols="40"
-										requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/>
+										requiredMessage="#{msg.resolveMsg('required.field', 'label.specification')}"/>
 						</h:panelGrid>
 					</h:panelGroup>					
 				</p:tab>
