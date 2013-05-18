@@ -2,12 +2,13 @@ package br.com.gp.inventory.domain.repository.impl;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.embracon.j4e.domain.repository.AbstractRepository;
 import br.com.gp.inventory.domain.entity.Socket;
 import br.com.gp.inventory.domain.repository.SocketRepository;
 
 @Repository("socketRepository")
-public class SocketRepositoryImpl extends AbstractRepository<Socket> implements SocketRepository {
+public class SocketRepositoryImpl extends AbstractHibernateRepostirory<Socket> implements SocketRepository {
+
+	private static final long serialVersionUID = -1688778425972502385L;
 
 	public SocketRepositoryImpl() {
 		super(Socket.class);

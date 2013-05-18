@@ -52,12 +52,23 @@ public class ProcessorBean extends DefaultBean {
 	public void init() {
 		try {
 			
+			this.processor = new Processor();
+			
 			this.manufacturers = manufactoryService.findAll();
 			this.sockets = socketService.findAll();
 			
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Processador");
 		}
+	}
+	
+	public void save() {
+		
+	}
+	
+	public String linkRedirect() {
+		destroy("processorBean");
+		return "/pages/processador/lista";
 	}
 	
 	public List<Manufacturer> getManufacturers() {

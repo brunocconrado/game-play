@@ -22,6 +22,9 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "COD_PROCESSADOR", scale = 0, precision = 0)
 	private Long id;
 	
+	@Column(name = "CODIGO", length = 10, nullable = false)
+	private String code;
+	
 	@Column(name = "NOME", length = 80, nullable = false)
 	private String name;
 	
@@ -46,6 +49,14 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	public String getName() {

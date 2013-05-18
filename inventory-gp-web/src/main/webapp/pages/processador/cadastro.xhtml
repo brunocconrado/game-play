@@ -12,25 +12,19 @@
 			<p:messages id="messages" showDetail="false" autoUpdate="false" closable="true" /> 
 			<p:growl id="grlMessages" showDetail="false" autoUpdate="false" closable="true" />  
 			
-			<p:tabView id="tvAta" style="height: 250px;"> 
-				<p:tab id="tabAta" title="#{msg.resolve('tab.ata.register')}">
+			<p:tabView id="tvProcessor" style="height: 250px;"> 
+				<p:tab id="tabProcessor" title="#{msg.resolve('tab.processor.register')}">
 					<p:spacer width="20" height="15"/>
 				 
-					<h:panelGroup id="pgroupAta">
-						<h:panelGrid columns="2" cellpadding="2" cellspacing="1">
-								<h:outputLabel value="#{msg.resolve('label.codigo')}" for="txtCodigo">
+					<h:panelGroup id="pgroupProcessor">
+						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+								<h:outputLabel value="#{msg.resolve('label.code')}" for="txtCodigo">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:inputText id="txtCodigo" value="" required="true" size="10" 
-											requiredMessage="#{msg.resolveMsg('required.field', 'label.codigo')}"/>
+								<p:inputText id="txtCodigo" value="#{processorBean.processor.code}" required="true" size="10" 
+											requiredMessage="#{msg.resolveMsg('required.field', 'label.code')}"/>
 											
-								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName">
-									<p:spacer  width="28" height="2"/>
-								</h:outputLabel>  
-								<p:inputText id="txtName" value="" required="true" size="40" 
-											requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/>
-											
-								<h:outputLabel value="#{msg.resolve('label.fabricante')}" for="cbxManufacturer">
+								<h:outputLabel value="#{msg.resolve('label.manufacturer')}" for="cbxManufacturer">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>
 								<p:selectOneMenu id="cbxManufacturer" style="width: 250px;" 
@@ -46,7 +40,13 @@
 											value="#{processorBean.socketId}" >
 									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
 									<f:selectItems value="#{processorBean.sockets}" var="socket" itemValue="#{socket.id}" itemLabel="#{socket.name}"/>
-								</p:selectOneMenu>  
+								</p:selectOneMenu> 
+								
+								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:inputText id="txtName" value="#{processorBean.processor.name}" required="true" size="40" 
+											requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/> 
 											
 								<h:outputLabel value="#{msg.resolve('label.title')}" for="txtTitle">
 									<p:spacer  width="28" height="2"/>
@@ -60,27 +60,42 @@
 				</p:tab>
 				<p:tab id="tabDescription" title="#{msg.resolve('tab.commercial.desciption')}">
 					<h:panelGroup id="pgroupDescription">
-						<h:panelGrid columns="2" cellpadding="2" cellspacing="1">
+						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 							<h:outputLabel value="#{msg.resolve('label.description')}" for="txaDescription">
-								<p:spacer  width="28" height="2"/>
+								<p:spacer  width="30" height="2"/>
 							</h:outputLabel>  
-							<p:inputTextarea id="txaDescription" value="" required="true" rows="15" cols="40"
-										requiredMessage="#{msg.resolveMsg('required.field', 'label.desciption')}"/>
+							<p:inputTextarea id="txaDescription" value="" required="true" rows="10" cols="40"
+										requiredMessage="#{msg.resolveMsg('required.field', 'label.description')}"/>
 						</h:panelGrid>
 					</h:panelGroup>					
 				</p:tab>
 				<p:tab id="tabEspecification" title="#{msg.resolve('tab.technical.specification')}" >
 					<h:panelGroup id="pgroupEspecification">
-						<h:panelGrid columns="2" cellpadding="2" cellspacing="1">
+						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 							<h:outputLabel value="#{msg.resolve('label.specification')}" for="txaEspecification">
-								<p:spacer  width="28" height="2"/>
+								<p:spacer  width="12" height="2"/>
 							</h:outputLabel>  
-							<p:inputTextarea id="txaEspecification" value="" required="true" rows="15" cols="40"
+							<p:inputTextarea id="txaEspecification" value="" required="true" rows="10" cols="40"
 										requiredMessage="#{msg.resolveMsg('required.field', 'label.specification')}"/>
 						</h:panelGrid>
 					</h:panelGroup>					
 				</p:tab>
 			</p:tabView>
+			
+			<h:panelGrid columns="1" style="width: 100%; text-align:right !important;">
+				<p:spacer width="100%" height="10"/>	
+			 	<h:panelGroup>			 
+			 		<p:commandButton id="btnCancel" immediate="true" ajax="false" image="ui-icon ui-icon-close"
+			 					value="#{msg.resolve('label.cancel')}" action="#{processorBean.linkRedirect()}"/>
+					
+					<p:spacer width="5"/>
+					
+					<p:commandButton id="btnSave" process="@this, tvProcessor" 
+								update="messages, grlMessages" image="ui-icon ui-icon-disk"
+								value="#{msg.resolve('label.save')}" actionListener="#{branchBean.save}"/>
+				</h:panelGroup>
+			</h:panelGrid>
+			
 		</h:form>
 	</ui:define>
 	
