@@ -16,11 +16,6 @@
 		<class>br.com.gp.inventory.domain.entity.Socket</class>
 		<class>br.com.gp.inventory.domain.entity.Status</class>
 
-		<class>br.com.gp.inventory.domain.entity.log.AtaLog</class>
-		<class>br.com.gp.inventory.domain.entity.log.ApprovationLog</class> 
-		<class>br.com.gp.inventory.domain.entity.log.BranchLog</class> 
-		<class>br.com.gp.inventory.domain.entity.log.TeamSellerLog</class>
-
 		<properties>
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />

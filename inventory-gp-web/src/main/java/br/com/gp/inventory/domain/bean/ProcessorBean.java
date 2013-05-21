@@ -13,6 +13,7 @@ import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Processor;
 import br.com.gp.inventory.domain.entity.Socket;
+import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.service.ManufacturerService;
 import br.com.gp.inventory.domain.service.ProcessorService;
 import br.com.gp.inventory.domain.service.SocketService;
@@ -54,7 +55,7 @@ public class ProcessorBean extends DefaultBean {
 			
 			this.processor = new Processor();
 			
-			this.manufacturers = manufactoryService.findAll();
+			this.manufacturers = manufactoryService.findAllByCategory(CategoryEnum.PROCESSOR);
 			this.sockets = socketService.findAll();
 			
 		} catch (ServiceException e) {
@@ -63,6 +64,20 @@ public class ProcessorBean extends DefaultBean {
 	}
 	
 	public void save() {
+		
+		try {
+			
+			this.processor.setManufacturer(this.manufactoryService.findById(this.manufacturerId));
+			this.processor.setSocket(this.socketService.findById(this.socketId));
+			
+			this.service.save(this.processor);
+			
+			successMessage("save.success", "Processador");			
+		} catch (ServiceException e) {
+			errorMessage("error.search", "Processador");
+		} catch (Throwable e) {
+			fatalMessage("fatal.error");
+		}
 		
 	}
 	
@@ -110,7 +125,5 @@ public class ProcessorBean extends DefaultBean {
 	public void setSocketId(Long socketId) {
 		this.socketId = socketId;
 	}
-	
-	
 	 
 }

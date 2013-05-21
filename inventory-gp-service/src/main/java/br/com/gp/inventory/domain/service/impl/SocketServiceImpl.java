@@ -26,4 +26,9 @@ public class SocketServiceImpl implements SocketService {
 		return (List<Socket>) repository.findAll();
 	}
 
+	@Override
+	public Socket findById(Long socketId) throws ServiceException {
+		return this.repository.findByIdentity(socketId);
+	}
+
 }

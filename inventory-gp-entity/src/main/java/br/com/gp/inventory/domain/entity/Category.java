@@ -18,7 +18,7 @@ public class Category implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "COD_CATEGORIA", scale = 0, precision = 0)
 	private Long id;
 	
-	@Column(name = "NAME", length = 10)
+	@Column(name = "NAME", length = 40)
 	private String name;
 
 	public Long getId() {

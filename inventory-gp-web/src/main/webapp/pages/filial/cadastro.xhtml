@@ -7,6 +7,12 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 	
+	<ui:define name="script">
+		$(document).ready(function() {  
+			
+		}); 
+  	</ui:define>
+	
 	<ui:define name="content"> 
 		<h:form prependId="false">
 		
@@ -296,37 +302,4 @@
 			
 		</h:form>
 	</ui:define>
-	
-	 <ui:define name="script">  
-	 	
-	 	$(document).ready(function() {  
-			$('#txtSearchCPF').mask("999.999.999-99");
-			$('#txtSearchCNPJ').mask("99.999.999/9999-99");
-			
-			changeMasks();	
-		});
-	      
-        function branchSaveCompleteHandle(xhr, status, args) {     
-	        if(args.firstSave) {
-	        	cdlgSaveConfirm.show();
-	        }
-        }
-        
-		function changeMasks() {
-		
-			var radio = $('#typeperson :checked');
-			
-			$('#txtSearchCPF').css('display', 'none');
-			$('#txtSearchCNPJ').css('display', 'none');
-			
-			if (radio.val() == "F") {
-				$('#txtSearchCPF').css('display', 'block');
-			}else{
-				$('#txtSearchCNPJ').css('display', 'block');
-			}
-			
-		}
-		
-        
-    </ui:define>
 </ui:composition>

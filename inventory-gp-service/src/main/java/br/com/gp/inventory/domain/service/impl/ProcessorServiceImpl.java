@@ -1,6 +1,6 @@
 package br.com.gp.inventory.domain.service.impl;
 
-import java.util.Collection;
+import java.util.List;
 
 import javax.interceptor.Interceptors;
 
@@ -22,8 +22,13 @@ public class ProcessorServiceImpl implements ProcessorService {
 	private ProcessorRepository repository;
 	
 	@Override
-	public Collection<Processor> findAll() throws ServiceException {
-		return repository.findAll();
+	public List<Processor> findAll() throws ServiceException {
+		return (List<Processor>) repository.findAll();
+	}
+
+	@Override
+	public void save(Processor processor) throws ServiceException {
+		this.repository.save(processor);	
 	}
 
 }

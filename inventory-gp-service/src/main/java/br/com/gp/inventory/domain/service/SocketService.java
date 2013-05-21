@@ -10,4 +10,6 @@ public interface SocketService {
 	
 	public List<Socket> findAll() throws ServiceException;
 
+	public Socket findById(Long socketId) throws ServiceException;
+
 }

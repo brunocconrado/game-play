@@ -2,11 +2,13 @@ package br.com.gp.inventory.domain.repository.impl;
 
 import java.util.Collection;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import br.com.gp.inventory.domain.entity.Manufacturer;
+import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.ManufacturerRepository;
 
 @Repository("manufacturerRepository")
@@ -18,11 +20,10 @@ public class ManufacturerRepositoryimpl extends AbstractHibernateRepostirory<Man
 	public ManufacturerRepositoryimpl() {
 		super(Manufacturer.class);
 	}
-
+	
 	@Override
-	public Collection<Manufacturer> findByCategory(Long categoryId) {
-		// TODO Auto-generated method stub
-		return null;
+	public Collection<Manufacturer> findByCategory(CategoryEnum category) {
+		return this.createCriteria().add(Restrictions.eq("category.id", category.value())).list();
 	}
 
 }

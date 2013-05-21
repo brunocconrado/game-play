@@ -40,11 +40,6 @@
 				<value>br.com.gp.inventory.domain.entity.Socket</value>
 				<value>br.com.gp.inventory.domain.entity.Status</value>
 
-
-				<value>br.com.gp.inventory.domain.entity.log.AtaLog</value>
-				<value>br.com.gp.inventory.domain.entity.log.ApprovationLog</value> 
-				<value>br.com.gp.inventory.domain.entity.log.BranchLog</value> 
-				<value>br.com.gp.inventory.domain.entity.log.TeamSellerLog</value>
 			</list>
 		</property>
 

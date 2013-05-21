@@ -21,6 +21,11 @@
 	</managed-bean> 
 	
 	<managed-bean>
+		<managed-bean-name>listProcessorBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.ListProcessorBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
 		<managed-bean-name>manufacturerBean</managed-bean-name>
 		<managed-bean-class>br.com.gp.inventory.domain.bean.ManufacturerBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
