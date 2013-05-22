@@ -9,11 +9,11 @@ import br.com.gp.inventory.domain.repository.ProcessorRepository;
 
 @Repository("processorRepository")
 @Transactional(propagation = Propagation.REQUIRED)
-public class ProcessorRepositoryimpl  extends AbstractHibernateRepostirory<Processor> implements ProcessorRepository {
+public class ProcessorRepositoryImpl  extends AbstractHibernateRepostirory<Processor> implements ProcessorRepository {
 
 	private static final long serialVersionUID = 3693155610312651628L;
 
-	public ProcessorRepositoryimpl() {
+	public ProcessorRepositoryImpl() {
 		super(Processor.class);
 	}
 

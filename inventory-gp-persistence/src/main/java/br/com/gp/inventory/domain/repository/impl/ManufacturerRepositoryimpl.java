@@ -11,6 +11,7 @@ import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.ManufacturerRepository;
 
+@SuppressWarnings("unchecked")
 @Repository("manufacturerRepository")
 @Transactional(propagation = Propagation.REQUIRED)
 public class ManufacturerRepositoryimpl extends AbstractHibernateRepostirory<Manufacturer> implements ManufacturerRepository {

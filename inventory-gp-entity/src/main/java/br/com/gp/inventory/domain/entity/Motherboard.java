@@ -10,22 +10,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "INV_PROCESSADOR")
-public class Processor implements br.com.embracon.j4e.domain.Entity {
+@Table(name = "INV_PLACA_MAE")
+public class Motherboard  implements br.com.embracon.j4e.domain.Entity {
 
-	
-	private static final long serialVersionUID = -8838851420440386488L;
+
+	private static final long serialVersionUID = 8904713741502690247L;
 	
 	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###,###,###,###,##0.00");
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "COD_PROCESSADOR", scale = 0, precision = 0)
+	@Column(name = "COD_PLACA_MAE", scale = 0, nullable = false)
 	private Long id;
 	
 	@Column(name = "CODIGO", length = 10, nullable = false)
@@ -37,12 +38,12 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "TITULO", length = 150, nullable = false)
 	private String title;
 	
-	//TODO: Byte
-	@Column(name = "DESCRIPTION", length = 100, nullable = false)
+	@Lob
+	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
 	
-	//TODO: Byte
-	@Column(name = "ESPECIFICATION", length = 100, nullable = false)
+	@Lob
+	@Column(name = "ESPECIFICATION", nullable = false)
 	private String especification;
 	
 	@Column(name = "PRECO", precision = 10, scale = 2)
@@ -58,8 +59,8 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 	
 	@Transient
 	private String priceString;
-	
-	public Processor() {
+
+	public Motherboard() {
 		this.socket = new Socket();
 		this.manufacturer = new Manufacturer();
 	}
@@ -149,10 +150,10 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 	}
 	
 	public boolean equals(Object obj) {
-		return obj instanceof Processor && this.equals((Processor)obj);
+		return obj instanceof Motherboard && this.equals((Motherboard)obj);
 	}
 	
-	public boolean equals(Processor other) {
+	public boolean equals(Motherboard other) {
 		return 	this.id != null && this.id.equals(other.id);
 	}
 	

@@ -35,11 +35,11 @@
 				<value>br.com.gp.inventory.domain.entity.Category</value>
 				<value>br.com.gp.inventory.domain.entity.Manufacturer</value>
 				<value>br.com.gp.inventory.domain.entity.Menu</value>
-				<value>br.com.gp.inventory.domain.entity.MenuProfile</value>
+				<value>br.com.gp.inventory.domain.entity.Motherboard</value>
 				<value>br.com.gp.inventory.domain.entity.Processor</value>
 				<value>br.com.gp.inventory.domain.entity.Socket</value>
 				<value>br.com.gp.inventory.domain.entity.Status</value>
-
+				<value>br.com.gp.inventory.domain.entity.VideoCard</value>
 			</list>
 		</property>
 

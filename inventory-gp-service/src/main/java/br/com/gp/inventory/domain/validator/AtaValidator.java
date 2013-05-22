@@ -4,15 +4,9 @@ import br.com.embracon.j4e.validation.LocalizableReason;
 import br.com.embracon.j4e.validation.ValidationResult;
 import br.com.embracon.j4e.validation.Validator;
 import br.com.gp.inventory.domain.entity.tmp.Ata;
-import br.com.gp.inventory.domain.repository.AtaRepository;
 
 public class AtaValidator implements Validator<Ata> {
 
-	private AtaRepository repository;
-
-	public AtaValidator(AtaRepository repository) {
-		this.repository = repository;
-	}
 
 	@Override
 	public ValidationResult validate(Ata ata) {
@@ -39,7 +33,7 @@ public class AtaValidator implements Validator<Ata> {
 					"validation.date.end.ata.less.than.start.registry"));
 		}
 
-		if(this.repository.existDateInteval(ata.getId(), 
+		/*if(this.repository.existDateInteval(ata.getId(), 
 					ata.getStart(), ata.getEnd(), "start", "end")) {
 			resultado.addReason(new LocalizableReason(
 					"validation.date.ata.between.other.interval"));
@@ -49,7 +43,7 @@ public class AtaValidator implements Validator<Ata> {
 					ata.getRegistryStart(), ata.getRegistryEnd(), "registryStart", "registryEnd")) {
 			resultado.addReason(new LocalizableReason(
 					"validation.date.ata.registry.between.other.interval"));
-		}
+		}*/
 
 		return resultado;
 	}

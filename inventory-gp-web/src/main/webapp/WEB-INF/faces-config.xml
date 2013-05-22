@@ -21,18 +21,60 @@
 	</managed-bean> 
 	
 	<managed-bean>
-		<managed-bean-name>listProcessorBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.ListProcessorBean</managed-bean-class>
+		<managed-bean-name>memoryBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.MemoryBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>memoryListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.MemoryListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>driveBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.DriveBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean> 
+	
+	<managed-bean>
+		<managed-bean-name>driveListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.DriveListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>motherboardBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.MotherboardBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
 	<managed-bean>
 		<managed-bean-name>manufacturerBean</managed-bean-name>
 		<managed-bean-class>br.com.gp.inventory.domain.bean.ManufacturerBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	
 	<managed-bean>
 		<managed-bean-name>processorBean</managed-bean-name>
 		<managed-bean-class>br.com.gp.inventory.domain.bean.ProcessorBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>processorListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.ProcessorListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>videoCardBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.VideoCardBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>videoCardListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.VideoCardListBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 

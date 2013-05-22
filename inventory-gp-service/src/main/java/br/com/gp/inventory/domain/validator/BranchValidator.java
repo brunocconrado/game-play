@@ -6,16 +6,9 @@ import br.com.embracon.j4e.validation.Validator;
 import br.com.gp.inventory.domain.entity.tmp.Branch;
 import br.com.gp.inventory.domain.entity.tmp.Collaborator;
 import br.com.gp.inventory.domain.entity.tmp.Regional;
-import br.com.gp.inventory.domain.repository.BranchRepository;
 
 public class BranchValidator  implements Validator<Branch> {
 
-	private BranchRepository repository;
-	
-	public BranchValidator(BranchRepository repository) {
-		this.repository = repository;
-	}
-	
 	@Override
 	public ValidationResult validate(Branch branch) {
 		
@@ -45,9 +38,9 @@ public class BranchValidator  implements Validator<Branch> {
 			result.addReason(new LocalizableReason("validation.required", "a Regional"));
 		}
 		
-		if(repository.existFilial(branch)) {
+		/*if(repository.existFilial(branch)) {
 			result.addReason(new LocalizableReason("validation.exist", "Filial", "Codigo", branch.getCode()));
-		}
+		}*/
 		
 		return result;
 	}

@@ -34,7 +34,7 @@
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>
 								<p:selectOneMenu id="cbxManufacturer" style="width: 250px;" 
-											value="#{processorBean.processor.manufacturer.id}" >
+											value="#{processorBean.manufacturerId}" >
 									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
 									<f:selectItems value="#{processorBean.manufacturers}" var="manufacturer" itemValue="#{manufacturer.id}"	itemLabel="#{manufacturer.name}"/>
 								</p:selectOneMenu>  
@@ -43,7 +43,7 @@
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
 								<p:selectOneMenu id="cbxSocket" style="width: 250px;" 
-											value="#{processorBean.processor.socket.id}" >
+											value="#{processorBean.socketId}" >
 									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
 									<f:selectItems value="#{processorBean.sockets}" var="socket" itemValue="#{socket.id}" itemLabel="#{socket.name}"/>
 								</p:selectOneMenu> 

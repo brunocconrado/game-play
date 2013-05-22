@@ -2,8 +2,10 @@ package br.com.gp.inventory.domain.enumeration;
 
 public enum CategoryEnum {
 	
-	PROCESSOR(2L), 
+	PROCESSOR(1L), 
+	MOTHERBOARD(2L),
 	MEMORY(3L), 
+	VIDEO_CARD(4L),
 	HD(-1L), 
 	CASE(-1L);
 	

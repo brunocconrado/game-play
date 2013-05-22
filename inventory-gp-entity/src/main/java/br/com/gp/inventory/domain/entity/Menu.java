@@ -14,7 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 
 @Entity
-@Table(name = "TP_MENU") 
+@Table(name = "INV_MENU") 
 public class Menu implements br.com.embracon.j4e.domain.Entity {
 
 	private static final long serialVersionUID = 3923204993448223460L;
@@ -38,9 +38,6 @@ public class Menu implements br.com.embracon.j4e.domain.Entity {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parent")
 	private Set<Menu> children = new HashSet<Menu>();
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "menu")
-	private Set<MenuProfile> menuProfiles = new HashSet<MenuProfile>();
 	
 	@Transient
 	private Long profileId;
@@ -91,14 +88,6 @@ public class Menu implements br.com.embracon.j4e.domain.Entity {
 
 	public void setChildren(Set<Menu> children) {
 		this.children = children;
-	}
-
-	public Set<MenuProfile> getMenuProfiles() {
-		return menuProfiles;
-	}
-
-	public void setMenuProfiles(Set<MenuProfile> menuProfiles) {
-		this.menuProfiles = menuProfiles;
 	}
 
 	public boolean hasChildren() {

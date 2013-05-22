@@ -11,21 +11,24 @@ import org.springframework.stereotype.Controller;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Manufacturer;
-import br.com.gp.inventory.domain.entity.Processor;
+import br.com.gp.inventory.domain.entity.Motherboard;
 import br.com.gp.inventory.domain.entity.Socket;
 import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.service.ManufacturerService;
-import br.com.gp.inventory.domain.service.ProcessorService;
+import br.com.gp.inventory.domain.service.MotherboardService;
 import br.com.gp.inventory.domain.service.SocketService;
 
-
-@Controller("processorBean")
+@Controller("motherboardBean")
 @Scope(value = "session")
-public class ProcessorBean extends DefaultBean {
-
+public class MotherboardBean extends DefaultBean {
+	
+	public MotherboardBean() {
+		super("motherboardBean");
+	}
+	
 	@Autowired
-	@Qualifier("processorService")
-	private ProcessorService service;
+	@Qualifier("motherboardService")
+	private MotherboardService service;
 	
 	@Autowired
 	@Qualifier("manufacturerService")
@@ -39,29 +42,23 @@ public class ProcessorBean extends DefaultBean {
 	
 	private List<Socket> sockets;
 	
-	private Processor processor;
+	private Motherboard motherboard;
 	
 	private Long manufacturerId;
 	
 	private Long socketId;
 	
-	public ProcessorBean() {
-		super("processorBean");
-	}
-
 	@PostConstruct
 	public void init() {
 		try {
 			
-			if(this.processor == null) {
-				this.processor = new Processor();
-			}
+			this.motherboard = new Motherboard();
 			
-			this.manufacturers = manufactoryService.findAllByCategory(CategoryEnum.PROCESSOR);
+			this.manufacturers = manufactoryService.findAllByCategory(CategoryEnum.MOTHERBOARD);
 			this.sockets = socketService.findAll();
 			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Processador");
+			errorMessage("error.search", "Placa Mãe");
 		}
 	}
 	
@@ -69,16 +66,16 @@ public class ProcessorBean extends DefaultBean {
 		
 		try {
 			
-			this.processor.setManufacturer(this.manufactoryService
-							.findById(this.processor.getManufacturer().getId()));
-			this.processor.setSocket(this.socketService
-							.findById(this.processor.getSocket().getId()));
+			this.motherboard.setManufacturer(this.manufactoryService
+							.findById(this.motherboard.getManufacturer().getId()));
+			this.motherboard.setSocket(this.socketService
+							.findById(this.motherboard.getSocket().getId()));
 			
-			this.service.save(this.processor);
+			this.service.save(this.motherboard);
 			
-			successMessage("save.success", "Processador");			
+			successMessage("save.success", "Placa Mãe");			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Processador");
+			errorMessage("error.search", "Placa Mãe");
 		} catch (Throwable e) {
 			fatalMessage("fatal.error");
 		}
@@ -86,8 +83,8 @@ public class ProcessorBean extends DefaultBean {
 	}
 	
 	public String linkRedirect() {
-		destroy("processorBean");
-		return "/pages/processador/lista";
+		destroy("motherboardBean");
+		return "/pages/placa-mae/lista";
 	}
 	
 	public List<Manufacturer> getManufacturers() {
@@ -114,12 +111,12 @@ public class ProcessorBean extends DefaultBean {
 		this.sockets = sockets;
 	}
 
-	public Processor getProcessor() {
-		return processor;
+	public Motherboard getMotherboard() {
+		return motherboard;
 	}
 
-	public void setProcessor(Processor processor) {
-		this.processor = processor;
+	public void setMotherboard(Motherboard Motherboard) {
+		this.motherboard = Motherboard;
 	}
 
 	public Long getSocketId() {
@@ -130,4 +127,5 @@ public class ProcessorBean extends DefaultBean {
 		this.socketId = socketId;
 	}
 	 
+
 }

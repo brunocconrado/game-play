@@ -10,22 +10,23 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-@Entity
-@Table(name = "INV_PROCESSADOR")
-public class Processor implements br.com.embracon.j4e.domain.Entity {
 
-	
-	private static final long serialVersionUID = -8838851420440386488L;
-	
+@Entity
+@Table(name = "INV_PLACA_VIDEO")
+public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
+
+	private static final long serialVersionUID = -3920268113544315082L;
+
 	private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("###,###,###,###,##0.00");
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "COD_PROCESSADOR", scale = 0, precision = 0)
+	@Column(name = "COD_PLACA_VIDEO", scale = 0, precision = 0)
 	private Long id;
 	
 	@Column(name = "CODIGO", length = 10, nullable = false)
@@ -37,11 +38,11 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "TITULO", length = 150, nullable = false)
 	private String title;
 	
-	//TODO: Byte
+	@Lob
 	@Column(name = "DESCRIPTION", length = 100, nullable = false)
 	private String description;
 	
-	//TODO: Byte
+	@Lob
 	@Column(name = "ESPECIFICATION", length = 100, nullable = false)
 	private String especification;
 	
@@ -52,15 +53,10 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
     @JoinColumn(name = "FABRICANTE", nullable = false)
 	private Manufacturer manufacturer;
 	
-	@OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "SOCKET", nullable = false)
-	private Socket socket;
-	
 	@Transient
 	private String priceString;
 	
-	public Processor() {
-		this.socket = new Socket();
+	public VideoCard() {
 		this.manufacturer = new Manufacturer();
 	}
 	
@@ -128,14 +124,6 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 		this.manufacturer = manufacturer;
 	}
 
-	public Socket getSocket() {
-		return socket;
-	}
-
-	public void setSocket(Socket socket) {
-		this.socket = socket;
-	}
-
 	public String getPriceString() {
 		if(priceString == null && price != null) {
 			this.priceString = DECIMAL_FORMAT.format(this.price);
@@ -149,15 +137,16 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 	}
 	
 	public boolean equals(Object obj) {
-		return obj instanceof Processor && this.equals((Processor)obj);
+		return obj instanceof VideoCard && this.equals((VideoCard)obj);
 	}
 	
-	public boolean equals(Processor other) {
+	public boolean equals(VideoCard other) {
 		return 	this.id != null && this.id.equals(other.id);
 	}
 	
 	public int hashCode() {
 		return this.id != null ? this.id.hashCode() : 0;
 	}
+	
 	
 }

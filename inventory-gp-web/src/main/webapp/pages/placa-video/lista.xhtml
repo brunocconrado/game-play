@@ -10,14 +10,14 @@
 	<ui:define name="content">
 		<h:form prependId="false">
 			  		
-			<p:tabView id="tvProcessorList" style="height: 400px;"> 
+			<p:tabView id="tvVideoCardList" style="height: 400px;"> 
 				<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
 				<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
 				
-				<p:tab id="tabProcessorList" title="#{msg.resolve('tab.processor.list')}">
+				<p:tab id="tabVideoCardList" title="#{msg.resolve('tab.video.card.list')}">
 					<p:spacer width="20" height="15"/>
 				
-					<h:panelGroup id="pgroupProcessorSearch"> 
+					<h:panelGroup id="pgroupVideoCardSearch"> 
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName"/>
 								<p:inputText id="txtName" value="" size="40"/>
@@ -36,7 +36,7 @@
 								<p:spacer width="3"/>
 								
 								<p:commandLink title="#{msg.resolve('label.search')}" 
-										actionListener="#{processorListBean.search()}" process="pgroupProcessorSearch" update="dgProcessors">
+										actionListener="#{videoCardListBean.search()}" process="pgroupVideoCardSearch" update="dgVideoCards">
 									<h:graphicImage name="busca.png" library="images"/>
 								</p:commandLink>
 								
@@ -44,58 +44,54 @@
 						
 						<p:spacer width="20" height="20"/>
 						
-						<p:dataTable widgetVar="dgProcessors" id="dgProcessors" style="width: 90%;" var="processor" value="#{processorListBean.processors}"
+						<p:dataTable widgetVar="dgVideoCards" id="dgVideoCards" style="width: 90%;" var="videoCard" value="#{videoCardListBean.viedoCards}"
 								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
 						
 							<f:facet name="header">  
-					            <h:outputLabel value="#{msg.resolve('data.table.processor.header')}" />
+					            <h:outputLabel value="#{msg.resolve('data.table.video.card.header')}" />
 					        </f:facet> 
 					         
 					        <p:column headerText="#{msg.resolve('label.name')}" style="width: 180px !important; text-align: left;">  
-					            <h:outputText value="#{processor.name}"/>  
+					            <h:outputText value="#{videoCard.name}"/>  
 					        </p:column>  
 					        
 					         <p:column headerText="#{msg.resolve('label.title')}" style="text-align: center;">  
-					            <h:outputText value="#{processor.title}"/>  
+					            <h:outputText value="#{videoCard.title}"/>  
 					        </p:column>  
 					        
 					        <p:column headerText="#{msg.resolve('label.manufacturer')}" style="width: 220px !important; text-align: left;">  
-					            <h:outputText value="#{processor.manufacturer.name}"/>  
-					        </p:column>  
-					  
-					        <p:column headerText="#{msg.resolve('label.socket')}" style="text-align: center;">  
-					            <h:outputText value="#{processor.socket.name}"/>  
+					            <h:outputText value="#{videoCard.manufacturer.name}"/>  
 					        </p:column>  
 					  
 					         <p:column headerText="#{msg.resolve('label.price')}" style="text-align: center;">  
-					            <h:outputText value="#{processor.priceString}"/>  
+					            <h:outputText value="#{videoCard.priceString}"/>  
 					        </p:column>  
 					        
 					        <p:column headerText="#{msg.resolve('label.actions')}" style="width: 35px !important;">  
-					            <p:commandLink title="#{msg.resolve('label.edit')}" action="/pages/processador/cadastro"
+					            <p:commandLink title="#{msg.resolve('label.edit')}" action="/pages/placa-video/cadastro"
 					            		 ajax="false" process="@this" immediate="true" update="messages">
 									<h:graphicImage name="pencil.png" library="images"/>
-									<f:setPropertyActionListener target="#{processorBean.processor}" value="#{processor}"/>
+									<f:setPropertyActionListener target="#{videoCardBean.videoCard}" value="#{videoCard}"/>
 								</p:commandLink>
 					        
 					        	<p:spacer width="3" height="2"/>
 					        
 					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();">
 									<h:graphicImage name="delete.png" library="images"/>
-									<f:setPropertyActionListener target="#{processorListBean.processorSelected}" value="#{processor}"/>
+									<f:setPropertyActionListener target="#{videoCardListBean.videoCardSelected}" value="#{videoCard}"/>
 								</p:commandLink>
 					        </p:column>  
 						</p:dataTable> 
 						
-						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.processor')}" 
-									header="#{msg.resolve('dialog.header.remove.processor')}" severity="alert">
+						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.video.card')}" 
+									header="#{msg.resolve('dialog.header.remove.video.card')}" severity="alert">
 			                <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
 			                
 			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" 
-			                    		actionListener="#{processorListBean.remove()}" update="tvProcessorList:dgProcessors, glMessages" immediate="true"/>
+			                    		actionListener="#{videoCardListBean.remove()}" update="tvVideoCardList:dgVideoCards, glMessages" immediate="true"/>
 			                    		
-			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgProcessors"/>
+			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgVideoCards"/>
 			                    
 			                </h:panelGrid>
 			            </p:confirmDialog>
