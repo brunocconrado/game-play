@@ -33,12 +33,17 @@
 		<property name="annotatedClasses">
 			<list>
 				<value>br.com.gp.inventory.domain.entity.Category</value>
+				<value>br.com.gp.inventory.domain.entity.Drive</value>
+				<value>br.com.gp.inventory.domain.entity.Frequency</value>
+				<value>br.com.gp.inventory.domain.entity.HardDisk</value>
 				<value>br.com.gp.inventory.domain.entity.Manufacturer</value>
+				<value>br.com.gp.inventory.domain.entity.Memory</value>
 				<value>br.com.gp.inventory.domain.entity.Menu</value>
 				<value>br.com.gp.inventory.domain.entity.Motherboard</value>
 				<value>br.com.gp.inventory.domain.entity.Processor</value>
 				<value>br.com.gp.inventory.domain.entity.Socket</value>
 				<value>br.com.gp.inventory.domain.entity.Status</value>
+				<value>br.com.gp.inventory.domain.entity.Tower</value>
 				<value>br.com.gp.inventory.domain.entity.VideoCard</value>
 			</list>
 		</property>

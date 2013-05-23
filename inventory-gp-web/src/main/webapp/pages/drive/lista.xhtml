@@ -10,14 +10,14 @@
 	<ui:define name="content">
 		<h:form prependId="false">
 			  		
-			<p:tabView id="tvListProcessor" style="height: 400px;"> 
+			<p:tabView id="tvDriveList" style="height: 400px;"> 
 				<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
 				<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
 				
-				<p:tab id="tabListProcessor" title="#{msg.resolve('tab.processor.list')}">
+				<p:tab id="tabDriveList" title="#{msg.resolve('tab.drive.list')}">
 					<p:spacer width="20" height="15"/>
 				
-					<h:panelGroup id="pgroupProcessorSearch"> 
+					<h:panelGroup id="pgroupDriveSearch"> 
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName"/>
 								<p:inputText id="txtName" value="" size="40"/>
@@ -36,7 +36,7 @@
 								<p:spacer width="3"/>
 								
 								<p:commandLink title="#{msg.resolve('label.search')}" 
-										actionListener="#{listProcessorBean.search()}" process="pgroupProcessorSearch" update="dgProcessors">
+										actionListener="#{driveListBean.search()}" process="pgroupDriveSearch" update="dgDrives">
 									<h:graphicImage name="busca.png" library="images"/>
 								</p:commandLink>
 								
@@ -44,58 +44,50 @@
 						
 						<p:spacer width="20" height="20"/>
 						
-						<p:dataTable widgetVar="dgProcessors" id="dgProcessors" style="width: 90%;" var="processor" value="#{listProcessorBean.processors}"
+						<p:dataTable widgetVar="dgDrives" id="dgDrives" style="width: 90%;" var="drive" value="#{driveListBean.drives}"
 								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
 						
 							<f:facet name="header">  
-					            <h:outputLabel value="#{msg.resolve('data.table.processor.header')}" />
+					            <h:outputLabel value="#{msg.resolve('data.table.drive.header')}" />
 					        </f:facet> 
 					         
 					        <p:column headerText="#{msg.resolve('label.name')}" style="width: 180px !important; text-align: left;">  
-					            <h:outputText value="#{processor.name}"/>  
-					        </p:column>  
-					        
-					         <p:column headerText="#{msg.resolve('label.title')}" style="text-align: center;">  
-					            <h:outputText value="#{processor.title}"/>  
+					            <h:outputText value="#{drive.name}"/>  
 					        </p:column>  
 					        
 					        <p:column headerText="#{msg.resolve('label.manufacturer')}" style="width: 220px !important; text-align: left;">  
-					            <h:outputText value="#{processor.manufacturer.name}"/>  
-					        </p:column>  
-					  
-					        <p:column headerText="#{msg.resolve('label.socket')}" style="text-align: center;">  
-					            <h:outputText value="#{processor.socket.name}"/>  
+					            <h:outputText value="#{drive.manufacturer.name}"/>  
 					        </p:column>  
 					  
 					         <p:column headerText="#{msg.resolve('label.price')}" style="text-align: center;">  
-					            <h:outputText value="#{processor.priceString}"/>  
+					            <h:outputText value="#{drive.priceString}"/>  
 					        </p:column>  
 					        
 					        <p:column headerText="#{msg.resolve('label.actions')}" style="width: 35px !important;">  
-					            <p:commandLink title="#{msg.resolve('label.edit')}" action="/pages/processador/cadastro"
+					            <p:commandLink title="#{msg.resolve('label.edit')}" action="/pages/drive/cadastro"
 					            		 ajax="false" process="@this" immediate="true" update="messages">
 									<h:graphicImage name="pencil.png" library="images"/>
-									<f:setPropertyActionListener target="#{processorBean.processor}" value="#{processor}"/>
+									<f:setPropertyActionListener target="#{driveBean.drive}" value="#{drive}"/>
 								</p:commandLink>
 					        
-					        	<p:spacer width="3" height="2"/>
+					        	<p:spacer width="3" height="2"/> 
 					        
 					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();">
 									<h:graphicImage name="delete.png" library="images"/>
-									<f:setPropertyActionListener target="#{listProcessorBean.processorSelected}" value="#{processor}"/>
+									<f:setPropertyActionListener target="#{driveListBean.driveSelected}" value="#{drive}"/>
 								</p:commandLink>
 					        </p:column>  
 						</p:dataTable> 
 						
-						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.processor')}" 
-									header="#{msg.resolve('dialog.header.remove.processor')}" severity="alert">
+						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.drive')}" 
+									header="#{msg.resolve('dialog.header.remove.drive')}" severity="alert">
 			                <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
 			                
 			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" 
-			                    		actionListener="#{listProcessorBean.remove()}" update="tvListProcessor:dgProcessors, glMessages" immediate="true"/>
+			                    		actionListener="#{driveListBean.remove()}" update="tvDriveList:dgDrives, glMessages" immediate="true"/>
 			                    		
-			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgProcessors"/>
+			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgDrives"/>
 			                    
 			                </h:panelGrid>
 			            </p:confirmDialog>

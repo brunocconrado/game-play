@@ -6,8 +6,9 @@ public enum CategoryEnum {
 	MOTHERBOARD(2L),
 	MEMORY(3L), 
 	VIDEO_CARD(4L),
-	HD(-1L), 
-	CASE(-1L);
+	HD(5L), 
+	TOWER(6L),
+	DRIVE(7L);
 	
 	private Long value;
 	

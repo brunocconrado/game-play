@@ -36,7 +36,7 @@ public class MotherboardListBean extends DefaultBean {
 			this.motherboards = service.findAll();
 		} catch (ServiceException e) {
 			fatalMessage("error.message.init", e);
-			destroy("listProcessorBean");
+			destroy("motherboardListBean");
 		}
 	}
 	

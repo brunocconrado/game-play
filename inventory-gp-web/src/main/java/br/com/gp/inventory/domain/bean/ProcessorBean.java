@@ -41,10 +41,6 @@ public class ProcessorBean extends DefaultBean {
 	
 	private Processor processor;
 	
-	private Long manufacturerId;
-	
-	private Long socketId;
-	
 	public ProcessorBean() {
 		super("processorBean");
 	}
@@ -76,6 +72,8 @@ public class ProcessorBean extends DefaultBean {
 			
 			this.service.save(this.processor);
 			
+			this.processor = new Processor();
+			
 			successMessage("save.success", "Processador");			
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Processador");
@@ -97,14 +95,6 @@ public class ProcessorBean extends DefaultBean {
 	public void setManufacturers(List<Manufacturer> manufacturers) {
 		this.manufacturers = manufacturers;
 	}
-	
-	public Long getManufacturerId() {
-		return manufacturerId;
-	}
-
-	public void setManufacturerId(Long manufacturerId) {
-		this.manufacturerId = manufacturerId;
-	}
 
 	public List<Socket> getSockets() {
 		return sockets;
@@ -121,13 +111,4 @@ public class ProcessorBean extends DefaultBean {
 	public void setProcessor(Processor processor) {
 		this.processor = processor;
 	}
-
-	public Long getSocketId() {
-		return socketId;
-	}
-
-	public void setSocketId(Long socketId) {
-		this.socketId = socketId;
-	}
-	 
 }

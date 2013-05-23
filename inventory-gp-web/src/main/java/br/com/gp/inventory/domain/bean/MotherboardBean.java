@@ -73,6 +73,8 @@ public class MotherboardBean extends DefaultBean {
 			
 			this.service.save(this.motherboard);
 			
+			this.motherboard = new Motherboard();
+			
 			successMessage("save.success", "Placa Mãe");			
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Placa Mãe");

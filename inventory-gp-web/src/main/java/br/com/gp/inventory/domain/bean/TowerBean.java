@@ -10,20 +10,20 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
-import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Manufacturer;
+import br.com.gp.inventory.domain.entity.Tower;
 import br.com.gp.inventory.domain.enumeration.CategoryEnum;
-import br.com.gp.inventory.domain.service.DriveService;
 import br.com.gp.inventory.domain.service.ManufacturerService;
+import br.com.gp.inventory.domain.service.TowerService;
 
 
-@Controller("driveBean")
+@Controller("towerBean")
 @Scope(value = "session")
-public class DriveBean extends DefaultBean {
+public class TowerBean extends DefaultBean {
 
 	@Autowired
-	@Qualifier("driveService")
-	private DriveService service;
+	@Qualifier("towerService")
+	private TowerService service;
 	
 	@Autowired
 	@Qualifier("manufacturerService")
@@ -31,21 +31,21 @@ public class DriveBean extends DefaultBean {
 	
 	private List<Manufacturer> manufacturers;
 	
-	private Drive drive;
+	private Tower tower;
 	
-	public DriveBean() {
-		super("driveBean");
+	public TowerBean() {
+		super("towerBean");
 	}
 
 	@PostConstruct
 	public void init() {
 		try {
 			
-			if(this.drive == null) {
-				this.drive = new Drive();
+			if(this.tower == null) {
+				this.tower = new Tower();
 			}
 			
-			this.manufacturers = manufactoryService.findAllByCategory(CategoryEnum.DRIVE);
+			this.manufacturers = manufactoryService.findAllByCategory(CategoryEnum.TOWER);
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Gabinete");
 		}
@@ -55,12 +55,12 @@ public class DriveBean extends DefaultBean {
 		
 		try {
 			
-			this.drive.setManufacturer(this.manufactoryService
-							.findById(this.drive.getManufacturer().getId()));
+			this.tower.setManufacturer(this.manufactoryService
+							.findById(this.tower.getManufacturer().getId()));
 			
-			this.service.save(this.drive);
+			this.service.save(this.tower);
 			
-			this.drive = new Drive();
+			this.tower = new Tower();
 			
 			successMessage("save.success", "Gabinete");			
 		} catch (ServiceException e) {
@@ -72,8 +72,8 @@ public class DriveBean extends DefaultBean {
 	}
 	
 	public String linkRedirect() {
-		destroy("driveBean");
-		return "/pages/drive/lista";
+		destroy("towerbean");
+		return "/pages/gabinete/lista";
 	}
 	
 	public List<Manufacturer> getManufacturers() {
@@ -84,12 +84,12 @@ public class DriveBean extends DefaultBean {
 		this.manufacturers = manufacturers;
 	}
 
-	public Drive getDrive() {
-		return drive;
+	public Tower getTower() {
+		return tower;
 	}
 
-	public void setDrive(Drive drive) {
-		this.drive = drive;
+	public void setTower(Tower tower) {
+		this.tower = tower;
 	}
 
 }

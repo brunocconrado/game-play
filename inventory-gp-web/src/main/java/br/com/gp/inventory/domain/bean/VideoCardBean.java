@@ -60,6 +60,8 @@ public class VideoCardBean extends DefaultBean {
 			
 			this.service.save(this.videoCard);
 			
+			this.videoCard = new VideoCard();
+			
 			successMessage("save.success", "Placa de Video");			
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Placa de Video");

@@ -21,18 +21,6 @@
 	</managed-bean> 
 	
 	<managed-bean>
-		<managed-bean-name>memoryBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.MemoryBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	
-	<managed-bean>
-		<managed-bean-name>memoryListBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.MemoryListBean</managed-bean-class>
-		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean>
-	
-	<managed-bean>
 		<managed-bean-name>driveBean</managed-bean-name>
 		<managed-bean-class>br.com.gp.inventory.domain.bean.DriveBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
@@ -45,8 +33,35 @@
 	</managed-bean>
 	
 	<managed-bean>
+		<managed-bean-name>hardDiskBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.HardDiskBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>hardDiskListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.HardDiskListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>memoryBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.MemoryBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>memoryListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.MemoryListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
 		<managed-bean-name>motherboardBean</managed-bean-name>
 		<managed-bean-class>br.com.gp.inventory.domain.bean.MotherboardBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>motherboardListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.MotherboardListBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
@@ -64,6 +79,17 @@
 	<managed-bean>
 		<managed-bean-name>processorListBean</managed-bean-name>
 		<managed-bean-class>br.com.gp.inventory.domain.bean.ProcessorListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>towerBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.TowerBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<managed-bean>
+		<managed-bean-name>towerListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.TowerListBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 	
