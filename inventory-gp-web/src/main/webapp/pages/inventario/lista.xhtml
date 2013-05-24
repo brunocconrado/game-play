@@ -10,14 +10,14 @@
 	<ui:define name="content">
 		<h:form prependId="false">
 			  		
-			<p:tabView id="tvFontList" style="height: 400px;"> 
+			<p:tabView id="tvDriveList" style="height: 400px;"> 
 				<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
 				<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
 				
-				<p:tab id="tabFontList" title="#{msg.resolve('tab.font.list')}">
+				<p:tab id="tabDriveList" title="#{msg.resolve('tab.drive.list')}">
 					<p:spacer width="20" height="15"/>
 				
-					<h:panelGroup id="pgroupFontSearch"> 
+					<h:panelGroup id="pgroupDriveSearch"> 
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName"/>
 								<p:inputText id="txtName" value="" size="40"/>
@@ -36,7 +36,7 @@
 								<p:spacer width="3"/>
 								
 								<p:commandLink title="#{msg.resolve('label.search')}" 
-										actionListener="#{fontListBean.search()}" process="pgroupFontSearch" update="dgFonts">
+										actionListener="#{driveListBean.search()}" process="pgroupDriveSearch" update="dgDrives">
 									<h:graphicImage name="busca.png" library="images"/>
 								</p:commandLink>
 								
@@ -44,62 +44,50 @@
 						
 						<p:spacer width="20" height="20"/>
 						
-						<p:dataTable widgetVar="dgFonts" id="dgFonts" style="width: 90%;" var="font" value="#{fontListBean.fonts}"
+						<p:dataTable widgetVar="dgDrives" id="dgDrives" style="width: 90%;" var="drive" value="#{driveListBean.drives}"
 								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
 						
 							<f:facet name="header">  
-					            <h:outputLabel value="#{msg.resolve('data.table.font.header')}" />
+					            <h:outputLabel value="#{msg.resolve('data.table.drive.header')}" />
 					        </f:facet> 
 					         
 					        <p:column headerText="#{msg.resolve('label.name')}" style="width: 180px !important; text-align: left;">  
-					            <h:outputText value="#{font.name}"/>  
-					        </p:column>  
-					        
-					         <p:column headerText="#{msg.resolve('label.title')}" style="text-align: center;">  
-					            <h:outputText value="#{font.title}"/>  
+					            <h:outputText value="#{drive.name}"/>  
 					        </p:column>  
 					        
 					        <p:column headerText="#{msg.resolve('label.manufacturer')}" style="width: 220px !important; text-align: left;">  
-					            <h:outputText value="#{font.manufacturer.name}"/>  
+					            <h:outputText value="#{drive.manufacturer.name}"/>  
 					        </p:column>  
-					  
-					        <p:column headerText="#{msg.resolve('label.potential')}" style="text-align: center;">  
-					            <h:outputText value="#{font.potential.name}"/>  
-					        </p:column>  
-					        
-					        <p:column headerText="#{msg.resolve('label.real.potential')}" style="text-align: center;">  
-					            <h:outputText value="#{font.realPotentialString}"/>  
-					        </p:column>
 					  
 					         <p:column headerText="#{msg.resolve('label.price')}" style="text-align: center;">  
-					            <h:outputText value="#{font.priceString}"/>  
+					            <h:outputText value="#{drive.priceString}"/>  
 					        </p:column>  
 					        
 					        <p:column headerText="#{msg.resolve('label.actions')}" style="width: 35px !important;">  
-					            <p:commandLink title="#{msg.resolve('label.edit')}" action="/pages/fonte/cadastro"
+					            <p:commandLink title="#{msg.resolve('label.edit')}" action="/pages/drive/cadastro"
 					            		 ajax="false" process="@this" immediate="true" update="messages">
 									<h:graphicImage name="pencil.png" library="images"/>
-									<f:setPropertyActionListener target="#{fontBean.font}" value="#{font}"/>
+									<f:setPropertyActionListener target="#{driveBean.drive}" value="#{drive}"/>
 								</p:commandLink>
 					        
-					        	<p:spacer width="3" height="2"/>
+					        	<p:spacer width="3" height="2"/> 
 					        
 					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();">
 									<h:graphicImage name="delete.png" library="images"/>
-									<f:setPropertyActionListener target="#{fontListBean.fontSelected}" value="#{font}"/>
+									<f:setPropertyActionListener target="#{driveListBean.driveSelected}" value="#{drive}"/>
 								</p:commandLink>
 					        </p:column>  
 						</p:dataTable> 
 						
-						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.font')}" 
-									header="#{msg.resolve('dialog.header.remove.font')}" severity="alert">
+						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.drive')}" 
+									header="#{msg.resolve('dialog.header.remove.drive')}" severity="alert">
 			                <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
 			                
 			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" 
-			                    		actionListener="#{fontListBean.remove()}" update="tvFontList:dgFonts, glMessages" immediate="true"/>
+			                    		actionListener="#{driveListBean.remove()}" update="tvDriveList:dgDrives, glMessages" immediate="true"/>
 			                    		
-			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgFonts"/>
+			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgDrives"/>
 			                    
 			                </h:panelGrid>
 			            </p:confirmDialog>

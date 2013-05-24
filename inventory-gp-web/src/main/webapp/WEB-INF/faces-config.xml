@@ -33,6 +33,18 @@
 	</managed-bean>
 	
 	<managed-bean>
+		<managed-bean-name>fontBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.FontBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean> 
+	
+	<managed-bean>
+		<managed-bean-name>fontListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.FontListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
 		<managed-bean-name>hardDiskBean</managed-bean-name>
 		<managed-bean-class>br.com.gp.inventory.domain.bean.HardDiskBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
@@ -42,6 +54,17 @@
 		<managed-bean-class>br.com.gp.inventory.domain.bean.HardDiskListBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>inventoryBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.InventoryBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	<!-- <managed-bean>
+		<managed-bean-name>hardDiskListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.HardDiskListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean> -->
 	
 	<managed-bean>
 		<managed-bean-name>memoryBean</managed-bean-name>

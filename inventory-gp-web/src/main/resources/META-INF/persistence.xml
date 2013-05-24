@@ -10,12 +10,15 @@
 
 		<class>br.com.gp.inventory.domain.entity.Category</class>
 		<class>br.com.gp.inventory.domain.entity.Drive</class>
+		<class>br.com.gp.inventory.domain.entity.Font</class>
 		<class>br.com.gp.inventory.domain.entity.Frequency</class>
 		<class>br.com.gp.inventory.domain.entity.HardDisk</class>
+		<class>br.com.gp.inventory.domain.entity.Inventory</class>
 		<class>br.com.gp.inventory.domain.entity.Manufacturer</class>
 		<class>br.com.gp.inventory.domain.entity.Memory</class>
 		<class>br.com.gp.inventory.domain.entity.Menu</class>
 		<class>br.com.gp.inventory.domain.entity.Motherboard</class>
+		<class>br.com.gp.inventory.domain.entity.Potential</class>
 		<class>br.com.gp.inventory.domain.entity.Processor</class>
 		<class>br.com.gp.inventory.domain.entity.Socket</class>
 		<class>br.com.gp.inventory.domain.entity.Status</class>

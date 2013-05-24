@@ -9,7 +9,7 @@
 	
 	<ui:define name="script">
 		$(document).ready(function() {  
-			setFormatPriceCustom('tvProcessor\\:txtPrice');
+			setFormatPriceCustom('tvFont\\:txtPrice');
 		}); 
   	</ui:define>
 	
@@ -18,53 +18,58 @@
 			<p:messages id="messages" showDetail="false" autoUpdate="false" closable="true" /> 
 			<p:growl id="grlMessages" showDetail="false" autoUpdate="false" closable="true" />  
 			
-			<p:tabView id="tvProcessor" style="height: 250px;"> 
-				<p:tab id="tabProcessor" title="#{msg.resolve('tab.processor.register')}">
+			<p:tabView id="tvFont" style="height: 250px;"> 
+				<p:tab id="tabFont" title="#{msg.resolve('tab.font.register')}">
 					<p:spacer width="20" height="15"/>
 				 
-					<h:panelGroup id="pgroupProcessor">
+					<h:panelGroup id="pgroupFont">
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 								<h:outputLabel value="#{msg.resolve('label.code')}" for="txtCodigo">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:inputText id="txtCodigo" value="#{processorBean.processor.code}" required="true" size="10" 
+								<p:inputText id="txtCodigo" value="#{fontBean.font.code}" required="true" size="10" 
 											requiredMessage="#{msg.resolveMsg('required.field', 'label.code')}"/>
 											
 								<h:outputLabel value="#{msg.resolve('label.manufacturer')}" for="cbxManufacturer">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>
 								<p:selectOneMenu id="cbxManufacturer" style="width: 250px;" 
-											value="#{processorBean.manufacturerId}" >
+											value="#{fontBean.font.manufacturer.id}" >
 									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
-									<f:selectItems value="#{processorBean.manufacturers}" var="manufacturer" itemValue="#{manufacturer.id}"	itemLabel="#{manufacturer.name}"/>
+									<f:selectItems value="#{fontBean.manufacturers}" var="manufacturer" itemValue="#{manufacturer.id}"	itemLabel="#{manufacturer.name}"/>
 								</p:selectOneMenu>  
 											
-								<h:outputLabel value="#{msg.resolve('label.socket')}" for="cbxSocket">
+								<h:outputLabel value="#{msg.resolve('label.potential')}" for="cbxPotential">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:selectOneMenu id="cbxSocket" style="width: 250px;" 
-											value="#{processorBean.socketId}" >
+								<p:selectOneMenu id="cbxPotential" style="width: 250px;" 
+											value="#{fontBean.font.potential.id}" >
 									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
-									<f:selectItems value="#{processorBean.sockets}" var="socket" itemValue="#{socket.id}" itemLabel="#{socket.name}"/>
+									<f:selectItems value="#{fontBean.potentials}" var="potential" itemValue="#{potential.id}" itemLabel="#{potential.name}"/>
 								</p:selectOneMenu> 
 								
 								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:inputText id="txtName" value="#{processorBean.processor.name}" required="true" size="40" 
+								<p:inputText id="txtName" value="#{fontBean.font.name}" required="true" size="40" 
 											requiredMessage="#{msg.resolveMsg('required.field', 'label.name')}"/> 
 											
 								<h:outputLabel value="#{msg.resolve('label.title')}" for="txtTitle">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:inputText id="txtTitle" value="#{processorBean.processor.title}" required="true" size="40" maxlength="150"
+								<p:inputText id="txtTitle" value="#{fontBean.font.title}" required="true" size="40" maxlength="150"
 											requiredMessage="#{msg.resolveMsg('required.field', 'label.title')}"/>
 											
 								<h:outputLabel value="#{msg.resolve('label.price')}" for="txtPrice">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:inputText id="txtPrice" value="#{processorBean.processor.priceString}" required="true" size="40" maxlength="150"
+								<p:inputText id="txtPrice" value="#{fontBean.font.priceString}" required="true" size="40" maxlength="150"
 											requiredMessage="#{msg.resolveMsg('required.field', 'label.price')}"/>
+											
+								<h:outputLabel value="#{msg.resolve('label.real.potential')}" for="ckbRealPotential">
+									<p:spacer  width="28" height="6"/>
+								</h:outputLabel>  
+								<p:selectBooleanCheckbox id="ckbRealPotential" value="#{fontBean.font.realPotential}" /> 
 						</h:panelGrid>
 					</h:panelGroup>
 				</p:tab>
@@ -74,7 +79,7 @@
 							<h:outputLabel value="#{msg.resolve('label.description')}" for="txaDescription">
 								<p:spacer  width="30" height="2"/>
 							</h:outputLabel>  
-							<p:inputTextarea id="txaDescription" value="#{processorBean.processor.description}" required="true" rows="10" cols="40"
+							<p:inputTextarea id="txaDescription" value="#{fontBean.font.description}" required="true" rows="10" cols="40"
 										requiredMessage="#{msg.resolveMsg('required.field', 'label.description')}"/>
 						</h:panelGrid>
 					</h:panelGroup>					
@@ -85,7 +90,7 @@
 							<h:outputLabel value="#{msg.resolve('label.specification')}" for="txaEspecification">
 								<p:spacer  width="12" height="2"/>
 							</h:outputLabel>  
-							<p:inputTextarea id="txaEspecification" value="#{processorBean.processor.especification}" required="true" rows="10" cols="40"
+							<p:inputTextarea id="txaEspecification" value="#{fontBean.font.especification}" required="true" rows="10" cols="40"
 										requiredMessage="#{msg.resolveMsg('required.field', 'label.specification')}"/>
 						</h:panelGrid>
 					</h:panelGroup>					
@@ -96,14 +101,14 @@
 				<p:spacer width="100%" height="10"/>	
 			 	<h:panelGroup>			 
 			 		<p:commandButton id="btnCancel" immediate="true" ajax="false" icon="ui-icon ui-icon-close"
-			 					value="#{msg.resolve('label.cancel')}" action="#{processorBean.linkRedirect()}"/>
+			 					value="#{msg.resolve('label.cancel')}" action="#{fontBean.linkRedirect()}"/>
 					
 					<p:spacer width="5"/>
 					
 					<p:commandButton id="btnSave" 
-								process="@this, tvProcessor" 
+								process="@this, tvFont" 
 								update="messages, grlMessages" icon="ui-icon ui-icon-disk"
-								value="#{msg.resolve('label.save')}" actionListener="#{processorBean.save}"/>
+								value="#{msg.resolve('label.save')}" actionListener="#{fontBean.save}"/>
 				</h:panelGroup>
 			</h:panelGrid>
 			

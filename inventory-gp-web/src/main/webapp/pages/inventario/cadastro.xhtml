@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"  
+	template="../../templates/default.xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	
+	<ui:define name="script">
+		$(document).ready(function() {  
+			setFormatPriceCustom('tvInventory\\:txtPrice');
+		}); 
+  	</ui:define>
+	
+	<ui:define name="content">
+		<h:form prependId="false">
+			<p:messages id="messages" showDetail="false" autoUpdate="false" closable="true" /> 
+			<p:growl id="grlMessages" showDetail="false" autoUpdate="false" closable="true" />  
+			
+			<p:tabView id="tvInventory" style="height: 250px;"> 
+				<p:tab id="tabInventory" title="#{msg.resolve('tab.inventory.register')}">
+					<p:spacer width="20" height="15"/>
+				 
+					<h:panelGroup id="pgroupInventory">
+							<h:panelGrid columns="2" cellpadding="0" cellspacing="3">
+								<h:outputLabel value="#{msg.resolve('label.code')}" for="txtCodigo">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:spacer  width="28" height="2"/>
+								
+								<p:inputText id="txtCodigo" required="true" size="10" 
+											requiredMessage="#{msg.resolveMsg('required.field', 'label.code')}"/>
+								<p:inputText id="txtCodigo" required="true" size="10" 
+											requiredMessage="#{msg.resolveMsg('required.field', 'label.code')}"/>
+							</h:panelGrid>
+					</h:panelGroup>
+				</p:tab>
+			</p:tabView>
+			
+			<h:panelGrid columns="1" style="width: 100%; text-align:right !important;">
+				<p:spacer width="100%" height="10"/>	
+			 	<h:panelGroup>			 
+			 		<p:commandButton id="btnCancel" immediate="true" ajax="false" icon="ui-icon ui-icon-close"
+			 					value="#{msg.resolve('label.cancel')}" action="#{inventoryBean.linkRedirect()}"/>
+					
+					<p:spacer width="5"/>
+					
+					<p:commandButton id="btnSave" 
+								process="@this, tvInventory" 
+								update="messages, grlMessages" icon="ui-icon ui-icon-disk"
+								value="#{msg.resolve('label.save')}" actionListener="#{inventoryBean.save}"/>
+				</h:panelGroup>
+			</h:panelGrid>
+			
+		</h:form>
+	</ui:define>
+	
+</ui:composition>

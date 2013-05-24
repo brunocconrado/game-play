@@ -8,7 +8,8 @@ public enum CategoryEnum {
 	VIDEO_CARD(4L),
 	HD(5L), 
 	TOWER(6L),
-	DRIVE(7L);
+	DRIVE(7L), 
+	FONT(8L);
 	
 	private Long value;
 	
