@@ -18,21 +18,109 @@
 			<p:messages id="messages" showDetail="false" autoUpdate="false" closable="true" /> 
 			<p:growl id="grlMessages" showDetail="false" autoUpdate="false" closable="true" />  
 			
-			<p:tabView id="tvInventory" style="height: 250px;"> 
+			<p:tabView id="tvInventory" style="height: 500px !important;"> 
 				<p:tab id="tabInventory" title="#{msg.resolve('tab.inventory.register')}">
 					<p:spacer width="20" height="15"/>
 				 
 					<h:panelGroup id="pgroupInventory">
-							<h:panelGrid columns="2" cellpadding="0" cellspacing="3">
-								<h:outputLabel value="#{msg.resolve('label.code')}" for="txtCodigo">
+							<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+								<h:outputLabel value="#{msg.resolve('label.motherboard')}" for="cbxMotherboard">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
 								<p:spacer  width="28" height="2"/>
+								<p:selectOneMenu id="cbxMotherboard" style="width: 350px;"
+											value="#{inventoryBean.inventory.motherboard.id}">
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{inventoryBean.motherboards}" 
+										var="motherboard" itemValue="#{motherboard.id}"	itemLabel="#{motherboard.toString}"/>
+									<p:ajax event="change" process="@this" update="cbxProcessor" listener="#{inventoryBean.loadProcessors()}"/>	
+								</p:selectOneMenu>  
+								<p:spacer  width="28" height="2"/>
 								
-								<p:inputText id="txtCodigo" required="true" size="10" 
-											requiredMessage="#{msg.resolveMsg('required.field', 'label.code')}"/>
-								<p:inputText id="txtCodigo" required="true" size="10" 
-											requiredMessage="#{msg.resolveMsg('required.field', 'label.code')}"/>
+								<h:outputLabel value="#{msg.resolve('label.processor')}" for="cbxProcessor">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:spacer  width="28" height="2"/>
+								<p:selectOneMenu id="cbxProcessor" style="width: 350px;"
+											value="#{inventoryBean.inventory.processor.id}" >
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{inventoryBean.processors}" 
+										var="processor" itemValue="#{processor.id}"	itemLabel="#{processor.toString}"/>
+								</p:selectOneMenu>  
+								<p:spacer  width="28" height="2"/>
+								
+								<h:outputLabel value="#{msg.resolve('label.font')}" for="cbxFont">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:spacer  width="28" height="2"/>
+								<p:selectOneMenu id="cbxFont" style="width: 350px;"
+											value="#{inventoryBean.inventory.font.id}" >
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{inventoryBean.fonts}" 
+										var="font" itemValue="#{font.id}"	itemLabel="#{font.toString}"/>
+								</p:selectOneMenu>  
+								<p:spacer  width="28" height="2"/>
+								
+								<h:outputLabel value="#{msg.resolve('label.video.card')}" for="cbxVideoCard">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:spacer  width="28" height="2"/>
+								<p:selectOneMenu id="cbxVideoCard" style="width: 350px;"
+											value="#{inventoryBean.inventory.videoCard.id}" >
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{inventoryBean.videoCards}" 
+										var="videoCard" itemValue="#{videoCard.id}"	itemLabel="#{videoCard.toString}"/>
+								</p:selectOneMenu>  
+								<p:spacer  width="28" height="2"/>
+								
+								<h:outputLabel value="#{msg.resolve('label.tower')}" for="cbxTower">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:spacer  width="28" height="2"/>
+								<p:selectOneMenu id="cbxTower" style="width: 350px;"
+											value="#{inventoryBean.inventory.tower.id}" >
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{inventoryBean.towers}" 
+										var="tower" itemValue="#{tower.id}"	itemLabel="#{tower.toString}"/>
+								</p:selectOneMenu>  
+								<p:spacer  width="28" height="2"/>
+								
+								<h:outputLabel value="#{msg.resolve('label.memory')}" for="cbxMemory">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:spacer  width="28" height="2"/>
+								<p:selectOneMenu id="cbxMemory" style="width: 350px;"
+											value="#{inventoryBean.inventory.memory.id}" >
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{inventoryBean.memories}" 
+										var="memory" itemValue="#{memory.id}"	itemLabel="#{memory.toString}"/>
+								</p:selectOneMenu>  
+								<p:inputText id="txtQtdMemory" size="5"/>
+								
+								<h:outputLabel value="#{msg.resolve('label.drive')}" for="cbxDrive">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:spacer  width="28" height="2"/>
+								<p:selectOneMenu id="cbxDrive" style="width: 350px;"
+											value="#{inventoryBean.inventory.drive.id}" >
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{inventoryBean.drivers}" 
+										var="drive" itemValue="#{drive.id}"	itemLabel="#{drive.toString}"/>
+								</p:selectOneMenu>  
+								<p:inputText id="txtQtdDrive" size="5"/>
+								
+								<h:outputLabel value="#{msg.resolve('label.hard.disk')}" for="cbxHardDisk">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:spacer  width="28" height="2"/>
+								<p:selectOneMenu id="cbxHardDisk" style="width: 350px;"
+											value="#{inventoryBean.inventory.hardDisk.id}" >
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{inventoryBean.hardDisks}" 
+										var="hardDisk" itemValue="#{hardDisk.id}"	itemLabel="#{hardDisk.toString}"/>
+								</p:selectOneMenu>  
+								<p:inputText id="txtQtdHardDisk" size="5"/>
+								
 							</h:panelGrid>
 					</h:panelGroup>
 				</p:tab>

@@ -148,5 +148,19 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 		return this.id != null ? this.id.hashCode() : 0;
 	}
 	
+	public String getToString() {
+		return this.toString();
+	}
 	
+	public String toString() {
+		return new StringBuilder()
+			.append(this.code)
+			.append(" - ")
+			.append(this.name)
+			.append(" - ")
+			.append(this.manufacturer.getName())
+			.append(" - R$ ")
+			.append(this.getPriceString())
+			.toString();
+	}
 }

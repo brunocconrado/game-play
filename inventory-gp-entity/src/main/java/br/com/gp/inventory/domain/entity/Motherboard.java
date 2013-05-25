@@ -149,6 +149,10 @@ public class Motherboard  implements br.com.embracon.j4e.domain.Entity {
 		this.price = new BigDecimal(priceString.replace(".", "").replace(",", "."));
 	}
 	
+	public String getToString() {
+		return this.toString();
+	}
+	
 	public boolean equals(Object obj) {
 		return obj instanceof Motherboard && this.equals((Motherboard)obj);
 	}
@@ -159,6 +163,20 @@ public class Motherboard  implements br.com.embracon.j4e.domain.Entity {
 	
 	public int hashCode() {
 		return this.id != null ? this.id.hashCode() : 0;
+	}
+	
+	public String toString() {
+		return new StringBuilder()
+			.append(this.code)
+			.append(" - ")
+			.append(this.name)
+			.append(" - ")
+			.append(this.socket.getName())
+			.append(" - ")
+			.append(this.manufacturer.getName())
+			.append(" - R$ ")
+			.append(this.getPriceString())
+			.toString();
 	}
 	
 }
