@@ -30,5 +30,10 @@ public class MotherboardServiceImpl implements MotherboardService {
 	public void save(Motherboard motherboard) throws ServiceException {
 		this.repository.save(motherboard);	
 	}
+
+	@Override
+	public Motherboard findById(Long id) throws ServiceException {
+		return this.repository.findByIdentity(id);
+	}
 	
 }

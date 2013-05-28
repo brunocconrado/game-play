@@ -11,5 +11,7 @@ public interface MotherboardService {
 	public List<Motherboard> findAll() throws ServiceException;
 	
 	public void save(Motherboard motherboard) throws ServiceException;
+
+	public Motherboard findById(Long id) throws ServiceException;
 	
 }

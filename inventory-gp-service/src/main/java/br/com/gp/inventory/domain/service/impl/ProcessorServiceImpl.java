@@ -42,4 +42,9 @@ public class ProcessorServiceImpl implements ProcessorService {
 		return this.repository.findBySocket(motherboardRepository.findByIdentity(motherboard.getId()).getSocket());
 	}
 
+	@Override
+	public Processor findById(Long id) throws ServiceException {
+		return this.repository.findByIdentity(id);
+	}
+
 }

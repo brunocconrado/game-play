@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.embracon.j4e.util.Objects;
+import br.com.embracon.j4e.validation.ValidationException;
 import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Font;
 import br.com.gp.inventory.domain.entity.HardDisk;
@@ -112,6 +113,16 @@ public class InventoryBean extends DefaultBean {
 		
 		try {
 			
+			this.inventory.setProcessor(this.processorService.findById(this.inventory.getProcessor().getId()));
+			this.inventory.setMotherboard(this.motherboardService.findById(this.inventory.getMotherboard().getId()));
+			this.inventory.setVideoCard(this.videoCardService.findById(this.inventory.getVideoCard().getId()));
+			this.inventory.setFont(this.fontService.findById(this.inventory.getFont().getId()));
+			this.inventory.setMemory(this.memoryService.findById(this.inventory.getMemory().getId()));
+			this.inventory.setHardDisk(this.hardDiskService.findById(this.inventory.getHardDisk().getId()));
+			this.inventory.setDrive(this.driveService.findById(this.inventory.getDrive().getId()));
+			this.inventory.setTower(this.towerService.findById(this.inventory.getTower().getId()));
+			
+			
 			this.service.save(this.inventory);
 			
 			this.inventory = new Inventory();
@@ -119,6 +130,8 @@ public class InventoryBean extends DefaultBean {
 			successMessage("save.success", "Inventário");			
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Inventário");
+		} catch (ValidationException e) {
+			warningMessage(e.getResult().getReasons());
 		} catch (Throwable e) {
 			fatalMessage("fatal.error");
 		}
@@ -159,6 +172,7 @@ public class InventoryBean extends DefaultBean {
 
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
+		loadProcessors();
 	}
 
 	public List<Processor> getProcessors() {

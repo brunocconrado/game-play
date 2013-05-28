@@ -11,4 +11,6 @@ public interface MemoryService {
 
 	public List<Memory> findAll() throws ServiceException;
 
+	public Memory findById(Long id) throws ServiceException;
+
 }

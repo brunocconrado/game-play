@@ -30,5 +30,10 @@ public class HardDiskServiceImpl implements HardDiskService {
 	public List<HardDisk> findAll() throws ServiceException {
 		return (List<HardDisk>) this.repository.findAll();
 	}
+
+	@Override
+	public HardDisk findById(Long id) throws ServiceException {
+		return this.repository.findByIdentity(id);
+	}
 	
 }

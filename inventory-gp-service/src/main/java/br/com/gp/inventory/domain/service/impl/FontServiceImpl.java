@@ -31,4 +31,9 @@ public class FontServiceImpl implements FontService {
 	public List<Font> findAll() throws ServiceException {
 		return (List<Font>) this.repository.findAll();
 	}
+
+	@Override
+	public Font findById(Long id) throws ServiceException {
+		return this.repository.findByIdentity(id);
+	}
 }

@@ -31,4 +31,9 @@ public class TowerServiceImpl implements TowerService {
 		return (List<Tower>) this.repository.findAll();
 	}
 
+	@Override
+	public Tower findById(Long id) throws ServiceException {
+		return this.repository.findByIdentity(id);
+	}
+
 }

@@ -184,6 +184,8 @@ public class Font  implements br.com.embracon.j4e.domain.Entity {
 			.append(" - ")
 			.append(this.name)
 			.append(" - ")
+			.append(this.potential.getName())
+			.append(this.isRealPotential() ? " Real - " : " - ")
 			.append(this.manufacturer.getName())
 			.append(" - R$ ")
 			.append(this.getPriceString())

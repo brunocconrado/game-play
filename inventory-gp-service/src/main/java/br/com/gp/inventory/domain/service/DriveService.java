@@ -11,4 +11,6 @@ public interface DriveService {
 
 	public List<Drive> findAll() throws ServiceException;
 
+	public Drive findById(Long id) throws ServiceException;
+
 }

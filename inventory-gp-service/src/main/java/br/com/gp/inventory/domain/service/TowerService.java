@@ -11,4 +11,6 @@ public interface TowerService {
 
 	public List<Tower> findAll() throws ServiceException;
 
+	public Tower findById(Long id) throws ServiceException;
+
 }

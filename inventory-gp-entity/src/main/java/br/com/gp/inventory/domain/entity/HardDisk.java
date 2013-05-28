@@ -185,6 +185,8 @@ public class HardDisk implements br.com.embracon.j4e.domain.Entity {
 			.append(" - ")
 			.append(this.name)
 			.append(" - ")
+			.append(this.capacity)
+			.append(" GB").append(this.isSsd() ? " SSD - " : " - ")
 			.append(this.manufacturer.getName())
 			.append(" - R$ ")
 			.append(this.getPriceString())

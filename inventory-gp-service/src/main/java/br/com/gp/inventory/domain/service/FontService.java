@@ -11,4 +11,6 @@ public interface FontService {
 
 	public List<Font> findAll() throws ServiceException;
 
+	public Font findById(Long id) throws ServiceException;
+
 }

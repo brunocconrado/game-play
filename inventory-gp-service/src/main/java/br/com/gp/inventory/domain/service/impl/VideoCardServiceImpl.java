@@ -31,4 +31,9 @@ public class VideoCardServiceImpl implements VideoCardService {
 		this.repository.save(videoCard);		
 	}
 
+	@Override
+	public VideoCard findById(Long id) throws ServiceException {
+		return this.repository.findByIdentity(id);
+	}
+
 }

@@ -31,4 +31,9 @@ public class DriveServiceImpl implements DriveService {
 		return (List<Drive>) this.repository.findAll();
 	}
 
+	@Override
+	public Drive findById(Long id) throws ServiceException {
+		return this.repository.findByIdentity(id);
+	}
+
 }

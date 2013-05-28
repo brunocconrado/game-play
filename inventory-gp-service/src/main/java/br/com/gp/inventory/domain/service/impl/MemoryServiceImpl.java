@@ -32,4 +32,9 @@ public class MemoryServiceImpl implements MemoryService {
 		return (List<Memory>) this.reposiroty.findAll();
 	}
 
+	@Override
+	public Memory findById(Long id) throws ServiceException {
+		return this.reposiroty.findByIdentity(id);
+	}
+
 }

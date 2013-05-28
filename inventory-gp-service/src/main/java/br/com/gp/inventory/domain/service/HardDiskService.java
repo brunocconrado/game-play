@@ -11,4 +11,6 @@ public interface HardDiskService {
 
 	public List<HardDisk> findAll() throws ServiceException;
 
+	public HardDisk findById(Long id) throws ServiceException;
+
 }

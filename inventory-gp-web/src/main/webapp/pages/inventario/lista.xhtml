@@ -10,14 +10,14 @@
 	<ui:define name="content">
 		<h:form prependId="false">
 			  		
-			<p:tabView id="tvDriveList" style="height: 400px;"> 
+			<p:tabView id="tvInventoryList" style="height: 400px;"> 
 				<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
 				<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
 				
-				<p:tab id="tabDriveList" title="#{msg.resolve('tab.drive.list')}">
+				<p:tab id="tabInventoryList" title="#{msg.resolve('tab.inventory.list')}">
 					<p:spacer width="20" height="15"/>
 				
-					<h:panelGroup id="pgroupDriveSearch"> 
+					<h:panelGroup id="pgroupInventorySearch"> 
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName"/>
 								<p:inputText id="txtName" value="" size="40"/>
@@ -36,7 +36,7 @@
 								<p:spacer width="3"/>
 								
 								<p:commandLink title="#{msg.resolve('label.search')}" 
-										actionListener="#{driveListBean.search()}" process="pgroupDriveSearch" update="dgDrives">
+										actionListener="#{inventoryListBean.search()}" process="pgroupInventorySearch" update="dgInventories">
 									<h:graphicImage name="busca.png" library="images"/>
 								</p:commandLink>
 								
@@ -44,50 +44,50 @@
 						
 						<p:spacer width="20" height="20"/>
 						
-						<p:dataTable widgetVar="dgDrives" id="dgDrives" style="width: 90%;" var="drive" value="#{driveListBean.drives}"
+						<p:dataTable widgetVar="dgInventories" id="dgInventories" style="width: 90%;" var="inventory" value="#{inventoryListBean.inventories}"
 								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
 						
 							<f:facet name="header">  
-					            <h:outputLabel value="#{msg.resolve('data.table.drive.header')}" />
+					            <h:outputLabel value="#{msg.resolve('data.table.inventory.header')}" />
 					        </f:facet> 
 					         
+					        <p:column headerText="#{msg.resolve('label.code')}" style="width: 180px !important; text-align: left;">  
+					            <h:outputText value="#{inventory.code}"/>  
+					        </p:column>
+					         
 					        <p:column headerText="#{msg.resolve('label.name')}" style="width: 180px !important; text-align: left;">  
-					            <h:outputText value="#{drive.name}"/>  
+					            <h:outputText value="#{inventory.name}"/>  
 					        </p:column>  
-					        
-					        <p:column headerText="#{msg.resolve('label.manufacturer')}" style="width: 220px !important; text-align: left;">  
-					            <h:outputText value="#{drive.manufacturer.name}"/>  
-					        </p:column>  
-					  
-					         <p:column headerText="#{msg.resolve('label.price')}" style="text-align: center;">  
-					            <h:outputText value="#{drive.priceString}"/>  
+					        					       					  
+					         <p:column headerText="#{msg.resolve('label.total')}" style="text-align: center;">  
+					            <h:outputText value="#{inventory.totalString}"/>  
 					        </p:column>  
 					        
 					        <p:column headerText="#{msg.resolve('label.actions')}" style="width: 35px !important;">  
-					            <p:commandLink title="#{msg.resolve('label.edit')}" action="/pages/drive/cadastro"
+					            <p:commandLink title="#{msg.resolve('label.edit')}" action="/pages/inventario/cadastro"
 					            		 ajax="false" process="@this" immediate="true" update="messages">
 									<h:graphicImage name="pencil.png" library="images"/>
-									<f:setPropertyActionListener target="#{driveBean.drive}" value="#{drive}"/>
+									<f:setPropertyActionListener target="#{inventoryBean.inventory}" value="#{inventory}"/>
 								</p:commandLink>
 					        
 					        	<p:spacer width="3" height="2"/> 
 					        
 					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();">
 									<h:graphicImage name="delete.png" library="images"/>
-									<f:setPropertyActionListener target="#{driveListBean.driveSelected}" value="#{drive}"/>
+									<f:setPropertyActionListener target="#{inventoryListBean.inventorySelected}" value="#{inventory}"/>
 								</p:commandLink>
 					        </p:column>  
 						</p:dataTable> 
 						
-						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.drive')}" 
-									header="#{msg.resolve('dialog.header.remove.drive')}" severity="alert">
+						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.inventory')}" 
+									header="#{msg.resolve('dialog.header.remove.inventory')}" severity="alert">
 			                <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
 			                
 			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" 
-			                    		actionListener="#{driveListBean.remove()}" update="tvDriveList:dgDrives, glMessages" immediate="true"/>
+			                    		actionListener="#{inventoryListBean.remove()}" update="tvInventoryList:dgInventories, glMessages" immediate="true"/>
 			                    		
-			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgDrives"/>
+			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgInventories"/>
 			                    
 			                </h:panelGrid>
 			            </p:confirmDialog>

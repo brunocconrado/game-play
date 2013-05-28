@@ -13,5 +13,7 @@ public interface ProcessorService {
 	public void save(Processor processor) throws ServiceException;
 
 	public List<Processor> findByMotherboard(Motherboard motherboard) throws ServiceException;
+
+	public Processor findById(Long id) throws ServiceException;
 	
 }

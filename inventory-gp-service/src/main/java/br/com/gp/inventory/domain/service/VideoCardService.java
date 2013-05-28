@@ -11,4 +11,6 @@ public interface VideoCardService {
 
 	public void save(VideoCard videoCard) throws ServiceException;
 
+	public VideoCard findById(Long id) throws ServiceException;
+
 }
