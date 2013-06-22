@@ -44,4 +44,26 @@ public class ManufacturerServiceImpl implements ManufacturerService {
 		return (List<Manufacturer>) repository.findByCategory(category);
 	}
 
+	@Override
+	public Manufacturer findByName(String name) throws ServiceException {
+		return null;
+	}
+
+	@Override
+	public void save(Manufacturer manufacturer) throws ServiceException {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public Manufacturer findOrCreateByName(String name) throws ServiceException {
+		Manufacturer manufacturer = this.findByName(name);
+		if(manufacturer == null) {
+			manufacturer = new Manufacturer(name);
+			this.save(manufacturer);
+		}
+		
+		return manufacturer;
+	}
+
 }

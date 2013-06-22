@@ -37,6 +37,9 @@ public class Font  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "TITULO", length = 150, nullable = false)
 	private String title;
 	
+	@Column(name = "WATTS", length = 10)
+	private String watts;
+	
 	@Lob
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
@@ -64,6 +67,11 @@ public class Font  implements br.com.embracon.j4e.domain.Entity {
 	public Font() {
 		this.manufacturer = new Manufacturer();
 		this.potential = new Potential();
+	}
+
+	public Font(Manufacturer manufacturer, Potential potential) {
+		this.manufacturer = manufacturer;
+		this.potential = potential;
 	}
 
 	public Long getId() {
@@ -98,6 +106,14 @@ public class Font  implements br.com.embracon.j4e.domain.Entity {
 		this.title = title;
 	}
 
+	public String getWatts() {
+		return watts;
+	}
+
+	public void setWatts(String watts) {
+		this.watts = watts;
+	}
+	
 	public String getDescription() {
 		return description;
 	}

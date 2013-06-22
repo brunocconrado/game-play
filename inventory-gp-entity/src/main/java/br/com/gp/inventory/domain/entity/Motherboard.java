@@ -38,6 +38,9 @@ public class Motherboard  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "TITULO", length = 150, nullable = false)
 	private String title;
 	
+	@Column(name = "WATTS", length = 10)
+	private String watts;
+	
 	@Lob
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
@@ -65,6 +68,11 @@ public class Motherboard  implements br.com.embracon.j4e.domain.Entity {
 		this.manufacturer = new Manufacturer();
 	}
 	
+	public Motherboard(Socket socket, Manufacturer manufacturer) {
+		this.socket = socket;
+		this.manufacturer = manufacturer;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -95,6 +103,14 @@ public class Motherboard  implements br.com.embracon.j4e.domain.Entity {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getWatts() {
+		return watts;
+	}
+
+	public void setWatts(String watts) {
+		this.watts = watts;
 	}
 
 	public String getDescription() {

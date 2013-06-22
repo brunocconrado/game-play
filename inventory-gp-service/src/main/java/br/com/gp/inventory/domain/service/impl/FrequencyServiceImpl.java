@@ -32,4 +32,10 @@ public class FrequencyServiceImpl implements FrequencyService {
 		return this.repository.findByIdentity(id);
 	}
 
+	@Override
+	public Frequency findOrCreateByName(String name) throws ServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -31,18 +32,21 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "CODIGO", length = 10, nullable = false)
 	private String code;
 	
-	@Column(name = "NOME", length = 80, nullable = false)
+	@Column(name = "NOME", length = 80)
 	private String name;
 	
 	@Column(name = "TITULO", length = 150, nullable = false)
 	private String title;
 	
-	//TODO: Byte
-	@Column(name = "DESCRIPTION", length = 100, nullable = false)
+	@Column(name = "WATTS", length = 10)
+	private String watts;
+	
+	@Lob
+	@Column(name = "DESCRIPTION")
 	private String description;
 	
-	//TODO: Byte
-	@Column(name = "ESPECIFICATION", length = 100, nullable = false)
+	@Lob
+	@Column(name = "ESPECIFICATION")
 	private String especification;
 	
 	@Column(name = "PRECO", precision = 10, scale = 2)
@@ -64,6 +68,11 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 		this.manufacturer = new Manufacturer();
 	}
 	
+	public Processor(Socket socket, Manufacturer manufacturer) {
+		this.socket = socket;
+		this.manufacturer = manufacturer;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -94,6 +103,14 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getWatts() {
+		return watts;
+	}
+
+	public void setWatts(String watts) {
+		this.watts = watts;
 	}
 
 	public String getDescription() {

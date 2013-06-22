@@ -30,5 +30,11 @@ public class PotentialServiceImpl implements PotentialService {
 	public Potential findById(Long potentialId) throws ServiceException {
 		return this.repository.findByIdentity(potentialId);
 	}
+
+	@Override
+	public Potential findOrCreateByName(String name) throws ServiceException {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }

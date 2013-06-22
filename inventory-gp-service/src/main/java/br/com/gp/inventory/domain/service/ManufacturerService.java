@@ -17,4 +17,10 @@ public interface ManufacturerService {
 
 	public List<Manufacturer> findAllByCategory(CategoryEnum processor) throws ServiceException;
 
+	public Manufacturer findByName(String name) throws ServiceException;
+
+	public void save(Manufacturer manufacturer) throws ServiceException;
+
+	public Manufacturer findOrCreateByName(String trim) throws ServiceException;
+
 }

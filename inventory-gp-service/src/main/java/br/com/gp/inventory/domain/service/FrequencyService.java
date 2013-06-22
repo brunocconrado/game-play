@@ -11,4 +11,7 @@ public interface FrequencyService {
 
 	public Frequency findById(Long id) throws ServiceException;
 
+	public Frequency findOrCreateByName(String name) throws ServiceException;
+
+
 }

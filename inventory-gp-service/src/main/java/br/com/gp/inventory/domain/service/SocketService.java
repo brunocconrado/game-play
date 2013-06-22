@@ -12,4 +12,10 @@ public interface SocketService {
 
 	public Socket findById(Long socketId) throws ServiceException;
 
+	public Socket findByName(String name) throws ServiceException;
+
+	public void save(Socket socket) throws ServiceException;
+
+	public Socket findOrCreateByName(String trim) throws ServiceException;
+
 }

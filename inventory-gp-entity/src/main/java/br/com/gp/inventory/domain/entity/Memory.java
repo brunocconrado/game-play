@@ -42,6 +42,9 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "TITULO", length = 150, nullable = false)
 	private String title;
 	
+	@Column(name = "WATTS", length = 10)
+	private String watts;
+	
 	@Lob
 	@Column(name = "DESCRIPTION", nullable = false)
 	private String description;
@@ -69,6 +72,11 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 		this.frequency = new Frequency();
 	}
 	
+	public Memory(Manufacturer manufacturer, Frequency frequency) {
+		this.manufacturer = manufacturer;
+		this.frequency = frequency;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -109,6 +117,14 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 		this.title = title;
 	}
 
+	public String getWatts() {
+		return watts;
+	}
+
+	public void setWatts(String watts) {
+		this.watts = watts;
+	}
+	
 	public String getDescription() {
 		return description;
 	}

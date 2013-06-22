@@ -33,6 +33,9 @@ public class Drive  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "NAME", length = 40)
 	private String name;
 	
+	@Column(name = "WATTS", length = 10)
+	private String watts;
+	
 	@Column(name = "PRECO", precision = 10, scale = 2, nullable = false)
 	private BigDecimal price;
 	
@@ -47,6 +50,10 @@ public class Drive  implements br.com.embracon.j4e.domain.Entity {
 		this.manufacturer = new Manufacturer();
 	}
 	
+	public Drive(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -71,6 +78,14 @@ public class Drive  implements br.com.embracon.j4e.domain.Entity {
 		this.name = name;
 	}
 
+	public String getWatts() {
+		return watts;
+	}
+
+	public void setWatts(String watts) {
+		this.watts = watts;
+	}
+	
 	public BigDecimal getPrice() {
 		return price;
 	}

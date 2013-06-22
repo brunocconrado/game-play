@@ -18,7 +18,7 @@
 
 	<bean name="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-			<value>java:jboss/gp-inventory</value>
+			<value>java:jboss/gp-inventory-local</value>
 		</property>
 	</bean>
 
@@ -45,7 +45,7 @@
 				<value>br.com.gp.inventory.domain.entity.Potential</value>
 				<value>br.com.gp.inventory.domain.entity.Processor</value>
 				<value>br.com.gp.inventory.domain.entity.Socket</value>
-				<value>br.com.gp.inventory.domain.entity.Status</value>
+				<!-- <value>br.com.gp.inventory.domain.entity.Status</value>  -->
 				<value>br.com.gp.inventory.domain.entity.Tower</value>
 				<value>br.com.gp.inventory.domain.entity.VideoCard</value>
 			</list>

@@ -28,6 +28,12 @@ public class Manufacturer implements br.com.embracon.j4e.domain.Entity {
     @JoinColumn(name = "CATEGORIA", nullable = false)
 	private Category category;
 	
+	public Manufacturer() {}
+	
+	public Manufacturer(String name) {
+		this.name = name 
+	}
+
 	public Long getId() {
 		return id;
 	}
