@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 
 @Entity
 @Table(name = "INV_PLACA_VIDEO")
@@ -32,7 +34,7 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "CODIGO", length = 10, nullable = false)
 	private String code;
 	
-	@Column(name = "NOME", length = 80, nullable = false)
+	@Column(name = "NOME", length = 80)
 	private String name;
 	
 	@Column(name = "TITULO", length = 150, nullable = false)
@@ -42,11 +44,11 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 	private String watts;
 	
 	@Lob
-	@Column(name = "DESCRIPTION", length = 100, nullable = false)
+	@Column(name = "DESCRIPTION", length = 100)
 	private String description;
 	
 	@Lob
-	@Column(name = "ESPECIFICATION", length = 100, nullable = false)
+	@Column(name = "ESPECIFICATION", length = 100)
 	private String especification;
 	
 	@Column(name = "PRECO", precision = 10, scale = 2)
@@ -61,6 +63,7 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 	
 	public VideoCard() {
 		this.manufacturer = new Manufacturer();
+		this.code = StringUtils.CODE;
 	}
 	
 	public VideoCard(Manufacturer manufacturer) {
@@ -171,7 +174,7 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 		return new StringBuilder()
 			.append(this.code)
 			.append(" - ")
-			.append(this.name)
+			.append(this.name != null ? this.name : this.title)
 			.append(" - ")
 			.append(this.manufacturer.getName())
 			.append(" - R$ ")

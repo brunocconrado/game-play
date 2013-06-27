@@ -27,7 +27,7 @@
 								<h:outputLabel value="#{msg.resolve('label.code')}" for="txtCodigo">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:inputText id="txtCodigo" value="#{fontBean.font.code}" required="true" size="10" 
+								<p:inputText id="txtCodigo" value="#{fontBean.font.code}" required="false" disabled="true" size="10" 
 											requiredMessage="#{msg.resolveMsg('required.field', 'label.code')}"/>
 											
 								<h:outputLabel value="#{msg.resolve('label.manufacturer')}" for="cbxManufacturer">
@@ -107,7 +107,7 @@
 					
 					<p:commandButton id="btnSave" 
 								process="@this, tvFont" 
-								update="messages, grlMessages" icon="ui-icon ui-icon-disk"
+								update="messages, grlMessages, tvFont" icon="ui-icon ui-icon-disk"
 								value="#{msg.resolve('label.save')}" actionListener="#{fontBean.save}"/>
 				</h:panelGroup>
 			</h:panelGrid>

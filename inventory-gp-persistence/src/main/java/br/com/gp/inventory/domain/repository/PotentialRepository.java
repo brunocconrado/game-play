@@ -5,4 +5,6 @@ import br.com.gp.inventory.domain.entity.Potential;
 
 public interface PotentialRepository extends Repository<Potential> {
 
+	public Potential findByName(String name);
+
 }

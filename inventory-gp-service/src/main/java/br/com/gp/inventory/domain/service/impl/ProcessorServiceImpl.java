@@ -1,12 +1,13 @@
 package br.com.gp.inventory.domain.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.interceptor.Interceptors;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -16,6 +17,7 @@ import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Motherboard;
 import br.com.gp.inventory.domain.entity.Processor;
 import br.com.gp.inventory.domain.entity.Socket;
+import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.MotherboardRepository;
 import br.com.gp.inventory.domain.repository.ProcessorRepository;
 import br.com.gp.inventory.domain.service.ManufacturerService;
@@ -56,8 +58,10 @@ public class ProcessorServiceImpl implements ProcessorService {
 	}
 
 	@Override
-	public void save(Processor processor) throws ServiceException {
-		this.repository.save(processor);	
+	public Processor save(Processor processor) throws ServiceException {
+		processor = this.repository.save(processor);
+		processor.setCode(StringUtils.formatString(processor.getId(), 10, "P"));
+		return this.repository.save(processor);	
 	}
 
 	@Override
@@ -71,29 +75,40 @@ public class ProcessorServiceImpl implements ProcessorService {
 	}
 
 	@Override
-	public void importProcessor(HSSFSheet sheet) {
+	public void importProcessor(Sheet sheet) {
+		
+		boolean isFirst = Boolean.TRUE;
 		for(Iterator<Row> it = sheet.rowIterator(); it.hasNext(); ) {
 			try {
 				
 				Row row = it.next();
+				if(isFirst) {
+					isFirst = Boolean.FALSE;
+					continue;
+				}
+				
 				Socket socket = socketService.findOrCreateByName(
 						row.getCell(SOCKET).getStringCellValue().trim());
 				
-				Manufacturer manufacturer = manufacturerService.findOrCreateByName(
-								row.getCell(MANUFACTURER).getStringCellValue().trim());
+				Manufacturer manufacturer = manufacturerService.findOrCreateByNameAndCategory(
+						row.getCell(MANUFACTURER).getStringCellValue().trim(),
+						CategoryEnum.PROCESSOR		
+				);
 				
 				Processor processor = new Processor(socket, manufacturer);
 				processor.setTitle(row.getCell(NAME).getStringCellValue().trim());
-				processor.setPriceString(row.getCell(PRICE).getStringCellValue().trim());
-				processor.setWatts(row.getCell(WATTS).getStringCellValue().trim());
+				processor.setPrice(BigDecimal.valueOf(row.getCell(PRICE).getNumericCellValue()));
+				processor.setWatts(String.valueOf(row.getCell(WATTS).getNumericCellValue()));
 				processor.setCode("0000000000");
 				
-				processor = this.repository.save(processor);
-				processor.setCode(StringUtils.formatString(processor.getId(), 10, "P"));
-				processor = this.repository.save(processor);
+				processor = this.save(processor);
 				
 				System.out.println(processor.toString());
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
 			} catch (ServiceException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

@@ -1,12 +1,13 @@
 package br.com.gp.inventory.domain.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.interceptor.Interceptors;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.VideoCard;
+import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.VideoCardRepository;
 import br.com.gp.inventory.domain.service.ManufacturerService;
 import br.com.gp.inventory.domain.service.VideoCardService;
@@ -44,6 +46,8 @@ public class VideoCardServiceImpl implements VideoCardService {
 
 	@Override
 	public VideoCard save(VideoCard videoCard) throws ServiceException {
+		videoCard = this.repository.save(videoCard);
+		videoCard.setCode(StringUtils.formatString(videoCard.getId(), 10, "PV"));
 		return this.repository.save(videoCard);		
 	}
 
@@ -53,27 +57,34 @@ public class VideoCardServiceImpl implements VideoCardService {
 	}
 
 	@Override
-	public void importVideoCard(HSSFSheet sheet) {
+	public void importVideoCard(Sheet sheet) {
+		boolean isFirst = Boolean.TRUE;
 		for(Iterator<Row> it = sheet.rowIterator(); it.hasNext(); ) {
 			try {
 				
 				Row row = it.next();
-
-				Manufacturer manufacturer = manufacturerService.findOrCreateByName(
-						row.getCell(MANUFACTURER).getStringCellValue().trim());
+				if(isFirst) {
+					isFirst = Boolean.FALSE;
+					continue;
+				}
+				
+				Manufacturer manufacturer = manufacturerService.findOrCreateByNameAndCategory(
+						row.getCell(MANUFACTURER).getStringCellValue().trim(),
+						CategoryEnum.VIDEO_CARD
+				);
 				
 				VideoCard videoCard = new VideoCard(manufacturer);
 				videoCard.setTitle(row.getCell(NAME).getStringCellValue().trim());
-				videoCard.setPriceString(row.getCell(PRICE).getStringCellValue().trim());
-				videoCard.setWatts(row.getCell(WATTS).getStringCellValue().trim());
+				videoCard.setPrice(BigDecimal.valueOf(row.getCell(PRICE).getNumericCellValue()));
+				videoCard.setWatts(String.valueOf(row.getCell(WATTS).getNumericCellValue()));
 				videoCard.setCode("0000000000");
 				
-				videoCard = this.save(videoCard);
-				videoCard.setCode(StringUtils.formatString(videoCard.getId(), 10, "PV"));
 				videoCard = this.save(videoCard);
 				
 				System.out.println(videoCard.toString());
 			} catch (ServiceException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

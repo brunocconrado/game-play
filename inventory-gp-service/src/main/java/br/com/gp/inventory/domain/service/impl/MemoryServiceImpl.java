@@ -1,12 +1,13 @@
 package br.com.gp.inventory.domain.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.interceptor.Interceptors;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Frequency;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Memory;
+import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.MemoryRepository;
 import br.com.gp.inventory.domain.service.FrequencyService;
 import br.com.gp.inventory.domain.service.ManufacturerService;
@@ -48,6 +50,8 @@ public class MemoryServiceImpl implements MemoryService {
 
 	@Override
 	public Memory save(Memory memory) throws ServiceException {
+		memory = this.reposiroty.save(memory);
+		memory.setCode(StringUtils.formatString(memory.getId(), 10, "M"));
 		return this.reposiroty.save(memory);
 	}
 
@@ -62,14 +66,21 @@ public class MemoryServiceImpl implements MemoryService {
 	}
 	
 	@Override
-	public void importMemory(HSSFSheet sheet) {
+	public void importMemory(Sheet sheet) {
+		boolean isFirst = Boolean.TRUE;
 		for(Iterator<Row> it = sheet.rowIterator(); it.hasNext(); ) {
 			try {
 				
 				Row row = it.next();
+				if(isFirst) {
+					isFirst = Boolean.FALSE;
+					continue;
+				}
 
-				Manufacturer manufacturer = manufacturerService.findOrCreateByName(
-						row.getCell(MANUFACTURER).getStringCellValue().trim());
+				Manufacturer manufacturer = manufacturerService.findOrCreateByNameAndCategory(
+						row.getCell(MANUFACTURER).getStringCellValue().trim(),
+						CategoryEnum.MEMORY
+				);
 				
 				Frequency frequency = frequencyService.findOrCreateByName(
 						row.getCell(FREQUENCY).getStringCellValue().trim());
@@ -78,16 +89,16 @@ public class MemoryServiceImpl implements MemoryService {
 				
 				memory.setCapacity(row.getCell(CAPACITY).getStringCellValue().trim());
 				memory.setTitle(row.getCell(NAME).getStringCellValue().trim());
-				memory.setPriceString(row.getCell(PRICE).getStringCellValue().trim());
-				memory.setWatts(row.getCell(WATTS).getStringCellValue().trim());
+				memory.setPrice(BigDecimal.valueOf(row.getCell(PRICE).getNumericCellValue()));
+				memory.setWatts(String.valueOf(row.getCell(WATTS).getNumericCellValue()));
 				memory.setCode("0000000000");
 				
-				memory = this.save(memory);
-				memory.setCode(StringUtils.formatString(memory.getId(), 10, "M"));
 				memory = this.save(memory);
 				
 				System.out.println(memory.toString());
 			} catch (ServiceException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

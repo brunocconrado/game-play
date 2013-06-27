@@ -1,5 +1,6 @@
 package br.com.gp.inventory.domain.repository.impl;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import br.com.gp.inventory.domain.entity.Socket;
@@ -14,5 +15,9 @@ public class SocketRepositoryImpl extends AbstractHibernateRepostirory<Socket> i
 		super(Socket.class);
 	}
 
+	@Override
+	public Socket findByName(String name) {
+		return (Socket) this.createCriteria().add(Restrictions.eq("name", name)).uniqueResult();
+	}
 
 }

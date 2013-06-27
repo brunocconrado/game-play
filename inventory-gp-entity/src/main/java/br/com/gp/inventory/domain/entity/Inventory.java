@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 
 @Entity
 @Table(name = "INV_INVENTARIO")
@@ -90,6 +92,7 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 		this.videoCard = new VideoCard();
 		this.font = new Font();
 		this.tower = new Tower();
+		this.code = StringUtils.CODE;
 	}
 
 	public Long getId() {

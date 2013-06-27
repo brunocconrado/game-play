@@ -1,12 +1,13 @@
 package br.com.gp.inventory.domain.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.interceptor.Interceptors;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,7 @@ import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Motherboard;
 import br.com.gp.inventory.domain.entity.Socket;
+import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.MotherboardRepository;
 import br.com.gp.inventory.domain.service.ManufacturerService;
 import br.com.gp.inventory.domain.service.MotherboardService;
@@ -51,6 +53,8 @@ public class MotherboardServiceImpl implements MotherboardService {
 
 	@Override
 	public Motherboard save(Motherboard motherboard) throws ServiceException {
+		motherboard = this.repository.save(motherboard);
+		motherboard.setCode(StringUtils.formatString(motherboard.getId(), 10, "PM"));
 		return this.repository.save(motherboard);	
 	}
 
@@ -60,29 +64,38 @@ public class MotherboardServiceImpl implements MotherboardService {
 	}
 
 	@Override
-	public void importMotherboard(HSSFSheet sheet) {
+	public void importMotherboard(Sheet sheet) {
+		
+		boolean isFirst = Boolean.TRUE;
 		for(Iterator<Row> it = sheet.rowIterator(); it.hasNext(); ) {
 			try {
 				
 				Row row = it.next();
+				if(isFirst) {
+					isFirst = Boolean.FALSE;
+					continue;
+				}
+				
 				Socket socket = socketService.findOrCreateByName(
 						row.getCell(SOCKET).getStringCellValue().trim());
 
-				Manufacturer manufacturer = manufacturerService.findOrCreateByName(
-						row.getCell(MANUFACTURER).getStringCellValue().trim());
+				Manufacturer manufacturer = manufacturerService.findOrCreateByNameAndCategory(
+						row.getCell(MANUFACTURER).getStringCellValue().trim(),
+						CategoryEnum.MOTHERBOARD
+				);
 				
 				Motherboard motherboard = new Motherboard(socket, manufacturer);
 				motherboard.setTitle(row.getCell(NAME).getStringCellValue().trim());
-				motherboard.setPriceString(row.getCell(PRICE).getStringCellValue().trim());
-				motherboard.setWatts(row.getCell(WATTS).getStringCellValue().trim());
+				motherboard.setPrice(BigDecimal.valueOf(row.getCell(PRICE).getNumericCellValue()));
+				motherboard.setWatts(String.valueOf(row.getCell(WATTS).getNumericCellValue()));
 				motherboard.setCode("0000000000");
 				
-				motherboard = this.save(motherboard);
-				motherboard.setCode(StringUtils.formatString(motherboard.getId(), 10, "PM"));
 				motherboard = this.save(motherboard);
 				
 				System.out.println(motherboard.toString());
 			} catch (ServiceException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

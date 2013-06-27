@@ -14,6 +14,7 @@ import br.com.embracon.j4e.validation.ValidationResult;
 import br.com.gp.inventory.domain.entity.Inventory;
 import br.com.gp.inventory.domain.repository.InventoryRepository;
 import br.com.gp.inventory.domain.service.InventoryService;
+import br.com.gp.inventory.domain.util.StringUtils;
 import br.com.gp.inventory.domain.validator.InventoryValidator;
 
 @Component("inventoryService")
@@ -34,7 +35,11 @@ public class InventoryServiceImpl implements InventoryService {
 		}
 		
 		inventory.sumTotal();
-		this.repository.save(inventory);
+		
+		inventory = this.repository.save(inventory);
+		inventory.setCode(StringUtils.formatString(inventory.getId(), 10, "INV"));
+		inventory = this.repository.save(inventory);
+		
 	}
 
 	@Override

@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 @Entity
 @Table(name = "INV_PROCESSADOR")
 public class Processor implements br.com.embracon.j4e.domain.Entity {
@@ -66,6 +68,7 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 	public Processor() {
 		this.socket = new Socket();
 		this.manufacturer = new Manufacturer();
+		this.code = StringUtils.CODE;
 	}
 	
 	public Processor(Socket socket, Manufacturer manufacturer) {
@@ -185,7 +188,7 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 		return new StringBuilder()
 			.append(this.code)
 			.append(" - ")
-			.append(this.name)
+			.append(this.name != null ? this.name : this.title)
 			.append(" - ")
 			.append(this.socket.getName())
 			.append(" - ")

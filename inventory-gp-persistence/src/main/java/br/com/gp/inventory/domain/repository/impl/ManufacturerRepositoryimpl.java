@@ -27,4 +27,12 @@ public class ManufacturerRepositoryimpl extends AbstractHibernateRepostirory<Man
 		return this.createCriteria().add(Restrictions.eq("category.id", category.value())).list();
 	}
 
+	@Override
+	public Manufacturer findByNameAndCategory(String name, CategoryEnum category) {
+		return (Manufacturer) this.createCriteria()
+				.add(Restrictions.eq("category.id", category.value()))
+				.add(Restrictions.eq("name", name))
+				.uniqueResult();
+	}
+
 }

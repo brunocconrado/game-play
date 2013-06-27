@@ -13,5 +13,9 @@ public interface FrequencyService {
 
 	public Frequency findOrCreateByName(String name) throws ServiceException;
 
+	public Frequency save(Frequency frequency) throws ServiceException;
+
+	public Frequency findByName(String name);
+
 
 }

@@ -12,5 +12,7 @@ public interface PotentialService {
 	public Potential findById(Long potentialId) throws ServiceException;
 
 	public Potential findOrCreateByName(String name) throws ServiceException;
+
+	Potential findByName(String name) throws ServiceException;
 	
 }

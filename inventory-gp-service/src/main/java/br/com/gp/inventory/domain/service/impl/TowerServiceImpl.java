@@ -1,12 +1,13 @@
 package br.com.gp.inventory.domain.service.impl;
 
+import java.math.BigDecimal;
 import java.util.Iterator;
 import java.util.List;
 
 import javax.interceptor.Interceptors;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Component;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Tower;
+import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.TowerRepository;
 import br.com.gp.inventory.domain.service.ManufacturerService;
 import br.com.gp.inventory.domain.service.TowerService;
@@ -55,26 +57,36 @@ public class TowerServiceImpl implements TowerService {
 	}
 
 	@Override
-	public void importTower(HSSFSheet sheet) {
+	public void importTower(Sheet sheet) {
+		
+		boolean isFirst = Boolean.TRUE;
 		for(Iterator<Row> it = sheet.rowIterator(); it.hasNext(); ) {
 			try {
 				
 				Row row = it.next();
+				if(isFirst) {
+					isFirst = Boolean.FALSE;
+					continue;
+				}
 
-				Manufacturer manufacturer = manufacturerService.findOrCreateByName(
-						row.getCell(MANUFACTURER).getStringCellValue().trim());
+				Manufacturer manufacturer = manufacturerService.findOrCreateByNameAndCategory(
+						row.getCell(MANUFACTURER).getStringCellValue().trim(),
+						CategoryEnum.TOWER
+				);
 				
 				Tower tower = new Tower(manufacturer);
 				
 				tower.setName(row.getCell(NAME).getStringCellValue().trim());
-				tower.setPriceString(row.getCell(PRICE).getStringCellValue().trim());
-				tower.setWatts(row.getCell(WATTS).getStringCellValue().trim());
+				tower.setPrice(BigDecimal.valueOf(row.getCell(PRICE).getNumericCellValue()));
+				tower.setWatts(String.valueOf(row.getCell(WATTS).getNumericCellValue()));
 				tower.setCode("0000000000");
 				
 				tower = this.save(tower);
 				
 				System.out.println(tower.toString());
 			} catch (ServiceException e) {
+				e.printStackTrace();
+			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}

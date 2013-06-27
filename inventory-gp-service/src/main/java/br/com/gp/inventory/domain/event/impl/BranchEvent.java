@@ -1,12 +1,9 @@
 package br.com.gp.inventory.domain.event.impl;
 
-import br.com.gp.inventory.domain.entity.tmp.Branch;
-import br.com.gp.inventory.domain.event.Event;
-import br.com.gp.inventory.domain.vo.UserSession;
 
-public class BranchEvent implements Event<Branch> {
+public class BranchEvent /*implements Event<Branch>*/ {
 
-	private Branch branch;
+	/*private Branch branch;
 	
 	private UserSession editor;
 
@@ -25,5 +22,5 @@ public class BranchEvent implements Event<Branch> {
 	@SuppressWarnings("unchecked")
 	public UserSession getEditor() {
 		return this.editor;
-	}
+	}*/
 }

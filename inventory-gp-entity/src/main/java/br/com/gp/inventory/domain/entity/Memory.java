@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 
 @Entity
 @Table(name = "INV_MEMORIA")
@@ -33,10 +35,10 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "CODIGO", length = 10, nullable = false)
 	private String code;
 	
-	@Column(name = "CAPACITY", length = 2, nullable = false)
+	@Column(name = "CAPACITY", length = 10, nullable = false)
 	private String capacity;
 	
-	@Column(name = "NOME", length = 80, nullable = false)
+	@Column(name = "NOME", length = 80)
 	private String name;
 	
 	@Column(name = "TITULO", length = 150, nullable = false)
@@ -46,11 +48,11 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 	private String watts;
 	
 	@Lob
-	@Column(name = "DESCRIPTION", nullable = false)
+	@Column(name = "DESCRIPTION")
 	private String description;
 	
 	@Lob
-	@Column(name = "ESPECIFICATION", nullable = false)
+	@Column(name = "ESPECIFICATION")
 	private String especification;
 	
 	@Column(name = "PRECO", precision = 10, scale = 2)
@@ -70,6 +72,7 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 	public Memory() {
 		this.manufacturer = new Manufacturer();
 		this.frequency = new Frequency();
+		this.code = StringUtils.CODE;
 	}
 	
 	public Memory(Manufacturer manufacturer, Frequency frequency) {
@@ -197,7 +200,7 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 		return new StringBuilder()
 			.append(this.code)
 			.append(" - ")
-			.append(this.name)
+			.append(this.name != null ? this.name : this.title)
 			.append(" - ")
 			.append(this.capacity)
 			.append(" GB - ")

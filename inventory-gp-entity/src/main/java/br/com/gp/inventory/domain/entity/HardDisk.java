@@ -15,6 +15,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 
 @Entity
 @Table(name = "INV_HD")
@@ -46,11 +48,11 @@ public class HardDisk implements br.com.embracon.j4e.domain.Entity {
 	private String watts;
 	
 	@Lob
-	@Column(name = "DESCRIPTION", nullable = false)
+	@Column(name = "DESCRIPTION")
 	private String description;
 	
 	@Lob
-	@Column(name = "ESPECIFICATION", nullable = false)
+	@Column(name = "ESPECIFICATION")
 	private String especification;
 	
 	@Column(name = "PRECO", precision = 10, scale = 2, nullable = false)
@@ -68,6 +70,7 @@ public class HardDisk implements br.com.embracon.j4e.domain.Entity {
 	
 	public HardDisk() {
 		this.manufacturer = new Manufacturer();
+		this.code = StringUtils.CODE;
 	}
 	
 	public HardDisk(Manufacturer manufacturer) {
@@ -198,7 +201,7 @@ public class HardDisk implements br.com.embracon.j4e.domain.Entity {
 		return new StringBuilder()
 			.append(this.code)
 			.append(" - ")
-			.append(this.name)
+			.append(this.name != null ? this.name : this.title)
 			.append(" - ")
 			.append(this.capacity)
 			.append(" GB").append(this.isSsd() ? " SSD - " : " - ")

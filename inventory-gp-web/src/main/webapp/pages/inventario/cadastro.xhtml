@@ -29,7 +29,7 @@
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>
 								<p:spacer  width="28" height="2"/>
-								<p:inputText id="txtCodigo" value="#{inventoryBean.inventory.code}" required="true" size="10" 
+								<p:inputText id="txtCodigo" value="#{inventoryBean.inventory.code}" required="false" disabled="true" size="10" 
 											requiredMessage="#{msg.resolveMsg('required.field', 'label.code')}"/>
 								<p:spacer  width="28" height="2"/>
 											
@@ -152,7 +152,7 @@
 					
 					<p:commandButton id="btnSave" 
 								process="@this, tvInventory:tabInventory" 
-								update="messages, grlMessages" icon="ui-icon ui-icon-disk"
+								update="messages, grlMessages, tvInventory" icon="ui-icon ui-icon-disk"
 								value="#{msg.resolve('label.save')}" actionListener="#{inventoryBean.save}"/>
 				</h:panelGroup>
 			</h:panelGrid>

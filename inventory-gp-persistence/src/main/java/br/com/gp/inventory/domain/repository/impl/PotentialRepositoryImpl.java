@@ -1,5 +1,6 @@
 package br.com.gp.inventory.domain.repository.impl;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,12 @@ public class PotentialRepositoryImpl extends AbstractHibernateRepostirory<Potent
 
 	public PotentialRepositoryImpl() {
 		super(Potential.class);
+	}
+
+	@Override
+	public Potential findByName(String name) {
+		return (Potential) this.createCriteria()
+				.add(Restrictions.eq("name", name)).uniqueResult();
 	}
 
 }

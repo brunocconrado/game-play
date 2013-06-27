@@ -1,14 +1,20 @@
 package br.com.gp.inventory.domain.service.impl;
 
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.Row;
+import javax.interceptor.Interceptors;
+
+import org.apache.poi.openxml4j.opc.OPCPackage;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.gp.inventory.domain.service.DriveService;
 import br.com.gp.inventory.domain.service.FontService;
@@ -20,6 +26,9 @@ import br.com.gp.inventory.domain.service.TowerService;
 import br.com.gp.inventory.domain.service.VideoCardService;
 import br.com.gp.inventory.domain.service.XLSImporterService;
 
+
+@Component("xlsImporterService")
+@Interceptors(value = {ServiceInteceptor.class})
 public class XLSImporterServiceImpl implements XLSImporterService {
 
 	private static List<Integer> listOfSheet;
@@ -33,20 +42,36 @@ public class XLSImporterServiceImpl implements XLSImporterService {
 	private static final int GABINETE = 6;
 	private static final int DRIVER = 7;
 	
+	@Autowired
+	@Qualifier("processorService")
 	private ProcessorService processorService;
 	
+	@Autowired
+	@Qualifier("motherboardService")
 	private MotherboardService motherboardService;
 	
+	@Autowired
+	@Qualifier("videoCardService")
 	private VideoCardService videoCardService;
 	
+	@Autowired
+	@Qualifier("memoryService")
 	private MemoryService memoryService;
 	
+	@Autowired
+	@Qualifier("hardDiskService")
 	private HardDiskService hardDiskService;
 	
+	@Autowired
+	@Qualifier("fontService")
 	private FontService fontService;
 	
+	@Autowired
+	@Qualifier("towerService")
 	private TowerService towerService;
 	
+	@Autowired
+	@Qualifier("driveService")
 	private DriveService driveService;
 
 	static {
@@ -62,12 +87,14 @@ public class XLSImporterServiceImpl implements XLSImporterService {
 	}
 
 	@Override
+	@Transactional(propagation = Propagation.REQUIRED)
 	public void importXLS(InputStream in) {
 
 		try {
-			HSSFWorkbook workbook = new HSSFWorkbook(in);
+			
+			Workbook workbook = new XSSFWorkbook(OPCPackage.open(in));
 			for(Integer key : listOfSheet) {
-				HSSFSheet sheet = workbook.getSheetAt(key);
+				Sheet sheet = workbook.getSheetAt(key);
 				switch (key) {
 				case PROCESSADOR:
 					this.processorService.importProcessor(sheet);
@@ -97,6 +124,8 @@ public class XLSImporterServiceImpl implements XLSImporterService {
 					break;
 				}
 			}
+			
+			System.out.println("FIMMMMMMMM");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

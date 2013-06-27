@@ -31,11 +31,25 @@ public class FrequencyServiceImpl implements FrequencyService {
 	public Frequency findById(Long id) throws ServiceException {
 		return this.repository.findByIdentity(id);
 	}
+	
+	@Override
+	public Frequency save(Frequency frequency) throws ServiceException {
+		return this.repository.save(frequency);
+	}
 
 	@Override
 	public Frequency findOrCreateByName(String name) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		Frequency frequency = this.findByName(name);
+		if(frequency == null) {
+			frequency = this.save(new Frequency(name));
+		}
+		
+		return frequency;
+	}
+
+	@Override
+	public Frequency findByName(String name) {
+		return this.repository.findByName(name);
 	}
 
 }

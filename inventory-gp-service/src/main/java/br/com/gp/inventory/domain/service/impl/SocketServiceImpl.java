@@ -33,8 +33,7 @@ public class SocketServiceImpl implements SocketService {
 
 	@Override
 	public Socket findByName(String name) throws ServiceException {
-		// TODO Auto-generated method stub
-		return null;
+		return this.repository.findByName(name);
 	}
 
 	@Override

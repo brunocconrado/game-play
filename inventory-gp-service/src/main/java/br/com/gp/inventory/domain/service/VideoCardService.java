@@ -2,7 +2,7 @@ package br.com.gp.inventory.domain.service;
 
 import java.util.List;
 
-import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.ss.usermodel.Sheet;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.VideoCard;
@@ -15,6 +15,6 @@ public interface VideoCardService {
 
 	public VideoCard findById(Long id) throws ServiceException;
 
-	public void importVideoCard(HSSFSheet sheet) throws ServiceException;
+	public void importVideoCard(Sheet sheet) throws ServiceException;
 
 }

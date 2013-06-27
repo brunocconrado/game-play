@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 @Entity
 @Table(name = "INV_DRIVE")
 public class Drive  implements br.com.embracon.j4e.domain.Entity {
@@ -48,6 +50,7 @@ public class Drive  implements br.com.embracon.j4e.domain.Entity {
 	
 	public Drive() {
 		this.manufacturer = new Manufacturer();
+		this.code = StringUtils.CODE;
 	}
 	
 	public Drive(Manufacturer manufacturer) {

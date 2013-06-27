@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 @Entity
 @Table(name = "INV_GABINETE")
 public class Tower  implements br.com.embracon.j4e.domain.Entity {
@@ -30,7 +32,7 @@ public class Tower  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "CODIGO", length = 10, nullable = false)
 	private String code;
 	
-	@Column(name = "NAME", length = 40)
+	@Column(name = "NAME", length = 80)
 	private String name;
 	
 	@Column(name = "WATTS", length = 10)
@@ -48,6 +50,7 @@ public class Tower  implements br.com.embracon.j4e.domain.Entity {
 	
 	public Tower() {
 		this.manufacturer = new Manufacturer();
+		this.code = StringUtils.CODE;
 	}
 	
 	public Tower(Manufacturer manufacturer) {
