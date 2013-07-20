@@ -19,7 +19,7 @@ import br.com.gp.inventory.domain.utils.StringUtils;
 
 @Entity
 @Table(name = "INV_PLACA_MAE")
-public class Motherboard  implements br.com.embracon.j4e.domain.Entity {
+public class Motherboard  implements br.com.embracon.j4e.domain.Entity, Html {
 
 
 	private static final long serialVersionUID = 8904713741502690247L;
@@ -182,6 +182,11 @@ public class Motherboard  implements br.com.embracon.j4e.domain.Entity {
 	
 	public int hashCode() {
 		return this.id != null ? this.id.hashCode() : 0;
+	}
+	
+	@Override
+	public String htmlText() {
+		return StringUtils.htmlText(this.title, this.description);
 	}
 	
 	public String toString() {

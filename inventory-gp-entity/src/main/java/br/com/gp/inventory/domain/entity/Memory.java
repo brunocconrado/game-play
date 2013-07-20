@@ -20,7 +20,7 @@ import br.com.gp.inventory.domain.utils.StringUtils;
 
 @Entity
 @Table(name = "INV_MEMORIA")
-public class Memory  implements br.com.embracon.j4e.domain.Entity {
+public class Memory  implements br.com.embracon.j4e.domain.Entity, Html {
 
 	
 	private static final long serialVersionUID = 6218559424319113571L;
@@ -194,6 +194,11 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 	
 	public String getToString() {
 		return this.toString();
+	}
+	
+	@Override
+	public String htmlText() {
+		return StringUtils.htmlText(this.title, this.description);
 	}
 	
 	public String toString() {

@@ -44,7 +44,7 @@
 						
 						<p:spacer width="20" height="20"/>
 						
-						<p:dataTable widgetVar="dgInventories" id="dgInventories" style="width: 90%;" var="inventory" value="#{inventoryListBean.inventories}"
+						<p:dataTable widgetVar="dgInventories" id="dgInventories" 	selection="#{inventoryListBean.inventoryReport}" rowKey="#{inventory.code}" selectionMode="single" style="width: 90%;" var="inventory" value="#{inventoryListBean.inventories}"
 								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
 						
@@ -73,8 +73,15 @@
 					        
 					        	<p:spacer width="3" height="2"/> 
 					        
-					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();">
+					            <p:commandLink title="#{msg.resolve('label.exclude')}" oncomplete="cdlgDeleteConfirm.show();">
 									<h:graphicImage name="delete.png" library="images"/>
+									<f:setPropertyActionListener target="#{inventoryListBean.inventorySelected}" value="#{inventory}"/>
+								</p:commandLink>
+								
+								<p:spacer width="3" height="2"/> 
+					        
+					            <p:commandLink title="#{msg.resolve('label.report')}" oncomplete="dlReport.show();" >
+									<h:graphicImage name="versao.png" library="images"/>
 									<f:setPropertyActionListener target="#{inventoryListBean.inventorySelected}" value="#{inventory}"/>
 								</p:commandLink>
 					        </p:column>  
@@ -91,6 +98,13 @@
 			                    
 			                </h:panelGrid>
 			            </p:confirmDialog>
+			            <p:dialog id="dlReport" header="" widgetVar="dlReport" modal="true" height="500" width="600" draggable="false">  
+						   	<h:panelGroup>
+								<h:panelGrid columns="1" cellpadding="5" cellspacing="5">
+									#{inventoryListBean.textHtml}								
+								</h:panelGrid>
+							</h:panelGroup>
+						</p:dialog>  
 					</h:panelGroup>
 				</p:tab>
 			</p:tabView>

@@ -47,4 +47,24 @@ public class InventoryServiceImpl implements InventoryService {
 		return (List<Inventory>) this.repository.findAll();
 	}
 
+	@Override
+	public String createHtmlText(Inventory inventory) {
+
+		if(inventory == null) {
+			return "";
+		}
+		
+		return new StringBuilder()
+			.append(inventory.getProcessor().htmlText())
+			.append(inventory.getMotherboard().htmlText())
+			.append(inventory.getMemory().htmlText())
+			.append(inventory.getHardDisk().htmlText())
+			.append(inventory.getSsd().htmlText())
+			.append(inventory.getVideoCard().htmlText())
+			.append(inventory.getDrive().htmlText())
+			.append(inventory.getFont().htmlText())
+			.append(inventory.getTower().htmlText())
+			.toString();
+	}
+
 }

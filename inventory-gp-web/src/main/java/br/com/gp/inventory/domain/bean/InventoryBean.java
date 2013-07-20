@@ -1,6 +1,7 @@
 package br.com.gp.inventory.domain.bean;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -79,6 +80,7 @@ public class InventoryBean extends DefaultBean {
 	private List<Motherboard> motherboards;
 	private List<Memory> memories;
 	private List<HardDisk> hardDisks;
+	private List<HardDisk> ssd;
 	private List<Drive> drivers;
 	private List<VideoCard> videoCards;
 	private List<Font> fonts;
@@ -103,6 +105,15 @@ public class InventoryBean extends DefaultBean {
 			this.drivers = this.driveService.findAll();
 			this.towers = this.towerService.findAll();
 			this.hardDisks = this.hardDiskService.findAll();
+			this.ssd = new ArrayList<HardDisk>();
+			
+			for(Iterator<HardDisk> it = this.hardDisks.iterator(); it.hasNext(); ) {
+				HardDisk hardDisk = it.next();
+				if(hardDisk.isSsd()) {
+					this.ssd.add(hardDisk);
+					it.remove();
+				}
+			}
 			
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Inventário");
@@ -119,6 +130,7 @@ public class InventoryBean extends DefaultBean {
 			this.inventory.setFont(this.fontService.findById(this.inventory.getFont().getId()));
 			this.inventory.setMemory(this.memoryService.findById(this.inventory.getMemory().getId()));
 			this.inventory.setHardDisk(this.hardDiskService.findById(this.inventory.getHardDisk().getId()));
+			this.inventory.setSsd(this.hardDiskService.findById(this.inventory.getSsd().getId()));
 			this.inventory.setDrive(this.driveService.findById(this.inventory.getDrive().getId()));
 			this.inventory.setTower(this.towerService.findById(this.inventory.getTower().getId()));
 			
@@ -205,6 +217,14 @@ public class InventoryBean extends DefaultBean {
 
 	public void setHardDisks(List<HardDisk> hardDisks) {
 		this.hardDisks = hardDisks;
+	}
+	
+	public List<HardDisk> getSsd() {
+		return ssd;
+	}
+
+	public void setSsd(List<HardDisk> ssd) {
+		this.ssd = ssd;
 	}
 
 	public List<Drive> getDrivers() {

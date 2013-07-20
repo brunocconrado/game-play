@@ -19,7 +19,7 @@ import br.com.gp.inventory.domain.utils.StringUtils;
 
 @Entity
 @Table(name = "INV_FONTE")
-public class Font  implements br.com.embracon.j4e.domain.Entity {
+public class Font  implements br.com.embracon.j4e.domain.Entity, Html {
 
 	private static final long serialVersionUID = -5614484826318779766L;
 
@@ -195,6 +195,11 @@ public class Font  implements br.com.embracon.j4e.domain.Entity {
 
 	public String getToString() {
 		return this.toString();
+	}
+	
+	@Override
+	public String htmlText() {
+		return StringUtils.htmlText(this.title, this.description);
 	}
 	
 	public String toString() {

@@ -126,17 +126,32 @@
 								</p:selectOneMenu>  
 								<p:inputText id="txtQtdDrive" size="5" value="#{inventoryBean.inventory.qtdDrive}" maxlength="1"/>
 								
-								<h:outputLabel value="#{msg.resolve('label.hard.disk')}" for="cbxHardDisk">
+								<h:outputLabel value="#{msg.resolve('label.hd')}" for="cbxHardDisk">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
 								<p:spacer  width="28" height="2"/>
 								<p:selectOneMenu id="cbxHardDisk" style="width: 350px;"
 											value="#{inventoryBean.inventory.hardDisk.id}" >
+									<p:ajax process="@this, cbxHardDisk" event="change"/>	
 									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
 									<f:selectItems value="#{inventoryBean.hardDisks}" 
 										var="hardDisk" itemValue="#{hardDisk.id}"	itemLabel="#{hardDisk.toString}"/>
 								</p:selectOneMenu>  
 								<p:inputText id="txtQtdHardDisk" size="5" value="#{inventoryBean.inventory.qtdHardDisk}" maxlength="1"/>
+								
+								<h:outputLabel value="#{msg.resolve('label.ssd')}" for="cbxSSD">
+									<p:spacer  width="28" height="2"/>
+								</h:outputLabel>  
+								<p:spacer  width="28" height="2"/>
+								<p:selectOneMenu id="cbxSSD" style="width: 350px;" 
+											value="#{inventoryBean.inventory.ssd.id}" >
+									<p:ajax process="@this, cbxSSD" event="change"/>		
+									<f:selectItem itemLabel="#{msg.resolve('select.one.option')}"/>  
+									<f:selectItems value="#{inventoryBean.ssd}" 
+										var="hardDisk" itemValue="#{hardDisk.id}" itemLabel="#{hardDisk.toString}"/>
+								</p:selectOneMenu>  
+								<p:inputText id="txtQtdSSD" size="5" value="#{inventoryBean.inventory.qtdSSD}" maxlength="1"/>
+								
 							</h:panelGrid>
 					</h:panelGroup>
 				</p:tab>

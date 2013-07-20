@@ -11,4 +11,6 @@ public interface InventoryService {
 
 	public List<Inventory> findAll() throws ServiceException;
 
+	public String createHtmlText(Inventory inventoryReport);
+
 }

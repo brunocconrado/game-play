@@ -19,7 +19,7 @@ import br.com.gp.inventory.domain.utils.StringUtils;
 
 @Entity
 @Table(name = "INV_PROCESSADOR")
-public class Processor implements br.com.embracon.j4e.domain.Entity {
+public class Processor implements br.com.embracon.j4e.domain.Entity, Html {
 
 	
 	private static final long serialVersionUID = -8838851420440386488L;
@@ -182,6 +182,11 @@ public class Processor implements br.com.embracon.j4e.domain.Entity {
 	
 	public String getToString() {
 		return this.toString();
+	}
+	
+	@Override
+	public String htmlText() {
+		return StringUtils.htmlText(this.title, this.description);
 	}
 	
 	public String toString() {

@@ -20,7 +20,7 @@ import br.com.gp.inventory.domain.utils.StringUtils;
 
 @Entity
 @Table(name = "INV_HD")
-public class HardDisk implements br.com.embracon.j4e.domain.Entity {
+public class HardDisk implements br.com.embracon.j4e.domain.Entity, Html {
 	
 
 	private static final long serialVersionUID = 7491040935679457890L;
@@ -195,6 +195,11 @@ public class HardDisk implements br.com.embracon.j4e.domain.Entity {
 
 	public String getToString() {
 		return this.toString();
+	}
+	
+	@Override
+	public String htmlText() {
+		return StringUtils.htmlText(this.title, this.description);
 	}
 	
 	public String toString() {

@@ -25,6 +25,10 @@ public class InventoryListBean extends DefaultBean {
 	private List<Inventory> inventories;
 	
 	private Inventory inventorySelected;
+	
+	private Inventory inventoryReport;
+	
+	private String textHtml;
 
 	public InventoryListBean() {
 		super("inventoryListBean");
@@ -47,6 +51,10 @@ public class InventoryListBean extends DefaultBean {
 	public void remove() {
 		
 	}
+	
+	public void createHtmlText() {
+		this.textHtml = this.service.createHtmlText(this.inventoryReport);				
+	}
 
 	public List<Inventory> getInventories() {
 		return inventories;
@@ -64,4 +72,23 @@ public class InventoryListBean extends DefaultBean {
 		this.inventorySelected = inventorySelected;
 	}
 
+	public Inventory getInventoryReport() {
+		return inventoryReport;
+	}
+
+	public void setInventoryReport(Inventory inventoryReport) {
+		this.inventoryReport = inventoryReport;
+		createHtmlText();
+	}
+
+	public String getTextHtml() {
+		return textHtml;
+	}
+
+	public void setTextHtml(String textHtml) {
+		this.textHtml = textHtml;
+	}
+	
+	
+	
 }

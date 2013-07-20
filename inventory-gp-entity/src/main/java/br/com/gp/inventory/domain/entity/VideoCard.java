@@ -20,7 +20,7 @@ import br.com.gp.inventory.domain.utils.StringUtils;
 
 @Entity
 @Table(name = "INV_PLACA_VIDEO")
-public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
+public class VideoCard  implements br.com.embracon.j4e.domain.Entity, Html {
 
 	private static final long serialVersionUID = -3920268113544315082L;
 
@@ -168,6 +168,11 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 	
 	public String getToString() {
 		return this.toString();
+	}
+	
+	@Override
+	public String htmlText() {
+		return StringUtils.htmlText(this.title, this.description);
 	}
 	
 	public String toString() {
