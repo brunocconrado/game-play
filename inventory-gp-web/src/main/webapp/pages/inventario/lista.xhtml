@@ -44,7 +44,16 @@
 						
 						<p:spacer width="20" height="20"/>
 						
-						<p:dataTable widgetVar="dgInventories" id="dgInventories" 	selection="#{inventoryListBean.inventoryReport}" rowKey="#{inventory.code}" selectionMode="single" style="width: 90%;" var="inventory" value="#{inventoryListBean.inventories}"
+						<h:panelGrid style="position: relative; right: 2%; left:87%;" columns="1" cellspacing="2">
+							<p:commandLink title="#{msg.resolve('label.search')}" process="@this"
+											actionListener="#{inventoryListBean.exportHtml()}" >
+										<h:graphicImage name="busca.png" library="images"/>
+							</p:commandLink>
+						</h:panelGrid>
+								
+						<p:dataTable widgetVar="dgInventories" id="dgInventories" selection="#{inventoryListBean.inventoryReport}" rowKey="#{inventory.code}" 
+								selectionMode="single" style="width: 90%;" var="inventory" value="#{inventoryListBean.inventories}" 
+								
 								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
 						
@@ -73,14 +82,15 @@
 					        
 					        	<p:spacer width="3" height="2"/> 
 					        
-					            <p:commandLink title="#{msg.resolve('label.exclude')}" oncomplete="cdlgDeleteConfirm.show();">
+					            <p:commandLink title="#{msg.resolve('label.exclude')}" oncomplete="cdlgDeleteConfirm.show();" >
 									<h:graphicImage name="delete.png" library="images"/>
 									<f:setPropertyActionListener target="#{inventoryListBean.inventorySelected}" value="#{inventory}"/>
 								</p:commandLink>
 								
 								<p:spacer width="3" height="2"/> 
 					        
-					            <p:commandLink title="#{msg.resolve('label.report')}" oncomplete="dlReport.show();" >
+					            <p:commandLink title="#{msg.resolve('label.report')}"  actionListener="#{inventoryListBean.createHtmlText()}" 
+					            		oncomplete="preparedHtmlCompleteHandle(xhr, status, args);" >
 									<h:graphicImage name="versao.png" library="images"/>
 									<f:setPropertyActionListener target="#{inventoryListBean.inventorySelected}" value="#{inventory}"/>
 								</p:commandLink>
@@ -98,16 +108,28 @@
 			                    
 			                </h:panelGrid>
 			            </p:confirmDialog>
-			            <p:dialog id="dlReport" header="" widgetVar="dlReport" modal="true" height="500" width="600" draggable="false">  
-						   	<h:panelGroup>
-								<h:panelGrid columns="1" cellpadding="5" cellspacing="5">
-									#{inventoryListBean.textHtml}								
-								</h:panelGrid>
-							</h:panelGroup>
-						</p:dialog>  
 					</h:panelGroup>
+					
+					<p:dialog id="dlReportId" widgetVar="dlReport" modal="true" height="500" width="600" draggable="false">  
+					   	<h:panelGroup>
+							<p:outputPanel columns="1" cellpadding="5" cellspacing="5" id="pgReport" >
+								<h:outputText value="#{inventoryListBean.textHtml}" />
+								<h:outputLabel value="#{inventoryListBean.inventoryReport.id}" />
+							</p:outputPanel>
+						</h:panelGroup>
+					</p:dialog>
 				</p:tab>
 			</p:tabView>
 		</h:form>	
 	</ui:define>
+	
+	
+	 <ui:define name="script">       
+        function preparedHtmlCompleteHandle(xhr, status, args) {     
+	        if(args.isOpenReport) {
+	        	dlReport.show();
+	        }
+        }
+    </ui:define>
+	
 </ui:composition>

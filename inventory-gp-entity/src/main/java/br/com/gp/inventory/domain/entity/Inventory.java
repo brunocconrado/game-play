@@ -45,7 +45,7 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "QTD_HD", nullable = false)
 	private Integer qtdHardDisk;
 	
-	@Column(name = "QTD_SSD", nullable = false)
+	@Column(name = "QTD_SSD")
 	private Integer qtdSSD;
 	
 	@Column(name = "QTD_Drive", nullable = false)

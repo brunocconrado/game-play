@@ -36,7 +36,7 @@ public class Drive  implements br.com.embracon.j4e.domain.Entity, Html {
 	@Column(name = "NAME", length = 40)
 	private String name;
 	
-	@Column(name = "TITULO", length = 150, nullable = false)
+	@Column(name = "TITULO", length = 150)
 	private String title;
 	
 	@Column(name = "WATTS", length = 10)

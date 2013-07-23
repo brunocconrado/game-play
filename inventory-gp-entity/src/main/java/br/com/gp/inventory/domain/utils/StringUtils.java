@@ -9,10 +9,10 @@ public class StringUtils {
 		return new StringBuilder()
 			.append("<h2>\n\t")
 			.append(title == null ? "" : title)
-			.append("\n<h2>")
-			.append("\n<p>\n\t")
+			.append("\n</h2>")
+			.append("\n<p>\n\t<h2>")
 			.append(description == null ? "" : description)
-			.append("\n<h2>")
+			.append("\n\t</h2>\n</p>\n")
 			.toString();
 	}
 

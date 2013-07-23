@@ -52,8 +52,25 @@ public class InventoryListBean extends DefaultBean {
 		
 	}
 	
+	public void exportHtml() {
+		init();
+		
+		StringBuilder html = new StringBuilder();
+		for(Inventory in : this.inventories) {
+			html.append("------------------->>").append(in.getName())
+				.append("\n\n")
+				.append(this.service.createHtmlText(in))
+				.append("\n\n-------------------------------------------------------------------------\n\n");
+		}
+		
+		this.textHtml = html.toString();
+		System.out.println(html.toString());
+	}
+	
 	public void createHtmlText() {
-		this.textHtml = this.service.createHtmlText(this.inventoryReport);				
+		this.textHtml = this.service.createHtmlText(this.inventoryReport);	
+		this.inventoryReport.setId(1144444L);
+		addCallbackParam("isOpenReport", true);
 	}
 
 	public List<Inventory> getInventories() {

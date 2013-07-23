@@ -12,8 +12,8 @@ INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (11, NULL
 INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (12, 'ui-icon ui-icon-note', NULL, 'menu.report', 1);
 INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (13, 'ui-icon ui-icon-circlesmall-close', NULL, 'menu.logout', 1);
 
-INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (14, 'ui-icon ui-icon-disk', '/web/pages/inventario/cadastro.xhtml', 'submenu.inventary.registry', 3);
-INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (15, 'ui-icon ui-icon-search', '/web/pages/inventario/lista.xhtml', 'submenu.inventary.search', 3);
+INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (14, 'ui-icon ui-icon-disk', '/web/pages/inventario/cadastro.xhtml', 'submenu.inventory.registry', 3);
+INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (15, 'ui-icon ui-icon-search', '/web/pages/inventario/lista.xhtml', 'submenu.inventory.search', 3);
 
 INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (16, 'ui-icon ui-icon-disk', '/web/pages/processador/cadastro.xhtml', 'submenu.processor.registry', 4);
 INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (17, 'ui-icon ui-icon-search', '/web/pages/processador/lista.xhtml', 'submenu.processor.search', 4);
@@ -36,7 +36,16 @@ INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (27, 'ui-
 INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (28, 'ui-icon ui-icon-disk', '/web/pages/drive/cadastro.xhtml', 'submenu.drive.registry', 10);
 INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (29, 'ui-icon ui-icon-search', '/web/pages/drive/lista.xhtml', 'submenu.drive.search', 10);
 
-INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (30, 'ui-icon ui-icon-disk', '/web/pages/fonte/cadastro.xhtml', 'submenu.fonte.registry', 11);
-INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (31, 'ui-icon ui-icon-search', '/web/pages/fonte/lista.xhtml', 'submenu.fonte.search', 11);
+INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (30, 'ui-icon ui-icon-disk', '/web/pages/fonte/cadastro.xhtml', 'submenu.font.registry', 11);
+INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (31, 'ui-icon ui-icon-search', '/web/pages/fonte/lista.xhtml', 'submenu.font.search', 11);
 
 INSERT INTO INV_MENU (COD_MENU, IMAGEM, URL, NOME, COD_PARENTE) VALUES (32, 'ui-icon ui-icon-clipboard', '/web/pages/relatorio/lista.xhtml', 'menu.report', 12);
+
+INSERT INTO INV_CATEGORIA (COD_CATEGORIA, NAME) VALUES (1, 'PROCESSADOR');
+INSERT INTO INV_CATEGORIA (COD_CATEGORIA, NAME) VALUES (2, 'PLACA MÃE');
+INSERT INTO INV_CATEGORIA (COD_CATEGORIA, NAME) VALUES (3, 'MEMORIA');
+INSERT INTO INV_CATEGORIA (COD_CATEGORIA, NAME) VALUES (4, 'PLACA DE VIDEO');
+INSERT INTO INV_CATEGORIA (COD_CATEGORIA, NAME) VALUES (5, 'HD/SSD');
+INSERT INTO INV_CATEGORIA (COD_CATEGORIA, NAME) VALUES (6, 'GABINETE');
+INSERT INTO INV_CATEGORIA (COD_CATEGORIA, NAME) VALUES (7, 'DRIVE');
+INSERT INTO INV_CATEGORIA (COD_CATEGORIA, NAME) VALUES (8, 'FONTE');
