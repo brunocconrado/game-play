@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Memory;
 import br.com.gp.inventory.domain.service.MemoryService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 
 
 @Controller("memoryListBean")
@@ -45,7 +46,8 @@ public class MemoryListBean extends DefaultBean {
 	}
 	
 	public void remove() {
-		
+		this.delete(this.service, "delete", 
+				this.memorySelected, "Mem—ria", "Invent‡rio");
 	}
 
 	public List<Memory> getMemories() {

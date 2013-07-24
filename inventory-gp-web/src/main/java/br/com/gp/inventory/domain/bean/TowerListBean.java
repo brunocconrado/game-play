@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Tower;
 import br.com.gp.inventory.domain.service.TowerService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 
 
 @Controller("towerListBean")
@@ -46,7 +47,8 @@ public class TowerListBean extends DefaultBean {
 	}
 	
 	public void remove() {
-		
+		this.delete(this.service, "delete", 
+				this.towerSelected, "Gabinete", "Invent‡rio");
 	}
 
 	public List<Tower> getTowers() {

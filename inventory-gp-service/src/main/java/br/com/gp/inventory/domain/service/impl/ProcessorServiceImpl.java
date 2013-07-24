@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Processor;
 import br.com.gp.inventory.domain.repository.ProcessorRepository;
 import br.com.gp.inventory.domain.service.ProcessorService;
@@ -29,6 +30,11 @@ public class ProcessorServiceImpl implements ProcessorService {
 	@Override
 	public void save(Processor processor) throws ServiceException {
 		this.repository.save(processor);	
+	}
+	
+	@Override
+	public void delete(Processor processor) throws ServiceException {
+		this.repository.delete(processor);
 	}
 
 }

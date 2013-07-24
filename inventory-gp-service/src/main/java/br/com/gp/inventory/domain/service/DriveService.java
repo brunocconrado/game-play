@@ -11,4 +11,6 @@ public interface DriveService {
 
 	public List<Drive> findAll() throws ServiceException;
 
+	public void delete(Drive drive) throws ServiceException;
+
 }

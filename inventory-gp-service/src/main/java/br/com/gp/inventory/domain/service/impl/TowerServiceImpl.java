@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Tower;
 import br.com.gp.inventory.domain.repository.TowerRepository;
 import br.com.gp.inventory.domain.service.TowerService;
@@ -29,6 +30,11 @@ public class TowerServiceImpl implements TowerService {
 	@Override
 	public List<Tower> findAll() throws ServiceException {
 		return (List<Tower>) this.repository.findAll();
+	}
+	
+	@Override
+	public void delete(Tower tower) throws ServiceException {
+		this.repository.delete(tower);
 	}
 
 }

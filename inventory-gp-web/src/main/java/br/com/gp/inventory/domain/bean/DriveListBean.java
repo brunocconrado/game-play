@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.service.DriveService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 
 
 @Controller("driveListBean")
@@ -29,7 +30,7 @@ public class DriveListBean extends DefaultBean {
 	public DriveListBean() {
 		super("driveBean");
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		try {
@@ -45,7 +46,8 @@ public class DriveListBean extends DefaultBean {
 	}
 
 	public void remove() {
-
+		this.delete(this.service, "delete", 
+				this.driveSelected, "Drive", "Invent‡rio");
 	}
 
 	public List<Drive> getDrives() {

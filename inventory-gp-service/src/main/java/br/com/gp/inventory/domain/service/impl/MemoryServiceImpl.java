@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Memory;
 import br.com.gp.inventory.domain.repository.MemoryRepository;
 import br.com.gp.inventory.domain.service.MemoryService;
@@ -30,6 +31,11 @@ public class MemoryServiceImpl implements MemoryService {
 	@Override
 	public List<Memory> findAll() throws ServiceException {
 		return (List<Memory>) this.reposiroty.findAll();
+	}
+	
+	@Override
+	public void delete(Memory memory) throws ServiceException {
+		this.repository.delete(memory);
 	}
 
 }

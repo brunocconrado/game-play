@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Processor;
 import br.com.gp.inventory.domain.service.ProcessorService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 
 @Controller("processorListBean")
 @Scope(value = "session")
@@ -45,7 +46,8 @@ public class ProcessorListBean extends DefaultBean {
 	}
 	
 	public void remove() {
-		
+		this.delete(this.service, "delete", 
+				this.processorSelected, "Processador", "Invent‡rio");
 	}
 	
 	public List<Processor> getProcessors() {

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.HardDisk;
 import br.com.gp.inventory.domain.repository.HardDiskRepository;
 import br.com.gp.inventory.domain.service.HardDiskService;
@@ -29,6 +30,11 @@ public class HardDiskServiceImpl implements HardDiskService {
 	@Override
 	public List<HardDisk> findAll() throws ServiceException {
 		return (List<HardDisk>) this.repository.findAll();
+	}
+	
+	@Override
+	public void delete(HardDisk hardDisk) throws ServiceException {
+		this.repository.delete(hardDisk);
 	}
 	
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Motherboard;
 import br.com.gp.inventory.domain.repository.MotherboardRepository;
 import br.com.gp.inventory.domain.service.MotherboardService;
@@ -31,4 +32,8 @@ public class MotherboardServiceImpl implements MotherboardService {
 		this.repository.save(motherboard);	
 	}
 	
+	@Override
+	public void delete(Motherboard motherboard) throws ServiceException {
+		this.repository.delete(motherboard);
+	}
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Font;
 import br.com.gp.inventory.domain.repository.FontRepository;
 import br.com.gp.inventory.domain.service.FontService;
@@ -30,5 +31,10 @@ public class FontServiceImpl implements FontService {
 	@Override
 	public List<Font> findAll() throws ServiceException {
 		return (List<Font>) this.repository.findAll();
+	}
+	
+	@Override
+	public void delete(Font font) throws ServiceException {
+		this.repository.delete(font);
 	}
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.VideoCard;
 import br.com.gp.inventory.domain.repository.VideoCardRepository;
 import br.com.gp.inventory.domain.service.VideoCardService;
@@ -29,6 +30,11 @@ public class VideoCardServiceImpl implements VideoCardService {
 	@Override
 	public void save(VideoCard videoCard) throws ServiceException {
 		this.repository.save(videoCard);		
+	}
+	
+	@Override
+	public void delete(VideoCard videoCard) throws ServiceException {
+		this.repository.delete(videoCard);
 	}
 
 }

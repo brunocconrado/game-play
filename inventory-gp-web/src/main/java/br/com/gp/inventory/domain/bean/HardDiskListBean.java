@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.HardDisk;
 import br.com.gp.inventory.domain.service.HardDiskService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 
 @Controller("hardDiskListBean")
 @Scope(value = "session")
@@ -44,7 +45,8 @@ public class HardDiskListBean extends DefaultBean {
 	}
 
 	public void remove() {
-
+		this.delete(this.service, "delete", 
+				this.hardDiskSelected, "HD/SSD", "Invent‡rio");
 	}
 
 	public List<HardDisk> getHardDisks() {

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Font;
 import br.com.gp.inventory.domain.service.FontService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 
 @Controller("fontListBean")
 @Scope(value = "session")
@@ -45,7 +46,8 @@ public class FontListBean extends DefaultBean {
 	}
 	
 	public void remove() {
-		
+		this.delete(this.service, "delete", 
+				this.fontSelected, "Fonte", "Invent‡rio");
 	}
 
 	public List<Font> getFonts() {

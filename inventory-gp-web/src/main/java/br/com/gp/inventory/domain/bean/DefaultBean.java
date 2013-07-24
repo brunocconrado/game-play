@@ -1,5 +1,6 @@
 package br.com.gp.inventory.domain.bean;
 
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import br.com.embracon.j4e.i18n.Messages;
 import br.com.embracon.j4e.util.Objects;
 import br.com.embracon.j4e.validation.InvalidationReason;
 import br.com.embracon.j4e.validation.LocalizableReason;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 import br.com.gp.inventory.domain.vo.UserSession;
 import br.com.gp.inventory.utils.FacesUtils;
 import br.com.gp.inventory.utils.TeamPositionProperties;
@@ -37,6 +39,21 @@ public class DefaultBean {
 		user.addBean(name);
 		
 		addInSession(user, TeamPositionProperties.USER_LOGGED);
+	}
+	
+	protected void delete(Object obj, String methodName, Object parameter, String deviceName, String associationName) {
+		try {
+			
+			Class clazz = obj.getClass();
+			Method method = clazz.getMethod(methodName, clazz);
+			method.invoke(method, parameter);
+		} catch (AssociationViolationException e) {
+			errorMessage("error.remove.associated.object", deviceName, associationName);
+		} catch (ServiceException e) {
+			errorMessage("error.remove", deviceName);
+		} catch (Exception e) {
+			errorMessage("error.remove", e, deviceName);
+		}
 	}
 	
 	protected String getLoginUserInSession() {

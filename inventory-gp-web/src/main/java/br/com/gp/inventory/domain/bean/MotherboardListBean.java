@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Motherboard;
 import br.com.gp.inventory.domain.service.MotherboardService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 
 
 @Controller("motherboardListBean")
@@ -45,7 +46,8 @@ public class MotherboardListBean extends DefaultBean {
 	}
 	
 	public void remove() {
-		
+		this.delete(this.service, "delete", 
+				this.motherboardSelected, "Placa M‹e", "Invent‡rio");
 	}
 
 	public List<Motherboard> getMotherboards() {

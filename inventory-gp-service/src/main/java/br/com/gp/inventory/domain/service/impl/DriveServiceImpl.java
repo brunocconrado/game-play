@@ -31,4 +31,9 @@ public class DriveServiceImpl implements DriveService {
 		return (List<Drive>) this.repository.findAll();
 	}
 
+	@Override
+	public void delete(Drive drive) throws ServiceException {
+		this.repository.delete(drive);
+	}
+
 }
