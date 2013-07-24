@@ -13,11 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
-<<<<<<< HEAD
-import br.com.gp.inventory.domain.entity.Drive;
-=======
 import br.com.gp.inventory.domain.entity.Manufacturer;
->>>>>>> ccdd4fa67d62621782d619c6692d92cf3cbe985b
 import br.com.gp.inventory.domain.entity.Tower;
 import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.TowerRepository;

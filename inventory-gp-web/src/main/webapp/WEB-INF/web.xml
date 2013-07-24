@@ -31,10 +31,6 @@
 		<param-name>primefaces.THEME</param-name>
 		<param-value>south-street</param-value>
 	</context-param>
-<<<<<<< HEAD
-	
-	
-=======
 
 	<filter>
 		<filter-name>PrimeFaces FileUpload Filter</filter-name>
@@ -45,7 +41,6 @@
 		<servlet-name>Faces Servlet</servlet-name>
 	</filter-mapping>
 
->>>>>>> ccdd4fa67d62621782d619c6692d92cf3cbe985b
 	<listener>
 		<description>ServletContextListener</description>
 		<listener-class>br.com.gp.inventory.listener.TeamPositionListener</listener-class>

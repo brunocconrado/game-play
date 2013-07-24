@@ -4,6 +4,8 @@ import br.com.embracon.j4e.services.exception.ServiceException;
 
 public class AssociationViolationException extends ServiceException {
 	
+	private static final long serialVersionUID = 7000842828238128684L;
+
 	public AssociationViolationException() {
 		super();
 	}

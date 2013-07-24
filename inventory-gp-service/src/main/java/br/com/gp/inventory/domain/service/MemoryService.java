@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
-import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Memory;
 
 public interface MemoryService {

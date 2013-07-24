@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Sheet;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
-import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Motherboard;
 
 public interface MotherboardService {
@@ -16,8 +15,8 @@ public interface MotherboardService {
 
 	public Motherboard findById(Long id) throws ServiceException;
 
-	void importMotherboard(Sheet sheet) throws ServiceException;
-	
 	public void delete(Motherboard motherboard) throws ServiceException;
+	
+	public void importMotherboard(Sheet sheet) throws ServiceException;
 	
 }

@@ -4,15 +4,14 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 
-import org.hibernate.service.spi.ServiceException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.VideoCard;
 import br.com.gp.inventory.domain.service.VideoCardService;
-import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 
 
 @Controller("videoCardListBean")

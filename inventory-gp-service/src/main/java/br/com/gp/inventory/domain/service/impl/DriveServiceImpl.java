@@ -30,15 +30,15 @@ public class DriveServiceImpl implements DriveService {
 	private static final int PRICE = 2;
 	//private static final int PARCEL = 3;
 	private static final int WATTS = 4;
-	
+
 	@Autowired
 	@Qualifier(value = "driveRepository")
 	private DriveRepository repository;
-	
+
 	@Autowired
 	@Qualifier(value = "manufacturerService")
 	private ManufacturerService manufacturerService;	
-	
+
 	@Override
 	public Drive save(Drive drive) throws ServiceException {
 		drive = this.repository.save(drive);
@@ -51,22 +51,22 @@ public class DriveServiceImpl implements DriveService {
 		return (List<Drive>) this.repository.findAll();
 	}
 
-	@Override
-<<<<<<< HEAD
-	public void delete(Drive drive) throws ServiceException {
-		this.repository.delete(drive);
-=======
 	public Drive findById(Long id) throws ServiceException {
 		return this.repository.findByIdentity(id);
 	}
-	
+
+	@Override
+	public void delete(Drive drive) throws ServiceException {
+		this.repository.delete(drive);
+	}
+
 	@Override
 	public void importDriver(Sheet sheet) {
-		
+
 		boolean isFirst = Boolean.TRUE;
 		for(Iterator<Row> it = sheet.rowIterator(); it.hasNext(); ) {
 			try {
-				
+
 				Row row = it.next();
 				if(isFirst) {
 					isFirst = Boolean.FALSE;
@@ -76,17 +76,17 @@ public class DriveServiceImpl implements DriveService {
 				Manufacturer manufacturer = manufacturerService.findOrCreateByNameAndCategory(
 						row.getCell(MANUFACTURER).getStringCellValue().trim(),
 						CategoryEnum.DRIVE
-				);
-				
+						);
+
 				Drive drive = new Drive(manufacturer);
-				
+
 				drive.setName(row.getCell(NAME).getStringCellValue().trim());
 				drive.setPrice(BigDecimal.valueOf(row.getCell(PRICE).getNumericCellValue()));
 				drive.setWatts(String.valueOf(row.getCell(WATTS).getNumericCellValue()));
 				drive.setCode("0000000000");
-				
+
 				drive = this.save(drive);
-				
+
 				System.out.println(drive.toString());
 			} catch (ServiceException e) {
 				e.printStackTrace();
@@ -94,7 +94,5 @@ public class DriveServiceImpl implements DriveService {
 				e.printStackTrace();
 			}
 		}
->>>>>>> ccdd4fa67d62621782d619c6692d92cf3cbe985b
 	}
-
 }

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import org.primefaces.context.RequestContext;
 
 import br.com.embracon.j4e.i18n.Messages;
+import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.embracon.j4e.util.Objects;
 import br.com.embracon.j4e.validation.InvalidationReason;
 import br.com.embracon.j4e.validation.LocalizableReason;
@@ -22,53 +23,56 @@ import br.com.gp.inventory.utils.FacesUtils;
 import br.com.gp.inventory.utils.TeamPositionProperties;
 
 public class DefaultBean {
-	
+
 	protected DefaultBean(String name) {
 		addBean(name);
 	}
-	
+
 	private void addBean(String name) {
-		
+
 		UserSession user = ((UserSession)
 				getFromSession(TeamPositionProperties.USER_LOGGED));
-		
+
 		if(Objects.isNull(user)) {
 			user = new UserSession();
 		}
-		
+
 		user.addBean(name);
-		
+
 		addInSession(user, TeamPositionProperties.USER_LOGGED);
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	protected void delete(Object obj, String methodName, Object parameter, String deviceName, String associationName) {
 		try {
-			
+
 			Class clazz = obj.getClass();
 			Method method = clazz.getMethod(methodName, clazz);
 			method.invoke(method, parameter);
-		} catch (AssociationViolationException e) {
-			errorMessage("error.remove.associated.object", deviceName, associationName);
-		} catch (ServiceException e) {
-			errorMessage("error.remove", deviceName);
-		} catch (Exception e) {
-			errorMessage("error.remove", e, deviceName);
+		} catch (Throwable t) {
+			if(t instanceof AssociationViolationException) {
+				errorMessage("error.remove.associated.object", deviceName, associationName);
+			} else if(t instanceof ServiceException) {
+				errorMessage("error.remove", deviceName);
+			} else {
+				errorMessage("error.remove", t, deviceName);
+			}
 		}
 	}
-	
+
 	protected String getLoginUserInSession() {
-		
+
 		return (String) getSession().getAttribute(TeamPositionProperties.USER_LOGIN);
 	}
-	
+
 	protected void addInSession(Object obj, String key) {
 		getSession().setAttribute(key, obj);
 	}
-	
+
 	protected Object getFromSession(String key) {
 		return getSession().getAttribute(key);
 	}
-	
+
 	protected void addCallbackParam(String param, Object value) {
 		RequestContext.getCurrentInstance().addCallbackParam(param, value);
 	}
@@ -88,21 +92,21 @@ public class DefaultBean {
 			warningMessage(localizableMessage.getLabel(), localizableMessage.getParams());
 		}
 	}
-	
+
 	protected void warningMessage(String keyMsg) {
 		warningMessage(keyMsg, keyMsg);
 	}
-	
+
 	protected void warningMessage(String keyMsg, Object... params) {
 		FacesContext.getCurrentInstance().addMessage(null, 
 				createMessage(FacesMessage.SEVERITY_WARN, keyMsg, true, params));
 	}
-	
+
 	protected void warningMessage(String keyMsg, String keyDetail) {
 		FacesContext.getCurrentInstance().addMessage(null, 
 				createMessage(FacesMessage.SEVERITY_WARN, keyMsg, keyDetail));
 	}
-	
+
 	protected void errorMessages(List<String> messages) {
 		for (String message : messages) {
 			errorMessage(message);
@@ -126,39 +130,39 @@ public class DefaultBean {
 		FacesContext.getCurrentInstance().addMessage(null, 
 				createMessage(FacesMessage.SEVERITY_ERROR, keyMsg, keyMsg, strings));
 	}
-	
+
 	protected void errorMessage(String keyMsg, Throwable t, Object... strings) {
 		FacesContext.getCurrentInstance().addMessage(null, 
 				createMessage(FacesMessage.SEVERITY_ERROR, keyMsg, keyMsg, strings));
-		
-		t.printStackTrace();
-		//TODO: Abilitar Log
-		//Logger.getLogger().error(msg, t);
-	}
-	
-	protected void fatalMessage(String keyMsg) {
-		fatalMessage(keyMsg, keyMsg);
-	}
-	
-	protected void fatalMessage(String keyMsg, String keyDetail) {
-		FacesContext.getCurrentInstance().addMessage(null, 
-				createMessage(FacesMessage.SEVERITY_FATAL, keyMsg, keyDetail));
-	}
-	
-	protected void fatalMessage(String keyMsg, Throwable t) {
-		fatalMessage(keyMsg, t, "");
-	}
-	
-	protected void fatalMessage(String keyMsg, Throwable t, Object... params) {
-		
-		FacesContext.getCurrentInstance().addMessage(null, 
-					createMessage(FacesMessage.SEVERITY_FATAL, keyMsg, params));
 
 		t.printStackTrace();
 		//TODO: Abilitar Log
 		//Logger.getLogger().error(msg, t);
 	}
-	
+
+	protected void fatalMessage(String keyMsg) {
+		fatalMessage(keyMsg, keyMsg);
+	}
+
+	protected void fatalMessage(String keyMsg, String keyDetail) {
+		FacesContext.getCurrentInstance().addMessage(null, 
+				createMessage(FacesMessage.SEVERITY_FATAL, keyMsg, keyDetail));
+	}
+
+	protected void fatalMessage(String keyMsg, Throwable t) {
+		fatalMessage(keyMsg, t, "");
+	}
+
+	protected void fatalMessage(String keyMsg, Throwable t, Object... params) {
+
+		FacesContext.getCurrentInstance().addMessage(null, 
+				createMessage(FacesMessage.SEVERITY_FATAL, keyMsg, params));
+
+		t.printStackTrace();
+		//TODO: Abilitar Log
+		//Logger.getLogger().error(msg, t);
+	}
+
 	protected HttpServletResponse getResponse() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		return (HttpServletResponse) context.getExternalContext().getResponse();
@@ -167,35 +171,35 @@ public class DefaultBean {
 	protected void destroy(String name) {
 		FacesUtils.destroyBean(name);
 	}
-	
+
 	protected void responseComplete() {
 		FacesContext.getCurrentInstance().responseComplete();
 	}
-	
+
 	private FacesMessage createMessage(Severity severity, String keyMessage, Object... params) {
 		return createMessage(severity, keyMessage, keyMessage, params);
 	}
-	
+
 	/*private FacesMessage createMessage(Severity severity, String keyMessage, String detail) {
 		return createMessage(severity, keyMessage, Boolean.TRUE, "", "", "");
 	}*/
-	
+
 	private FacesMessage createMessage(Severity severity, String keyMessage, String detail, Object... params) {
 		return createMessage(severity, keyMessage, detail, true, params);
 	}
-	
+
 	private FacesMessage createMessage(Severity severity, String keyMessage, boolean isI18n, Object... params) {
 		return createMessage(severity, keyMessage, keyMessage, isI18n, params);
 	}
-	
+
 	private FacesMessage createMessage(Severity severity, String keyMessage, String keyDetail, boolean isI18n, Object... params) {
-		
+
 		String message = isI18n ? Messages.getMessage(Messages.DEFAULT_KEY, keyMessage, params) : keyMessage;
 		String detail = isI18n ? Messages.getMessage(keyDetail) : keyDetail;
-		
+
 		return new FacesMessage(severity, message, detail);
 	}
-	
+
 	private HttpSession getSession() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) 
@@ -203,7 +207,7 @@ public class DefaultBean {
 		if(Objects.isNull(session)) {
 			session = (HttpSession) context.getExternalContext().getSession(true);
 		}
-		
+
 		return session;
 	}
 }

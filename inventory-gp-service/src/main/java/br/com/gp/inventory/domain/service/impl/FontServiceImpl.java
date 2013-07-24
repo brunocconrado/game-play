@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
-import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Font;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Potential;
@@ -58,13 +57,12 @@ public class FontServiceImpl implements FontService {
 	public List<Font> findAll() throws ServiceException {
 		return (List<Font>) this.repository.findAll();
 	}
-<<<<<<< HEAD
 	
 	@Override
 	public void delete(Font font) throws ServiceException {
 		this.repository.delete(font);
-=======
-
+	}
+	
 	@Override
 	public Font findById(Long id) throws ServiceException {
 		return this.repository.findByIdentity(id);
@@ -106,6 +104,5 @@ public class FontServiceImpl implements FontService {
 				e.printStackTrace();
 			}
 		}
->>>>>>> ccdd4fa67d62621782d619c6692d92cf3cbe985b
 	}
 }

@@ -13,6 +13,6 @@ public interface PotentialService {
 
 	public Potential findOrCreateByName(String name) throws ServiceException;
 
-	Potential findByName(String name) throws ServiceException;
+	public Potential findByName(String name) throws ServiceException;
 	
 }

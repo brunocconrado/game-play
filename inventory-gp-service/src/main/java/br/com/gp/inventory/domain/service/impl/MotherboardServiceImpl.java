@@ -13,11 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
-<<<<<<< HEAD
-import br.com.gp.inventory.domain.entity.Drive;
-=======
 import br.com.gp.inventory.domain.entity.Manufacturer;
->>>>>>> ccdd4fa67d62621782d619c6692d92cf3cbe985b
 import br.com.gp.inventory.domain.entity.Motherboard;
 import br.com.gp.inventory.domain.entity.Socket;
 import br.com.gp.inventory.domain.enumeration.CategoryEnum;
@@ -66,13 +62,11 @@ public class MotherboardServiceImpl implements MotherboardService {
 	public Motherboard findById(Long id) throws ServiceException {
 		return this.repository.findByIdentity(id);
 	}
-<<<<<<< HEAD
 	
 	@Override
 	public void delete(Motherboard motherboard) throws ServiceException {
 		this.repository.delete(motherboard);
 	}
-=======
 
 	@Override
 	public void importMotherboard(Sheet sheet) {
@@ -112,5 +106,4 @@ public class MotherboardServiceImpl implements MotherboardService {
 		}
 	}
 
->>>>>>> ccdd4fa67d62621782d619c6692d92cf3cbe985b
 }

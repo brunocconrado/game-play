@@ -73,7 +73,7 @@ public class MemoryBean extends DefaultBean {
 			
 			this.service.save(this.memory);
 			
-			successMessage("save.success", e, "Mem—ria");			
+			successMessage("save.success", "Mem—ria");			
 		} catch (ServiceException e) {
 			errorMessage("error.search", e, "Mem—ria");
 		} catch (Throwable e) {

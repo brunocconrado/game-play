@@ -13,7 +13,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
-import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.HardDisk;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.enumeration.CategoryEnum;
