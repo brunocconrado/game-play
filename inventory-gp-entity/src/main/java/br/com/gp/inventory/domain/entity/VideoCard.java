@@ -15,10 +15,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 
 @Entity
 @Table(name = "INV_PLACA_VIDEO")
-public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
+public class VideoCard  implements br.com.embracon.j4e.domain.Entity, Html {
 
 	private static final long serialVersionUID = -3920268113544315082L;
 
@@ -32,18 +34,21 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "CODIGO", length = 10, nullable = false)
 	private String code;
 	
-	@Column(name = "NOME", length = 80, nullable = false)
+	@Column(name = "NOME", length = 80)
 	private String name;
 	
 	@Column(name = "TITULO", length = 150, nullable = false)
 	private String title;
 	
+	@Column(name = "WATTS", length = 10)
+	private String watts;
+	
 	@Lob
-	@Column(name = "DESCRIPTION", length = 100, nullable = false)
+	@Column(name = "DESCRIPTION", length = 100)
 	private String description;
 	
 	@Lob
-	@Column(name = "ESPECIFICATION", length = 100, nullable = false)
+	@Column(name = "ESPECIFICATION", length = 100)
 	private String especification;
 	
 	@Column(name = "PRECO", precision = 10, scale = 2)
@@ -58,8 +63,13 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 	
 	public VideoCard() {
 		this.manufacturer = new Manufacturer();
+		this.code = StringUtils.CODE;
 	}
 	
+	public VideoCard(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -91,7 +101,15 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	public String getWatts() {
+		return watts;
+	}
 
+	public void setWatts(String watts) {
+		this.watts = watts;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -148,5 +166,24 @@ public class VideoCard  implements br.com.embracon.j4e.domain.Entity {
 		return this.id != null ? this.id.hashCode() : 0;
 	}
 	
+	public String getToString() {
+		return this.toString();
+	}
 	
+	@Override
+	public String htmlText() {
+		return StringUtils.htmlText(this.title, this.description);
+	}
+	
+	public String toString() {
+		return new StringBuilder()
+			.append(this.code)
+			.append(" - ")
+			.append(this.name != null ? this.name : this.title)
+			.append(" - ")
+			.append(this.manufacturer.getName())
+			.append(" - R$ ")
+			.append(this.getPriceString())
+			.toString();
+	}
 }

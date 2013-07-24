@@ -176,9 +176,9 @@ public class DefaultBean {
 		return createMessage(severity, keyMessage, keyMessage, params);
 	}
 	
-	private FacesMessage createMessage(Severity severity, String keyMessage, String detail) {
-		return createMessage(severity, keyMessage, true, "");
-	}
+	/*private FacesMessage createMessage(Severity severity, String keyMessage, String detail) {
+		return createMessage(severity, keyMessage, Boolean.TRUE, "", "", "");
+	}*/
 	
 	private FacesMessage createMessage(Severity severity, String keyMessage, String detail, Object... params) {
 		return createMessage(severity, keyMessage, detail, true, params);

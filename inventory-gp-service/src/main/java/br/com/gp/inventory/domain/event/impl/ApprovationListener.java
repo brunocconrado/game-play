@@ -2,17 +2,10 @@ package br.com.gp.inventory.domain.event.impl;
 
 import org.springframework.stereotype.Component;
 
-import br.com.embracon.j4e.util.DateUtils;
-import br.com.gp.inventory.domain.entity.log.ApprovationLog;
-import br.com.gp.inventory.domain.entity.tmp.Approvation;
-import br.com.gp.inventory.domain.event.Event;
-import br.com.gp.inventory.domain.event.EventListener;
-import br.com.gp.inventory.domain.event.exception.EventListenerException;
-
 @Component("approvationListener")
-public class ApprovationListener implements EventListener<Approvation> {
+public class ApprovationListener/* implements EventListener<Approvation>*/ {
 
-	@Override
+	/*@Override
 	public void onSave(Event<Approvation> event) throws EventListenerException {
 		
 		try {
@@ -24,5 +17,5 @@ public class ApprovationListener implements EventListener<Approvation> {
 		} catch (Exception e) {
 			throw new EventListenerException(e);
 		}
-	}
+	}*/
 }

@@ -22,6 +22,12 @@ public class Socket implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "NAME", length = 10)
 	private String name;
 
+	public Socket(){}
+
+	public Socket(String name) {
+		this.name = name.trim();
+	}
+
 	public Long getId() {
 		return id;
 	}

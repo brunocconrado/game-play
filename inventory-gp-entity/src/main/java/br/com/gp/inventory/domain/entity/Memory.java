@@ -15,10 +15,12 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 
 @Entity
 @Table(name = "INV_MEMORIA")
-public class Memory  implements br.com.embracon.j4e.domain.Entity {
+public class Memory  implements br.com.embracon.j4e.domain.Entity, Html {
 
 	
 	private static final long serialVersionUID = 6218559424319113571L;
@@ -33,21 +35,24 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "CODIGO", length = 10, nullable = false)
 	private String code;
 	
-	@Column(name = "CAPACITY", length = 2, nullable = false)
+	@Column(name = "CAPACITY", length = 10, nullable = false)
 	private String capacity;
 	
-	@Column(name = "NOME", length = 80, nullable = false)
+	@Column(name = "NOME", length = 80)
 	private String name;
 	
 	@Column(name = "TITULO", length = 150, nullable = false)
 	private String title;
 	
+	@Column(name = "WATTS", length = 10)
+	private String watts;
+	
 	@Lob
-	@Column(name = "DESCRIPTION", nullable = false)
+	@Column(name = "DESCRIPTION")
 	private String description;
 	
 	@Lob
-	@Column(name = "ESPECIFICATION", nullable = false)
+	@Column(name = "ESPECIFICATION")
 	private String especification;
 	
 	@Column(name = "PRECO", precision = 10, scale = 2)
@@ -67,8 +72,14 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 	public Memory() {
 		this.manufacturer = new Manufacturer();
 		this.frequency = new Frequency();
+		this.code = StringUtils.CODE;
 	}
 	
+	public Memory(Manufacturer manufacturer, Frequency frequency) {
+		this.manufacturer = manufacturer;
+		this.frequency = frequency;
+	}
+
 	public Long getId() {
 		return id;
 	}
@@ -109,6 +120,14 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 		this.title = title;
 	}
 
+	public String getWatts() {
+		return watts;
+	}
+
+	public void setWatts(String watts) {
+		this.watts = watts;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -171,6 +190,29 @@ public class Memory  implements br.com.embracon.j4e.domain.Entity {
 	
 	public int hashCode() {
 		return this.id != null ? this.id.hashCode() : 0;
+	}
+	
+	public String getToString() {
+		return this.toString();
+	}
+	
+	@Override
+	public String htmlText() {
+		return StringUtils.htmlText(this.title, this.description);
+	}
+	
+	public String toString() {
+		return new StringBuilder()
+			.append(this.code)
+			.append(" - ")
+			.append(this.name != null ? this.name : this.title)
+			.append(" - ")
+			.append(this.capacity)
+			.append(" GB - ")
+			.append(this.manufacturer.getName())
+			.append(" - R$ ")
+			.append(this.getPriceString())
+			.toString();
 	}
 	
 }

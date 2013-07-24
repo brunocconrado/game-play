@@ -1,9 +1,11 @@
 package br.com.gp.inventory.domain.bean;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 
+import org.primefaces.event.FileUploadEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -17,6 +19,7 @@ import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.service.ManufacturerService;
 import br.com.gp.inventory.domain.service.ProcessorService;
 import br.com.gp.inventory.domain.service.SocketService;
+import br.com.gp.inventory.domain.service.XLSImporterService;
 
 
 @Controller("processorBean")
@@ -34,6 +37,10 @@ public class ProcessorBean extends DefaultBean {
 	@Autowired
 	@Qualifier("socketService")
 	private SocketService socketService;
+	
+	@Autowired(required = true)
+	@Qualifier("xlsImporterService")
+	private XLSImporterService xlsImporterService;
 	
 	private List<Manufacturer> manufacturers;
 	
@@ -58,6 +65,16 @@ public class ProcessorBean extends DefaultBean {
 			
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Processador");
+		}
+	}
+	
+	public void doUpload(FileUploadEvent fileUploadEvent) { 
+		
+		try {
+			xlsImporterService.importXLS(fileUploadEvent.getFile().getInputstream());
+			successMessage("Importação concluida com sucesso");
+		} catch (IOException e) {
+			errorMessage("error.search", "Importacao");
 		}
 	}
 	

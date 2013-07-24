@@ -31,4 +31,23 @@ public class PotentialServiceImpl implements PotentialService {
 		return this.repository.findByIdentity(potentialId);
 	}
 	
+	public Potential save(Potential potential) throws ServiceException {
+		return this.repository.save(potential);
+	}
+
+	@Override
+	public Potential findOrCreateByName(String name) throws ServiceException {
+		Potential potential = this.findByName(name);
+		if(potential == null) {
+			potential = this.save(new Potential(name));
+		}
+		
+		return potential;
+	}
+
+	@Override
+	public  Potential findByName(String name) {
+		return this.repository.findByName(name);
+	}
+	
 }

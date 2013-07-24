@@ -27,7 +27,7 @@
 								<h:outputLabel value="#{msg.resolve('label.code')}" for="txtCodigo">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
-								<p:inputText id="txtCodigo" value="#{memoryBean.memory.code}" required="true" size="10" 
+								<p:inputText id="txtCodigo" value="#{memoryBean.memory.code}" required="false" disabled="true" size="10" 
 											requiredMessage="#{msg.resolveMsg('required.field', 'label.code')}"/>
 											
 								<h:outputLabel value="#{msg.resolve('label.manufacturer')}" for="cbxManufacturer">
@@ -39,7 +39,7 @@
 									<f:selectItems value="#{memoryBean.manufacturers}" var="manufacturer" itemValue="#{manufacturer.id}"	itemLabel="#{manufacturer.name}"/>
 								</p:selectOneMenu>  
 											
-								<h:outputLabel value="#{msg.resolve('label.frequency')}" for="cbxSocket">
+								<h:outputLabel value="#{msg.resolve('label.frequency')}" for="cbxFrequecy">
 									<p:spacer  width="28" height="2"/>
 								</h:outputLabel>  
 								<p:selectOneMenu id="cbxFrequecy" style="width: 250px;" 
@@ -108,7 +108,7 @@
 					
 					<p:commandButton id="btnSave" 
 								process="@this, tvMemory" 
-								update="messages, grlMessages" icon="ui-icon ui-icon-disk"
+								update="messages, grlMessages, tvMemory" icon="ui-icon ui-icon-disk"
 								value="#{msg.resolve('label.save')}" actionListener="#{memoryBean.save}"/>
 				</h:panelGroup>
 			</h:panelGrid>

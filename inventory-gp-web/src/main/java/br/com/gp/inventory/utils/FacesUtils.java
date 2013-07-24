@@ -11,8 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
 
-import br.com.gp.inventory.domain.entity.tmp.Collaborator;
-
 public class FacesUtils {
 
 
@@ -67,12 +65,12 @@ public class FacesUtils {
 		return value;
 	}
 
-	public static Collaborator getCollaborator() {
+	/*public static Collaborator getCollaborator() {
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpSession session = (HttpSession) 
 				context.getExternalContext().getSession(false);
 		return (Collaborator) session.getAttribute(TeamPositionProperties.USER_LOGGED);
-	}
+	}*/
 
 	public static void redirect(String page) {
 		ExternalContext ec = FacesContext.getCurrentInstance()

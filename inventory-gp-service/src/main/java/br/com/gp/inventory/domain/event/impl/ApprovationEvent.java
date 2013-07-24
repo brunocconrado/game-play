@@ -1,11 +1,9 @@
 package br.com.gp.inventory.domain.event.impl;
 
-import br.com.gp.inventory.domain.entity.tmp.Approvation;
-import br.com.gp.inventory.domain.event.Event;
 
-public class ApprovationEvent implements Event<Approvation> {
+public class ApprovationEvent /*implements Event<Approvation>*/ {
 	
-	private Approvation approvation;
+	/*private Approvation approvation;
 	
 	public ApprovationEvent(Approvation approvation) {
 		this.approvation = approvation;
@@ -19,5 +17,5 @@ public class ApprovationEvent implements Event<Approvation> {
 	@Override
 	public <C> C getEditor() {
 		return null;
-	}
+	}*/
 }

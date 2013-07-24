@@ -15,9 +15,11 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 @Entity
 @Table(name = "INV_FONTE")
-public class Font  implements br.com.embracon.j4e.domain.Entity {
+public class Font  implements br.com.embracon.j4e.domain.Entity, Html {
 
 	private static final long serialVersionUID = -5614484826318779766L;
 
@@ -37,12 +39,15 @@ public class Font  implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "TITULO", length = 150, nullable = false)
 	private String title;
 	
+	@Column(name = "WATTS", length = 10)
+	private String watts;
+	
 	@Lob
-	@Column(name = "DESCRIPTION", nullable = false)
+	@Column(name = "DESCRIPTION")
 	private String description;
 	
 	@Lob
-	@Column(name = "ESPECIFICATION", nullable = false)
+	@Column(name = "ESPECIFICATION")
 	private String especification;
 	
 	@Column(name = "PRECO", precision = 10, scale = 2, nullable = false)
@@ -64,6 +69,12 @@ public class Font  implements br.com.embracon.j4e.domain.Entity {
 	public Font() {
 		this.manufacturer = new Manufacturer();
 		this.potential = new Potential();
+		this.code = StringUtils.CODE;
+	}
+
+	public Font(Manufacturer manufacturer, Potential potential) {
+		this.manufacturer = manufacturer;
+		this.potential = potential;
 	}
 
 	public Long getId() {
@@ -98,6 +109,14 @@ public class Font  implements br.com.embracon.j4e.domain.Entity {
 		this.title = title;
 	}
 
+	public String getWatts() {
+		return watts;
+	}
+
+	public void setWatts(String watts) {
+		this.watts = watts;
+	}
+	
 	public String getDescription() {
 		return description;
 	}
@@ -174,5 +193,26 @@ public class Font  implements br.com.embracon.j4e.domain.Entity {
 		return this.id != null ? this.id.hashCode() : 0;
 	}
 
-
+	public String getToString() {
+		return this.toString();
+	}
+	
+	@Override
+	public String htmlText() {
+		return StringUtils.htmlText(this.title, this.description);
+	}
+	
+	public String toString() {
+		return new StringBuilder()
+			.append(this.code)
+			.append(" - ")
+			.append(this.name != null ? this.name : this.title)
+			.append(" - ")
+			.append(this.potential.getName())
+			.append(this.isRealPotential() ? " Real - " : " - ")
+			.append(this.manufacturer.getName())
+			.append(" - R$ ")
+			.append(this.getPriceString())
+			.toString();
+	}
 }

@@ -5,4 +5,6 @@ import br.com.gp.inventory.domain.entity.Frequency;
 
 public interface FrequencyRepository extends Repository<Frequency> {
 
+	public Frequency findByName(String name);
+
 }

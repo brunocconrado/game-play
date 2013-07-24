@@ -18,7 +18,7 @@
 
 	<bean name="jndiDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-			<value>java:jboss/gp-inventory</value>
+			<value>java:jboss/gp-inventory-local</value>
 		</property>
 	</bean>
 
@@ -45,7 +45,7 @@
 				<value>br.com.gp.inventory.domain.entity.Potential</value>
 				<value>br.com.gp.inventory.domain.entity.Processor</value>
 				<value>br.com.gp.inventory.domain.entity.Socket</value>
-				<value>br.com.gp.inventory.domain.entity.Status</value>
+				<!-- <value>br.com.gp.inventory.domain.entity.Status</value>  -->
 				<value>br.com.gp.inventory.domain.entity.Tower</value>
 				<value>br.com.gp.inventory.domain.entity.VideoCard</value>
 			</list>
@@ -56,7 +56,7 @@
 
 				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
 				<prop key="hibernate.hbm2ddl.auto">update</prop>
-				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.show_sql">false</prop>
 				<prop key="hibernate.format_sql">true</prop>
 				<prop key="hibernate.generate_statistics">false</prop>
 				

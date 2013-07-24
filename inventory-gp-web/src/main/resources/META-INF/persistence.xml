@@ -6,7 +6,7 @@
 
 	<persistence-unit name="gp-inventory" transaction-type="JTA">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
-		<jta-data-source>java:jboss/gp-inventory</jta-data-source>
+		<jta-data-source>java:jboss/gp-inventory-local</jta-data-source>
 
 		<class>br.com.gp.inventory.domain.entity.Category</class>
 		<class>br.com.gp.inventory.domain.entity.Drive</class>
@@ -21,7 +21,7 @@
 		<class>br.com.gp.inventory.domain.entity.Potential</class>
 		<class>br.com.gp.inventory.domain.entity.Processor</class>
 		<class>br.com.gp.inventory.domain.entity.Socket</class>
-		<class>br.com.gp.inventory.domain.entity.Status</class>
+		<!-- <class>br.com.gp.inventory.domain.entity.Status</class> -->
 		<class>br.com.gp.inventory.domain.entity.Tower</class>
 		<class>br.com.gp.inventory.domain.entity.VideoCard</class>
 
@@ -29,7 +29,7 @@
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.generate_statistics" value="false" />
-			<!-- <property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="true" />
 
 			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider" />
@@ -46,7 +46,7 @@
 				value="true" />
 			<property name="hibernate.connection.autocommit" value="false" />
 			<property name="hibernate.connection.release_mode" value="after_transaction" />
-			<property name="hibernate.connection.autoReconnect" value="true" /> -->
+			<property name="hibernate.connection.autoReconnect" value="true" /> 
 
 		</properties>
 	</persistence-unit>

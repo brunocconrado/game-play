@@ -60,11 +60,11 @@
 		<managed-bean-class>br.com.gp.inventory.domain.bean.InventoryBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
-	<!-- <managed-bean>
-		<managed-bean-name>hardDiskListBean</managed-bean-name>
-		<managed-bean-class>br.com.gp.inventory.domain.bean.HardDiskListBean</managed-bean-class>
+	<managed-bean>
+		<managed-bean-name>inventoryListBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.InventoryListBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
-	</managed-bean> -->
+	</managed-bean>
 	
 	<managed-bean>
 		<managed-bean-name>memoryBean</managed-bean-name>
@@ -124,6 +124,12 @@
 	<managed-bean>
 		<managed-bean-name>videoCardListBean</managed-bean-name>
 		<managed-bean-class>br.com.gp.inventory.domain.bean.VideoCardListBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>uploaderBean</managed-bean-name>
+		<managed-bean-class>br.com.gp.inventory.domain.bean.UploderBean</managed-bean-class>
 		<managed-bean-scope>session</managed-bean-scope>
 	</managed-bean>
 

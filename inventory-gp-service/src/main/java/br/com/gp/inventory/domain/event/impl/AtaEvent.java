@@ -1,11 +1,9 @@
 package br.com.gp.inventory.domain.event.impl;
 
-import br.com.gp.inventory.domain.entity.tmp.Ata;
-import br.com.gp.inventory.domain.event.Event;
 
-public class AtaEvent implements Event<Ata> {
+public class AtaEvent /*implements Event<Ata>*/ {
 	
-	private Ata ata;
+	/*private Ata ata;
 	
 	public AtaEvent(Ata ata) {
 		this.ata = ata;
@@ -19,7 +17,7 @@ public class AtaEvent implements Event<Ata> {
 	@Override
 	public <C> C getEditor() {
 		return null;
-	}
+	}*/
 	
 	
 

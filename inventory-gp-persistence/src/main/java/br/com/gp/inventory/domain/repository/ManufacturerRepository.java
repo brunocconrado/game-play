@@ -10,4 +10,6 @@ public interface ManufacturerRepository extends Repository<Manufacturer> {
 
 	public Collection<Manufacturer> findByCategory(CategoryEnum category);
 
+	public Manufacturer findByNameAndCategory(String name, CategoryEnum category);
+
 }

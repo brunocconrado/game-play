@@ -22,6 +22,12 @@ public class Frequency implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "NAME", length = 40)
 	private String name;
 
+	public Frequency() {}
+	
+	public Frequency(String name) {
+		this.name = name;
+	}
+
 	public Long getId() {
 		return id;
 	}

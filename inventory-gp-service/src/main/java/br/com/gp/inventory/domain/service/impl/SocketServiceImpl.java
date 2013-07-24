@@ -31,4 +31,24 @@ public class SocketServiceImpl implements SocketService {
 		return this.repository.findByIdentity(socketId);
 	}
 
+	@Override
+	public Socket findByName(String name) throws ServiceException {
+		return this.repository.findByName(name);
+	}
+
+	@Override
+	public void save(Socket socket) throws ServiceException {
+		this.repository.save(socket);
+	}
+
+	@Override
+	public Socket findOrCreateByName(String name) throws ServiceException {
+		Socket socket = this.findByName(name);
+		if(socket == null) {
+			socket = new Socket(name);
+			this.save(socket);
+		}
+		
+		return socket;
+	}
 }

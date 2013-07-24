@@ -14,6 +14,8 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import br.com.gp.inventory.domain.utils.StringUtils;
+
 
 @Entity
 @Table(name = "INV_INVENTARIO")
@@ -25,7 +27,7 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "COD_FREQUENCIA", scale = 0, precision = 0)
+	@Column(name = "COD_INVENTARIO", scale = 0, precision = 0)
 	private Long id;
 
 	@Column(name = "NAME", length = 40)
@@ -34,8 +36,20 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 	@Column(name = "CODIGO", length = 10, nullable = false)
 	private String code;
 
-	@Column(name = "PRECO", precision = 10, scale = 2, nullable = false)
-	private BigDecimal price;
+	@Column(name = "TOTAL", precision = 10, scale = 2, nullable = false)
+	private BigDecimal total;
+	
+	@Column(name = "QTD_MEMORIA", nullable = false)
+	private Integer qtdMemory;
+	
+	@Column(name = "QTD_HD", nullable = false)
+	private Integer qtdHardDisk;
+	
+	@Column(name = "QTD_SSD")
+	private Integer qtdSSD;
+	
+	@Column(name = "QTD_Drive", nullable = false)
+	private Integer qtdDrive;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "PLACA_MAE", nullable = true)
@@ -50,8 +64,12 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 	private Memory memory;
 
 	@OneToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name = "HD_SSD", nullable = true)
+	@JoinColumn(name = "HD", nullable = true)
 	private HardDisk hardDisk;
+	
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "SSD")
+	private HardDisk ssd;
 
 	@OneToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "DRIVE", nullable = true)
@@ -70,17 +88,19 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 	private Tower tower;
 
 	@Transient
-	private String priceString;
+	private String totalString;
 
 	public Inventory() {
 		this.motherboard = new Motherboard();
 		this.processor = new Processor();
 		this.memory = new Memory();
 		this.hardDisk = new HardDisk();
+		this.ssd = new HardDisk();
 		this.drive = new Drive();
 		this.videoCard = new VideoCard();
 		this.font = new Font();
 		this.tower = new Tower();
+		this.code = StringUtils.CODE;
 	}
 
 	public Long getId() {
@@ -90,6 +110,8 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	
 
 	public String getName() {
 		return name;
@@ -107,12 +129,44 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 		this.code = code;
 	}
 
-	public BigDecimal getPrice() {
-		return price;
+	public BigDecimal getTotal() {
+		return total;
 	}
 
-	public void setPrice(BigDecimal price) {
-		this.price = price;
+	public void setTotal(BigDecimal total) {
+		this.total = total;
+	}
+
+	public Integer getQtdMemory() {
+		return qtdMemory;
+	}
+
+	public void setQtdMemory(Integer qtdMemory) {
+		this.qtdMemory = qtdMemory;
+	}
+
+	public Integer getQtdHardDisk() {
+		return qtdHardDisk;
+	}
+
+	public void setQtdHardDisk(Integer qtdHardDisk) {
+		this.qtdHardDisk = qtdHardDisk;
+	}
+
+	public Integer getQtdSSD() {
+		return qtdSSD;
+	}
+
+	public void setQtdSSD(Integer qtdSSD) {
+		this.qtdSSD = qtdSSD;
+	}
+
+	public Integer getQtdDrive() {
+		return qtdDrive;
+	}
+
+	public void setQtdDrive(Integer qtdDrive) {
+		this.qtdDrive = qtdDrive;
 	}
 
 	public Motherboard getMotherboard() {
@@ -140,11 +194,25 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 	}
 
 	public HardDisk getHardDisk() {
+		if(hardDisk == null) {
+			this.hardDisk = new HardDisk();
+		}
 		return hardDisk;
 	}
 
 	public void setHardDisk(HardDisk hardDisk) {
 		this.hardDisk = hardDisk;
+	}
+
+	public HardDisk getSsd() {
+		if(ssd == null) {
+			this.ssd = new HardDisk();
+		}
+		return ssd;
+	}
+
+	public void setSsd(HardDisk ssd) {
+		this.ssd = ssd;
 	}
 
 	public Drive getDrive() {
@@ -179,16 +247,16 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 		this.tower = tower;
 	}
 
-	public String getPriceString() {
-		if(priceString == null && price != null) {
-			this.priceString = DECIMAL_FORMAT.format(this.price);
+	public String getTotalString() {
+		if(totalString == null && total != null) {
+			this.totalString = DECIMAL_FORMAT.format(this.total);
 		}
-		return priceString;
+		return totalString;
 	}
 
-	public void setPriceString(String priceString) {
-		this.priceString = priceString;
-		this.price = new BigDecimal(priceString.replace(".", "").replace(",", "."));
+	public void setTotalString(String totalString) {
+		this.totalString = totalString;
+		this.total = new BigDecimal(totalString.replace(".", "").replace(",", "."));
 	}
 
 	public boolean equals(Object obj) {
@@ -201,6 +269,20 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 
 	public int hashCode() {
 		return this.id != null ? this.id.hashCode() : 0;
+	}
+
+	public void sumTotal() {
+		this.total = this.processor.getPrice().add(this.motherboard.getPrice());
+		this.total = this.total.add(this.videoCard.getPrice());
+		this.total = this.total.add(this.font.getPrice());
+		this.total = this.total.add(this.tower.getPrice());
+		this.total = this.total.add(this.memory.getPrice().multiply(BigDecimal.valueOf(this.qtdMemory)));
+		this.total = this.total.add(this.hardDisk.getPrice().multiply(BigDecimal.valueOf(this.qtdHardDisk)));
+		if(this.ssd != null) {
+			this.total = this.total.add(this.ssd.getPrice().multiply(BigDecimal.valueOf(this.qtdSSD)));
+		}
+		this.total = this.total.add(this.drive.getPrice().multiply(BigDecimal.valueOf(this.qtdDrive)));
+		
 	}
 
 }

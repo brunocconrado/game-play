@@ -1,5 +1,7 @@
 package br.com.gp.inventory.domain.bean;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -10,11 +12,26 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.embracon.j4e.util.Objects;
+import br.com.embracon.j4e.validation.ValidationException;
+import br.com.gp.inventory.domain.entity.Drive;
+import br.com.gp.inventory.domain.entity.Font;
 import br.com.gp.inventory.domain.entity.HardDisk;
-import br.com.gp.inventory.domain.entity.Manufacturer;
-import br.com.gp.inventory.domain.enumeration.CategoryEnum;
+import br.com.gp.inventory.domain.entity.Inventory;
+import br.com.gp.inventory.domain.entity.Memory;
+import br.com.gp.inventory.domain.entity.Motherboard;
+import br.com.gp.inventory.domain.entity.Processor;
+import br.com.gp.inventory.domain.entity.Tower;
+import br.com.gp.inventory.domain.entity.VideoCard;
+import br.com.gp.inventory.domain.service.DriveService;
+import br.com.gp.inventory.domain.service.FontService;
 import br.com.gp.inventory.domain.service.HardDiskService;
-import br.com.gp.inventory.domain.service.ManufacturerService;
+import br.com.gp.inventory.domain.service.InventoryService;
+import br.com.gp.inventory.domain.service.MemoryService;
+import br.com.gp.inventory.domain.service.MotherboardService;
+import br.com.gp.inventory.domain.service.ProcessorService;
+import br.com.gp.inventory.domain.service.TowerService;
+import br.com.gp.inventory.domain.service.VideoCardService;
 
 
 @Controller("inventoryBean")
@@ -22,16 +39,52 @@ import br.com.gp.inventory.domain.service.ManufacturerService;
 public class InventoryBean extends DefaultBean {
 
 	@Autowired
+	@Qualifier("inventoryService")
+	private InventoryService service;
+	
+	@Autowired
+	@Qualifier("motherboardService")
+	private MotherboardService motherboardService;
+	
+	@Autowired
+	@Qualifier("processorService")
+	private ProcessorService processorService;
+	
+	@Autowired
+	@Qualifier("memoryService")
+	private MemoryService memoryService;
+	
+	@Autowired
 	@Qualifier("hardDiskService")
-	private HardDiskService service;
+	private HardDiskService hardDiskService;
+	
+	@Autowired
+	@Qualifier("driveService")
+	private DriveService driveService;
+	
+	@Autowired
+	@Qualifier("videoCardService")
+	private VideoCardService videoCardService;
 
 	@Autowired
-	@Qualifier("manufacturerService")
-	private ManufacturerService manufacturerService;
+	@Qualifier("fontService")
+	private FontService fontService;
+	
+	@Autowired
+	@Qualifier("towerService")
+	private TowerService towerService;
 
-	private HardDisk hardDisk;
+	private Inventory inventory;
 
-	private List<Manufacturer> manufacturers;
+	private List<Processor> processors;
+	private List<Motherboard> motherboards;
+	private List<Memory> memories;
+	private List<HardDisk> hardDisks;
+	private List<HardDisk> ssd;
+	private List<Drive> drivers;
+	private List<VideoCard> videoCards;
+	private List<Font> fonts;
+	private List<Tower> towers;
 
 	public InventoryBean() {
 		super("inventoryBean");
@@ -41,12 +94,26 @@ public class InventoryBean extends DefaultBean {
 	public void init() {
 		try {
 			
-			this.hardDisk = new HardDisk();
-			if(this.hardDisk == null) {
-				
+			if(this.inventory == null) {
+				this.inventory = new Inventory();
 			}
 			
-			this.manufacturers = manufacturerService.findAllByCategory(CategoryEnum.HD);
+			this.motherboards = this.motherboardService.findAll();
+			this.fonts = this.fontService.findAll();
+			this.videoCards = this.videoCardService.findAll();
+			this.memories = this.memoryService.findAll();
+			this.drivers = this.driveService.findAll();
+			this.towers = this.towerService.findAll();
+			this.hardDisks = this.hardDiskService.findAll();
+			this.ssd = new ArrayList<HardDisk>();
+			
+			for(Iterator<HardDisk> it = this.hardDisks.iterator(); it.hasNext(); ) {
+				HardDisk hardDisk = it.next();
+				if(hardDisk.isSsd()) {
+					this.ssd.add(hardDisk);
+					it.remove();
+				}
+			}
 			
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Inventário");
@@ -57,50 +124,139 @@ public class InventoryBean extends DefaultBean {
 		
 		try {
 			
-			this.hardDisk.setManufacturer(this.manufacturerService
-							.findById(this.hardDisk.getManufacturer().getId()));
-
-			this.service.save(this.hardDisk);
+			this.inventory.setProcessor(this.processorService.findById(this.inventory.getProcessor().getId()));
+			this.inventory.setMotherboard(this.motherboardService.findById(this.inventory.getMotherboard().getId()));
+			this.inventory.setVideoCard(this.videoCardService.findById(this.inventory.getVideoCard().getId()));
+			this.inventory.setFont(this.fontService.findById(this.inventory.getFont().getId()));
+			this.inventory.setMemory(this.memoryService.findById(this.inventory.getMemory().getId()));
+			this.inventory.setHardDisk(this.hardDiskService.findById(this.inventory.getHardDisk().getId()));
+			this.inventory.setSsd(this.hardDiskService.findById(this.inventory.getSsd().getId()));
+			this.inventory.setDrive(this.driveService.findById(this.inventory.getDrive().getId()));
+			this.inventory.setTower(this.towerService.findById(this.inventory.getTower().getId()));
 			
-			this.hardDisk = new HardDisk();
+			
+			this.service.save(this.inventory);
+			
+			this.inventory = new Inventory();
 			
 			successMessage("save.success", "Inventário");			
 		} catch (ServiceException e) {
 			errorMessage("error.search", "Inventário");
+		} catch (ValidationException e) {
+			warningMessage(e.getResult().getReasons());
 		} catch (Throwable e) {
 			fatalMessage("fatal.error");
 		}
 		
 	}
 	
+	public void loadProcessors() {
+		try {
+			if(Objects.isNull(this.inventory.getMotherboard().getId())) {
+				this.processors = new ArrayList<Processor>();
+			} else {
+				this.processors = this.processorService.findByMotherboard(this.inventory.getMotherboard());
+			}
+		} catch (ServiceException e) {
+			errorMessage("error.search", "Processador");
+		}
+	}
+	
+	/*public List<Motherboard> autoCompleteMotherboard(String query) {
+
+		List<Motherboard> found = new LinkedList<Motherboard>();
+		for(Motherboard motherboard : this.motherboards) {
+			if(motherboard.toString().contains(query)) {
+				found.add(motherboard);
+			}
+		}
+		return found;
+	}*/
+
 	public String linkRedirect() {
 		destroy("inventoryBean");
 		return "/pages/inventario/lista";
 	}
+
+	public Inventory getInventory() {
+		return inventory;
+	}
+
+	public void setInventory(Inventory inventory) {
+		this.inventory = inventory;
+		loadProcessors();
+	}
+
+	public List<Processor> getProcessors() {
+		return processors;
+	}
+
+	public void setProcessors(List<Processor> processors) {
+		this.processors = processors;
+	}
+
+	public List<Motherboard> getMotherboards() {
+		return motherboards;
+	}
+
+	public void setMotherboards(List<Motherboard> motherboards) {
+		this.motherboards = motherboards;
+	}
+
+	public List<Memory> getMemories() {
+		return memories;
+	}
+
+	public void setMemories(List<Memory> memories) {
+		this.memories = memories;
+	}
+
+	public List<HardDisk> getHardDisks() {
+		return hardDisks;
+	}
+
+	public void setHardDisks(List<HardDisk> hardDisks) {
+		this.hardDisks = hardDisks;
+	}
 	
-	public ManufacturerService getManufacturerService() {
-		return manufacturerService;
+	public List<HardDisk> getSsd() {
+		return ssd;
 	}
 
-	public void setManufacturerService(ManufacturerService manufacturerService) {
-		this.manufacturerService = manufacturerService;
+	public void setSsd(List<HardDisk> ssd) {
+		this.ssd = ssd;
 	}
 
-	public HardDisk getHardDisk() {
-		return hardDisk;
+	public List<Drive> getDrivers() {
+		return drivers;
 	}
 
-	public void setHardDisk(HardDisk hardDisk) {
-		this.hardDisk = hardDisk;
+	public void setDrivers(List<Drive> drivers) {
+		this.drivers = drivers;
 	}
 
-	public List<Manufacturer> getManufacturers() {
-		return manufacturers;
+	public List<VideoCard> getVideoCards() {
+		return videoCards;
 	}
 
-	public void setManufacturers(List<Manufacturer> manufacturers) {
-		this.manufacturers = manufacturers;
+	public void setVideoCards(List<VideoCard> videoCards) {
+		this.videoCards = videoCards;
 	}
 
+	public List<Font> getFonts() {
+		return fonts;
+	}
 
+	public void setFonts(List<Font> fonts) {
+		this.fonts = fonts;
+	}
+
+	public List<Tower> getTowers() {
+		return towers;
+	}
+
+	public void setTowers(List<Tower> towers) {
+		this.towers = towers;
+	}
+	
 }

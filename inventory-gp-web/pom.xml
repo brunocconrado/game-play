@@ -54,6 +54,13 @@
 			<version>2.5</version>
 		</dependency>
 
+		<dependency>
+			<groupId>commons-fileupload</groupId>
+			<artifactId>commons-fileupload</artifactId>
+			<version>1.3</version>
+		</dependency>
+
+
 		<!-- Team Position Dependences -->
 		<dependency>
 			<groupId>br.com.embracon</groupId>
@@ -68,13 +75,13 @@
 		</dependency>
 	</dependencies>
 
-	<parent> 
+	<parent>
 		<groupId>br.com.embracon</groupId>
 		<artifactId>inventory-gp-module</artifactId>
 		<version>1.0</version>
 		<relativePath>../inventory-gp-module</relativePath>
 	</parent>
-	
+
 	<build>
 		<plugins>
 			<plugin>

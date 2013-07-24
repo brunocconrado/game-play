@@ -1,5 +1,6 @@
 package br.com.gp.inventory.domain.repository.impl;
 
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,12 @@ public class FrequencyRepositoryImpl extends AbstractHibernateRepostirory<Freque
 
 	public FrequencyRepositoryImpl() {
 		super(Frequency.class);
+	}
+
+	@Override
+	public Frequency findByName(String name) {
+		return (Frequency) this.createCriteria()
+				.add(Restrictions.eq("name", name)).uniqueResult();
 	}
 
 }
