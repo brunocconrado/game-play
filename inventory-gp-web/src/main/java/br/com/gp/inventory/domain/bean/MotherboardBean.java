@@ -58,7 +58,8 @@ public class MotherboardBean extends DefaultBean {
 			this.sockets = socketService.findAll();
 			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Placa Mãe");
+			fatalMessage("error.message.init", e, "Placa M‹e");
+			destroy("motherboardBean");
 		}
 	}
 	
@@ -77,11 +78,15 @@ public class MotherboardBean extends DefaultBean {
 			
 			successMessage("save.success", "Placa Mãe");			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Placa Mãe");
+			errorMessage("error.search", e, "Placa Mãe");
 		} catch (Throwable e) {
-			fatalMessage("fatal.error");
+			fatalMessage("fatal.error", e);
 		}
 		
+	}
+	
+	public void clear() {
+		this.motherboard = new Motherboard();
 	}
 	
 	public String linkRedirect() {

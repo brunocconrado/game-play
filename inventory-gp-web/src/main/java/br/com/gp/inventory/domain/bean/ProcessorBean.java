@@ -64,7 +64,8 @@ public class ProcessorBean extends DefaultBean {
 			this.sockets = socketService.findAll();
 			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Processador");
+			fatalMessage("error.search", e, "Processador");
+			destroy("processorBean");
 		}
 	}
 	
@@ -74,7 +75,7 @@ public class ProcessorBean extends DefaultBean {
 			xlsImporterService.importXLS(fileUploadEvent.getFile().getInputstream());
 			successMessage("Importação concluida com sucesso");
 		} catch (IOException e) {
-			errorMessage("error.search", "Importacao");
+			errorMessage("error.search", e, "Importacao");
 		}
 	}
 	
@@ -93,11 +94,15 @@ public class ProcessorBean extends DefaultBean {
 			
 			successMessage("save.success", "Processador");			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Processador");
+			errorMessage("error.search", e, "Processador");
 		} catch (Throwable e) {
-			fatalMessage("fatal.error");
+			fatalMessage("fatal.error", e);
 		}
 		
+	}
+	
+	public void clear() {
+		this.processor = new Processor();
 	}
 	
 	public String linkRedirect() {

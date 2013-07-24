@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Font;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Potential;
@@ -52,7 +53,8 @@ public class FontBean extends DefaultBean {
 			this.manufacturers = manufactoryService.findAllByCategory(CategoryEnum.FONT);
 			this.potentials = potentialService.findAll();
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Fonte");
+			fatalMessage("error.search", e, "Fonte");
+			destroy("fontBean");
 		}
 	}
 	
@@ -67,14 +69,16 @@ public class FontBean extends DefaultBean {
 			
 			this.service.save(this.font);
 			
-			this.font = new Font();
-			
 			successMessage("save.success", "Fonte");			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Fonte");
+			errorMessage("error.search", e, "Fonte");
 		} catch (Throwable e) {
-			fatalMessage("fatal.error");
+			fatalMessage("fatal.error", e);
 		}
+	}
+	
+	public void clear() {
+		this.font = new Font();		
 	}
 	
 	public String linkRedirect() {

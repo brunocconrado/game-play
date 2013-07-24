@@ -95,10 +95,17 @@
 					<p:commandButton id="btnSave" 
 								process="@this, tvDrive" 
 								update="messages, grlMessages, tvDrive" icon="ui-icon ui-icon-disk"
-								value="#{msg.resolve('label.save')}" actionListener="#{driveBean.save}"/>
+								value="#{msg.resolve('label.save')}" actionListener="#{driveBean.save}"
+								oncomplete="saveCompletedHandle(xhr, status, args);"/>
 				</h:panelGroup>
 			</h:panelGrid>
 			
+			<g:confirmation
+				headerMessage="#{msg.resolve('dialog.header.confirmation.saved.drive', driveBean.drive.id)}"
+				confirmationMessage="#{msg.resolve('dialog.message.confirmation.saved.drive')}" 
+				listenerMethod="#{driveBean.clear()}"
+				updateComponentYes="tvDrive:tabDrive"
+				updateComponentNo="tvDrive:tabDrive"/>
 		</h:form>
 	</ui:define>
 	

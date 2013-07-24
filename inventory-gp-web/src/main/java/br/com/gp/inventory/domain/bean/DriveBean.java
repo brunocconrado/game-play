@@ -47,7 +47,8 @@ public class DriveBean extends DefaultBean {
 			
 			this.manufacturers = manufactoryService.findAllByCategory(CategoryEnum.DRIVE);
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Gabinete");
+			fatalMessage("error.search", e, "Gabinete");
+			destroy("driveBean");
 		}
 	}
 	
@@ -60,15 +61,17 @@ public class DriveBean extends DefaultBean {
 			
 			this.service.save(this.drive);
 			
-			this.drive = new Drive();
-			
-			successMessage("save.success", "Gabinete");			
+			addCallbackParam("saved", true);
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Gabinete");
+			errorMessage("error.search", e, "Gabinete");
 		} catch (Throwable e) {
-			fatalMessage("fatal.error");
+			fatalMessage("fatal.error", e);
 		}
 		
+	}
+	
+	public void clear() {
+		this.drive = new Drive();		
 	}
 	
 	public String linkRedirect() {

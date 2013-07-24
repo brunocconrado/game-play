@@ -27,7 +27,7 @@ public class UploderBean extends DefaultBean {
 		try {
 			xlsImporterService.importXLS(fileUploadEvent.getFile().getInputstream());
 		} catch (IOException e) {
-			errorMessage("error.search", "Importacao");
+			errorMessage("error.search", e, "Importacao");
 		}
 	}
 }

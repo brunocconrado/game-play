@@ -116,7 +116,8 @@ public class InventoryBean extends DefaultBean {
 			}
 			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Inventário");
+			fatalMessage("error.search", e, "Invent‡rio");
+			destroy("inventoryBean");
 		}
 	}
 	
@@ -137,15 +138,13 @@ public class InventoryBean extends DefaultBean {
 			
 			this.service.save(this.inventory);
 			
-			this.inventory = new Inventory();
-			
 			successMessage("save.success", "Inventário");			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Inventário");
+			errorMessage("error.search", e, "Inventário");
 		} catch (ValidationException e) {
 			warningMessage(e.getResult().getReasons());
 		} catch (Throwable e) {
-			fatalMessage("fatal.error");
+			fatalMessage("fatal.error", e);
 		}
 		
 	}
@@ -158,8 +157,12 @@ public class InventoryBean extends DefaultBean {
 				this.processors = this.processorService.findByMotherboard(this.inventory.getMotherboard());
 			}
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Processador");
+			errorMessage("error.search", e, "Processador");
 		}
+	}
+	
+	public void clear() {
+		this.inventory = new Inventory();
 	}
 	
 	/*public List<Motherboard> autoCompleteMotherboard(String query) {

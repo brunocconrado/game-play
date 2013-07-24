@@ -57,7 +57,8 @@ public class MemoryBean extends DefaultBean {
 			this.frequencies = frequencyService.findAll();
 			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Memória");
+			fatalMessage("error.search", e, "Mem—ria");
+			destroy("memoryBean");
 		}
 	}
 	
@@ -72,13 +73,17 @@ public class MemoryBean extends DefaultBean {
 			
 			this.service.save(this.memory);
 			
-			successMessage("save.success", "Memória");			
+			successMessage("save.success", e, "Mem—ria");			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Memória");
+			errorMessage("error.search", e, "Mem—ria");
 		} catch (Throwable e) {
-			fatalMessage("fatal.error");
+			fatalMessage("fatal.error", e);
 		}
 		
+	}
+	
+	public void clear() {
+		this.memory = new Memory();
 	}
 	
 	public String linkRedirect() {

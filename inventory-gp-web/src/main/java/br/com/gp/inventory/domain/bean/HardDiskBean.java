@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
+import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.HardDisk;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.enumeration.CategoryEnum;
@@ -49,7 +50,8 @@ public class HardDiskBean extends DefaultBean {
 			this.manufacturers = manufacturerService.findAllByCategory(CategoryEnum.HD);
 			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "HD/SSD");
+			fatalMessage("error.search", e, "HD/SSD");
+			destroy("hardDiskBean");
 		}
 	}
 	
@@ -66,11 +68,14 @@ public class HardDiskBean extends DefaultBean {
 			
 			successMessage("save.success", "HD/SSD");			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "HD/SSD");
+			errorMessage("error.search", e, "HD/SSD");
 		} catch (Throwable e) {
-			fatalMessage("fatal.error");
+			fatalMessage("fatal.error", e);
 		}
-		
+	}
+	
+	public void clear() {
+		this.hardDisk = new HardDisk();		
 	}
 	
 	public String linkRedirect() {

@@ -6,16 +6,15 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:h="http://java.sun.com/jsf/html">
 	
-	<p:confirmDialog widgetVar="#{dialogId}" message="#{msg.resolve('dialog.message.remove.drive')}" 
-									header="#{msg.resolve('dialog.header.remove.drive')}" severity="alert">
+	<p:confirmDialog widgetVar="cfmNewRegister" message="#{confirmationMessage}" 
+									header="#{headerMessage}" severity="alert">
           <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
           
-              <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" 
-              		actionListener="#{driveListBean.remove()}" update="#{updateComponentYes}" immediate="true"/>
+              <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="#{dialogId}.hide()}" 
+              		actionListener="#{listenerMethod}" update="#{updateComponentYes}" immediate="true"/>
               		
               <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="#{dialogId}.hide()" update="#{updateComponentNo}"/>
               
           </h:panelGrid>
       </p:confirmDialog>
-	
 </ui:composition>

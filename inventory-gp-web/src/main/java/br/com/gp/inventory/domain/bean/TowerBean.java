@@ -47,7 +47,8 @@ public class TowerBean extends DefaultBean {
 			
 			this.manufacturers = manufactoryService.findAllByCategory(CategoryEnum.TOWER);
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Gabinete");
+			fatalMessage("error.search", e, "Gabinete");
+			destroy("towerBean");
 		}
 	}
 	
@@ -64,15 +65,15 @@ public class TowerBean extends DefaultBean {
 			
 			successMessage("save.success", "Gabinete");			
 		} catch (ServiceException e) {
-			errorMessage("error.search", "Gabinete");
+			errorMessage("error.search", e, "Gabinete");
 		} catch (Throwable e) {
-			fatalMessage("fatal.error");
+			fatalMessage("fatal.error", e);
 		}
 		
 	}
 	
 	public String linkRedirect() {
-		destroy("towerbean");
+		destroy("towerBean");
 		return "/pages/gabinete/lista";
 	}
 	
