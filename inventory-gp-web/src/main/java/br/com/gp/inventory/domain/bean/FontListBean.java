@@ -48,6 +48,7 @@ public class FontListBean extends DefaultBean {
 	public void remove() {
 		this.delete(this.service, "delete", 
 				this.fontSelected, "Fonte", "Invent‡rio");
+		init();
 	}
 
 	public List<Font> getFonts() {

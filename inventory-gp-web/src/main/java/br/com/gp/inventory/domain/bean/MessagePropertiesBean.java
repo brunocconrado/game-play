@@ -61,7 +61,7 @@ public class MessagePropertiesBean {
 		}
 
 		String result =  bundle.getString(key);
-		if(value != null) {
+		if(value != null && !value.isEmpty()) {
 			String found = null;
 			try {
 				found = bundle.getString(value);

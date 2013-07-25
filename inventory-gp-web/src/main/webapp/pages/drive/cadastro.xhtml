@@ -60,7 +60,7 @@
 						</h:panelGrid>
 					</h:panelGroup>
 				</p:tab>
-				<p:tab id="tabDescription" title="#{msg.resolve('tab.commercial.desciption')}" disabled="true">
+				<p:tab id="tabDescription" title="#{msg.resolve('tab.commercial.desciption')}" >
 					<h:panelGroup id="pgroupDescription">
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 							<h:outputLabel value="#{msg.resolve('label.description')}" for="txaDescription">
@@ -71,7 +71,7 @@
 						</h:panelGrid>
 					</h:panelGroup>					
 				</p:tab>
-				<p:tab id="tabEspecification" title="#{msg.resolve('tab.technical.specification')}" disabled="true">
+				<p:tab id="tabEspecification" title="#{msg.resolve('tab.technical.specification')}" >
 					<h:panelGroup id="pgroupEspecification">
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 							<h:outputLabel value="#{msg.resolve('label.specification')}" for="txaEspecification">
@@ -96,16 +96,16 @@
 								process="@this, tvDrive" 
 								update="messages, grlMessages, tvDrive" icon="ui-icon ui-icon-disk"
 								value="#{msg.resolve('label.save')}" actionListener="#{driveBean.save}"
-								oncomplete="saveCompletedHandle(xhr, status, args);"/>
+								oncomplete="saveCompletedHandle(xhr, status, args); setFormatPriceCustom('tvDrive\\:txtPrice');"/>
 				</h:panelGroup>
 			</h:panelGrid>
 			
 			<g:confirmation
-				headerMessage="#{msg.resolve('dialog.header.confirmation.saved.drive', driveBean.drive.id)}"
+				headerMessage="#{msg.resolveMsg('dialog.header.confirmation.saved.drive', driveBean.drive.id)}"
 				confirmationMessage="#{msg.resolve('dialog.message.confirmation.saved.drive')}" 
-				listenerMethod="#{driveBean.clear()}"
-				updateComponentYes="tvDrive:tabDrive"
-				updateComponentNo="tvDrive:tabDrive"/>
+				defaultBean="#{driveBean}"
+				updateComponentYes="tvDrive, tvDrive:pgroupDescription, tvDrive:pgroupEspecification"
+				updateComponentNo="tvDrive, tvDrive:pgroupDescription, tvDrive:pgroupEspecification"/>
 		</h:form>
 	</ui:define>
 	

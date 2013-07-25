@@ -11,10 +11,10 @@
 		<h:form prependId="false">
 			  		
 			<p:tabView id="tvTowerList" style="height: 400px;"> 
-				<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
-				<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
-				
 				<p:tab id="tabTowerList" title="#{msg.resolve('tab.tower.list')}">
+					<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+					<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
+				
 					<p:spacer width="20" height="15"/>
 				
 					<h:panelGroup id="pgroupTowerSearch"> 
@@ -73,7 +73,7 @@
 					        
 					        	<p:spacer width="3" height="2"/>
 					        
-					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();">
+					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();"  process="@this, dgTowers">
 									<h:graphicImage name="delete.png" library="images"/>
 									<f:setPropertyActionListener target="#{towerListBean.towerSelected}" value="#{tower}"/>
 								</p:commandLink>
@@ -85,9 +85,11 @@
 			                <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
 			                
 			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" 
-			                    		actionListener="#{towerListBean.remove()}" update="tvTowerList:dgTowers, glMessages" immediate="true"/>
+			                    		update="tvTowerList:dgTowers, tvTowerList:glMessages, tvTowerList:messages" 
+			                    		actionListener="#{towerListBean.remove()}" immediate="true"/>
 			                    		
-			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgTowers"/>
+			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" 
+			                    		update="tvTowerList:messages, tvTowerList:dgTowers, tvTowerList:messages"/>
 			                    
 			                </h:panelGrid>
 			            </p:confirmDialog>

@@ -1,5 +1,6 @@
 package br.com.gp.inventory.domain.bean;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
@@ -11,6 +12,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.primefaces.context.RequestContext;
+
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import br.com.embracon.j4e.i18n.Messages;
 import br.com.embracon.j4e.services.exception.ServiceException;
@@ -47,21 +50,28 @@ public class DefaultBean {
 		try {
 
 			Class clazz = obj.getClass();
-			Method method = clazz.getMethod(methodName, clazz);
-			method.invoke(method, parameter);
-		} catch (Throwable t) {
-			if(t instanceof AssociationViolationException) {
+			Method method = clazz.getMethod(methodName, parameter.getClass());
+			method.invoke(obj, parameter);
+			
+			successMessage("remove.success", deviceName);
+		} catch (InvocationTargetException t) {
+			if(t.getTargetException() instanceof AssociationViolationException) {
 				errorMessage("error.remove.associated.object", deviceName, associationName);
-			} else if(t instanceof ServiceException) {
+			} else if(t.getTargetException() instanceof ServiceException) {
 				errorMessage("error.remove", deviceName);
 			} else {
-				errorMessage("error.remove", t, deviceName);
+				fatalMessage("error.remove", t, deviceName);
 			}
+		} catch (Exception e) {
+			errorMessage("error.remove", e, deviceName);
 		}
 	}
 
+	protected void clear() {
+		throw new NotImplementedException();
+	}
+	
 	protected String getLoginUserInSession() {
-
 		return (String) getSession().getAttribute(TeamPositionProperties.USER_LOGIN);
 	}
 

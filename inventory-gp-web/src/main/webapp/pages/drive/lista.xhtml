@@ -11,10 +11,11 @@
 		<h:form prependId="false">
 			  		
 			<p:tabView id="tvDriveList" style="height: 400px;"> 
-				<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
-				<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
 				
 				<p:tab id="tabDriveList" title="#{msg.resolve('tab.drive.list')}">
+					<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+					<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
+					
 					<p:spacer width="20" height="15"/>
 				
 					<h:panelGroup id="pgroupDriveSearch"> 
@@ -44,7 +45,7 @@
 						
 						<p:spacer width="20" height="20"/>
 						
-						<p:dataTable widgetVar="dgDrives" id="dgDrives" style="width: 90%;" var="drive" value="#{driveListBean.drives}"
+						<p:dataTable widgetVar="dgDrive" id="dgDrives" style="width: 90%;" var="drive" value="#{driveListBean.drives}"
 								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
 						
@@ -73,7 +74,7 @@
 					        
 					        	<p:spacer width="3" height="2"/> 
 					        
-					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();">
+					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();" process="@this, dgDrives" update="dgDrives">
 									<h:graphicImage name="delete.png" library="images"/>
 									<f:setPropertyActionListener target="#{driveListBean.driveSelected}" value="#{drive}"/>
 								</p:commandLink>
@@ -84,10 +85,10 @@
 									header="#{msg.resolve('dialog.header.remove.drive')}" severity="alert">
 			                <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
 			                
-			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" 
-			                    		actionListener="#{driveListBean.remove()}" update="tvDriveList:dgDrives, glMessages" immediate="true"/>
+			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" immediate="true" process="@this"
+			                    		actionListener="#{driveListBean.remove()}" update="tvDriveList:messages, tvDriveList, tvDriveList:dgDrives, tvDriveList:glMessages"/>
 			                    		
-			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgDrives"/>
+			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="tvDriveList:messages, tvDriveList:glMessages"/>
 			                    
 			                </h:panelGrid>
 			            </p:confirmDialog>

@@ -8,13 +8,13 @@
 	xmlns:h="http://java.sun.com/jsf/html">
 	 
 	<ui:define name="content">
-		<h:form prependId="false">
+		<h:form prependId="false" id="fmFont">
 			  		
 			<p:tabView id="tvFontList" style="height: 400px;"> 
-				<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
-				<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
 				
 				<p:tab id="tabFontList" title="#{msg.resolve('tab.font.list')}">
+					<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
+					<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
 					<p:spacer width="20" height="15"/>
 				
 					<h:panelGroup id="pgroupFontSearch"> 
@@ -44,7 +44,7 @@
 						
 						<p:spacer width="20" height="20"/>
 						
-						<p:dataTable widgetVar="dgFonts" id="dgFonts" style="width: 90%;" var="font" value="#{fontListBean.fonts}"
+						<p:dataTable widgetVar="dgFonts" id="dgFonts" style="width: 95%;" var="font" value="#{fontListBean.fonts}"
 								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
 						
@@ -85,7 +85,7 @@
 					        
 					        	<p:spacer width="3" height="2"/>
 					        
-					            <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();">
+					           <p:commandLink title="#{msg.resolve('label.exclude')}" onclick="cdlgDeleteConfirm.show();" process="@this, dgFonts">
 									<h:graphicImage name="delete.png" library="images"/>
 									<f:setPropertyActionListener target="#{fontListBean.fontSelected}" value="#{font}"/>
 								</p:commandLink>
@@ -96,10 +96,10 @@
 									header="#{msg.resolve('dialog.header.remove.font')}" severity="alert">
 			                <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
 			                
-			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" 
-			                    		actionListener="#{fontListBean.remove()}" update="tvFontList:dgFonts, glMessages" immediate="true"/>
+			                    <p:commandButton value="#{msg.resolve('label.yes')}" oncomplete="cdlgDeleteConfirm.hide()" process="@this"
+			                    		actionListener="#{fontListBean.remove()}" update="tvFontList:dgFonts, tvFontList:messages, tvFontList:glMessages" immediate="true"/>
 			                    		
-			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="messages, dgFonts"/>
+			                    <p:commandButton value="#{msg.resolve('label.no')}" oncomplete="cdlgDeleteConfirm.hide()" update="dgFonts"/>
 			                    
 			                </h:panelGrid>
 			            </p:confirmDialog>

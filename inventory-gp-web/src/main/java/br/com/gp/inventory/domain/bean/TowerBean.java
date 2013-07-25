@@ -61,15 +61,17 @@ public class TowerBean extends DefaultBean {
 			
 			this.service.save(this.tower);
 			
-			this.tower = new Tower();
-			
-			successMessage("save.success", "Gabinete");			
+			addCallbackParam("saved", true);
 		} catch (ServiceException e) {
 			errorMessage("error.search", e, "Gabinete");
 		} catch (Throwable e) {
 			fatalMessage("fatal.error", e);
 		}
 		
+	}
+	
+	public void clear() {
+		this.tower = new Tower();
 	}
 	
 	public String linkRedirect() {

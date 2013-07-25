@@ -48,6 +48,11 @@ public class VideoCardListBean extends DefaultBean {
 		this.delete(this.service, "delete", 
 				this.videoCardSelected, "Placa de Video", "Invent‡rio");
 	}
+	
+	@Override
+	protected void clear() {
+		
+	}
 
 	public List<VideoCard> getViedoCards() {
 		return viedoCards;

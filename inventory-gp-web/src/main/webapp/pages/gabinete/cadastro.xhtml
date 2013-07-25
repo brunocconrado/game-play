@@ -5,7 +5,8 @@
 	xmlns:p="http://primefaces.org/ui"  
 	template="../../templates/default.xhtml"
 	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:g="http://gameplaycomputadores.com.br/facelets">
 	
 	<ui:define name="script">
 		$(document).ready(function() {  
@@ -59,7 +60,7 @@
 						</h:panelGrid>
 					</h:panelGroup>
 				</p:tab>
-				<p:tab id="tabDescription" title="#{msg.resolve('tab.commercial.desciption')}" disabled="true">
+				<p:tab id="tabDescription" title="#{msg.resolve('tab.commercial.desciption')}">
 					<h:panelGroup id="pgroupDescription">
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 							<h:outputLabel value="#{msg.resolve('label.description')}" for="txaDescription">
@@ -70,7 +71,7 @@
 						</h:panelGrid>
 					</h:panelGroup>					
 				</p:tab>
-				<p:tab id="tabEspecification" title="#{msg.resolve('tab.technical.specification')}" disabled="true">
+				<p:tab id="tabEspecification" title="#{msg.resolve('tab.technical.specification')}" >
 					<h:panelGroup id="pgroupEspecification">
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 							<h:outputLabel value="#{msg.resolve('label.specification')}" for="txaEspecification">
@@ -93,10 +94,18 @@
 					
 					<p:commandButton id="btnSave" 
 								process="@this, tvTower" 
-								update="messages, grlMessages, tvFont" icon="ui-icon ui-icon-disk"
-								value="#{msg.resolve('label.save')}" actionListener="#{towerBean.save}"/>
+								update="messages, grlMessages, tvTower" icon="ui-icon ui-icon-disk"
+								value="#{msg.resolve('label.save')}" actionListener="#{towerBean.save}"
+								oncomplete="saveCompletedHandle(xhr, status, args); setFormatPriceCustom('tvTower\\:txtPrice');"/>
 				</h:panelGroup>
 			</h:panelGrid>
+			
+			<g:confirmation
+				headerMessage="#{msg.resolveMsg('dialog.header.confirmation.saved.tower', towerBean.tower.id)}"
+				confirmationMessage="#{msg.resolve('dialog.message.confirmation.saved.tower')}" 
+				defaultBean="#{towerBean}"
+				updateComponentYes="tvTower, tvTower:pgroupDescription, tvTower:pgroupEspecification"
+				updateComponentNo="tvTower, tvTower:pgroupDescription, tvTower:pgroupEspecification"/>
 			
 		</h:form>
 	</ui:define>

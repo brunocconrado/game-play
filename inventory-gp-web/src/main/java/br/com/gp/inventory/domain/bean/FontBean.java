@@ -10,7 +10,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import br.com.embracon.j4e.services.exception.ServiceException;
-import br.com.gp.inventory.domain.entity.Drive;
 import br.com.gp.inventory.domain.entity.Font;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Potential;
@@ -69,7 +68,7 @@ public class FontBean extends DefaultBean {
 			
 			this.service.save(this.font);
 			
-			successMessage("save.success", "Fonte");			
+			addCallbackParam("saved", true);			
 		} catch (ServiceException e) {
 			errorMessage("error.search", e, "Fonte");
 		} catch (Throwable e) {
