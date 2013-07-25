@@ -8,10 +8,12 @@ import javax.interceptor.Interceptors;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import br.com.embracon.j4e.domain.repository.RepositoryException;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.VideoCard;
@@ -19,6 +21,7 @@ import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.VideoCardRepository;
 import br.com.gp.inventory.domain.service.ManufacturerService;
 import br.com.gp.inventory.domain.service.VideoCardService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 import br.com.gp.inventory.domain.util.StringUtils;
 
 @Component("videoCardService")
@@ -58,7 +61,15 @@ public class VideoCardServiceImpl implements VideoCardService {
 	
 	@Override
 	public void delete(VideoCard videoCard) throws ServiceException {
-		this.repository.delete(videoCard);
+		try {
+			this.repository.delete(videoCard);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		} catch (Exception e) {
+			if(e.getCause() instanceof ConstraintViolationException) {
+				throw new AssociationViolationException(e);
+			}
+		}
 	}
 
 	@Override

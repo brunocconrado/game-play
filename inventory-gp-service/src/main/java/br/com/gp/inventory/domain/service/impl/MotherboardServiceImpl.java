@@ -8,10 +8,12 @@ import javax.interceptor.Interceptors;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import br.com.embracon.j4e.domain.repository.RepositoryException;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Motherboard;
@@ -21,6 +23,7 @@ import br.com.gp.inventory.domain.repository.MotherboardRepository;
 import br.com.gp.inventory.domain.service.ManufacturerService;
 import br.com.gp.inventory.domain.service.MotherboardService;
 import br.com.gp.inventory.domain.service.SocketService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 import br.com.gp.inventory.domain.util.StringUtils;
 
 @Component("motherboardService")
@@ -65,7 +68,15 @@ public class MotherboardServiceImpl implements MotherboardService {
 	
 	@Override
 	public void delete(Motherboard motherboard) throws ServiceException {
-		this.repository.delete(motherboard);
+		try {
+			this.repository.delete(motherboard);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		} catch (Exception e) {
+			if(e.getCause() instanceof ConstraintViolationException) {
+				throw new AssociationViolationException(e);
+			}
+		}
 	}
 
 	@Override

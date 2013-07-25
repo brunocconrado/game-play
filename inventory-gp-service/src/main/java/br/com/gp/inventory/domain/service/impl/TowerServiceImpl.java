@@ -8,10 +8,12 @@ import javax.interceptor.Interceptors;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import br.com.embracon.j4e.domain.repository.RepositoryException;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Manufacturer;
 import br.com.gp.inventory.domain.entity.Tower;
@@ -19,6 +21,7 @@ import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.TowerRepository;
 import br.com.gp.inventory.domain.service.ManufacturerService;
 import br.com.gp.inventory.domain.service.TowerService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 import br.com.gp.inventory.domain.util.StringUtils;
 
 @Component("towerService")
@@ -53,7 +56,15 @@ public class TowerServiceImpl implements TowerService {
 	
 	@Override
 	public void delete(Tower tower) throws ServiceException {
-		this.repository.delete(tower);
+		try {
+			this.repository.delete(tower);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		} catch (Exception e) {
+			if(e.getCause() instanceof ConstraintViolationException) {
+				throw new AssociationViolationException(e);
+			}
+		}
 	}
 
 	@Override

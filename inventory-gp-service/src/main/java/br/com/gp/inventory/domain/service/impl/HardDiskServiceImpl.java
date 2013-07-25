@@ -8,10 +8,12 @@ import javax.interceptor.Interceptors;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import br.com.embracon.j4e.domain.repository.RepositoryException;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.HardDisk;
 import br.com.gp.inventory.domain.entity.Manufacturer;
@@ -19,6 +21,7 @@ import br.com.gp.inventory.domain.enumeration.CategoryEnum;
 import br.com.gp.inventory.domain.repository.HardDiskRepository;
 import br.com.gp.inventory.domain.service.HardDiskService;
 import br.com.gp.inventory.domain.service.ManufacturerService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 import br.com.gp.inventory.domain.util.StringUtils;
 
 @Component("hardDiskService")
@@ -97,7 +100,15 @@ public class HardDiskServiceImpl implements HardDiskService {
 	
 	@Override
 	public void delete(HardDisk hardDisk) throws ServiceException {
-		this.repository.delete(hardDisk);
+		try {
+			this.repository.delete(hardDisk);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		} catch (Exception e) {
+			if(e.getCause() instanceof ConstraintViolationException) {
+				throw new AssociationViolationException(e);
+			}
+		}
 	}
 	
 }

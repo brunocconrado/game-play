@@ -5,6 +5,8 @@ import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 import javax.xml.rpc.ServiceException;
 
+import org.hibernate.exception.ConstraintViolationException;
+
 import br.com.embracon.j4e.logging.Logger;
 import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 
@@ -22,7 +24,7 @@ public class ServiceInteceptor  {
 			Logger.getLogger().error(String.format("Erro ao executar o servico %s no metodo %s", 
 						context.getClass().getName(), context.getMethod().getName()));
 			
-			if(e.getCause() instanceof Exception) {
+			if(e.getCause() instanceof ConstraintViolationException) {
 				//TODO: Mudar o exception que Ž capturado
 				throw new AssociationViolationException(e);
 			}

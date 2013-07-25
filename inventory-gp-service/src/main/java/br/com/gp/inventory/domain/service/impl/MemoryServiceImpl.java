@@ -8,10 +8,12 @@ import javax.interceptor.Interceptors;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+import br.com.embracon.j4e.domain.repository.RepositoryException;
 import br.com.embracon.j4e.services.exception.ServiceException;
 import br.com.gp.inventory.domain.entity.Frequency;
 import br.com.gp.inventory.domain.entity.Manufacturer;
@@ -21,6 +23,7 @@ import br.com.gp.inventory.domain.repository.MemoryRepository;
 import br.com.gp.inventory.domain.service.FrequencyService;
 import br.com.gp.inventory.domain.service.ManufacturerService;
 import br.com.gp.inventory.domain.service.MemoryService;
+import br.com.gp.inventory.domain.service.exception.AssociationViolationException;
 import br.com.gp.inventory.domain.util.StringUtils;
 
 @Component("memoryService")
@@ -38,7 +41,7 @@ public class MemoryServiceImpl implements MemoryService {
 	
 	@Autowired
 	@Qualifier(value = "memoryRepository")
-	private MemoryRepository reposiroty;
+	private MemoryRepository repository;
 	
 	@Autowired
 	@Qualifier(value = "manufacturerService")
@@ -50,24 +53,32 @@ public class MemoryServiceImpl implements MemoryService {
 
 	@Override
 	public Memory save(Memory memory) throws ServiceException {
-		memory = this.reposiroty.save(memory);
+		memory = this.repository.save(memory);
 		memory.setCode(StringUtils.formatString(memory.getId(), 10, "M"));
-		return this.reposiroty.save(memory);
+		return this.repository.save(memory);
 	}
 
 	@Override
 	public List<Memory> findAll() throws ServiceException {
-		return (List<Memory>) this.reposiroty.findAll();
+		return (List<Memory>) this.repository.findAll();
 	}
 	
 	@Override
 	public void delete(Memory memory) throws ServiceException {
-		this.reposiroty.delete(memory);
+		try {
+			this.repository.delete(memory);
+		} catch (RepositoryException e) {
+			throw new ServiceException(e);
+		} catch (Exception e) {
+			if(e.getCause() instanceof ConstraintViolationException) {
+				throw new AssociationViolationException(e);
+			}
+		}
 	}
 
 	@Override
 	public Memory findById(Long id) throws ServiceException {
-		return this.reposiroty.findByIdentity(id);
+		return this.repository.findByIdentity(id);
 	}
 	
 	@Override
