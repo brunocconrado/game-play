@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"   
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:component="http://java.sun.com/jsf/composite">
+    <h:body>
+    		
+    		<component:attribute name="defaultBean" type="br.com.gp.inventory.domain.bean.DefaultBean" required="true"/>
+    
+	       <ui:composition>
+				<p:confirmDialog widgetVar="cfmNewRegister" id="cfmNewRegisterID" message="#{confirmationMessage}" header="#{headerMessage}" severity="alert" >
+			          <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
+			          
+			              <p:commandButton id="btnYes" value="#{msg.resolve('label.yes')}" onclick="cfmNewRegister.hide()" 
+			              		actionListener="#{defaultBean.clear()}" update="#{updateComponentYes}" process="@this"/>
+			              		
+			              <p:commandButton id="btnNo" value="#{msg.resolve('label.no')}" oncomplete="cfmNewRegister.hide()" update="#{updateComponentNo}"/>
+			              
+			          </h:panelGrid>
+			      </p:confirmDialog>
+			</ui:composition>
+	</h:body>
+</html>
