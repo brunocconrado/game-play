@@ -267,6 +267,20 @@ public class Inventory implements br.com.embracon.j4e.domain.Entity {
 		return 	this.id != null && this.id.equals(other.id);
 	}
 
+	public String getHtmlText() {
+		return new StringBuilder()
+			.append(this.getProcessor().htmlText())
+			.append(this.getMotherboard().htmlText())
+			.append(this.getMemory().htmlText())
+			.append(this.getHardDisk().htmlText())
+			.append(this.getSsd().htmlText())
+			.append(this.getVideoCard().htmlText())
+			.append(this.getDrive().htmlText())
+			.append(this.getFont().htmlText())
+			.append(this.getTower().htmlText())
+			.toString();
+	}
+	
 	public int hashCode() {
 		return this.id != null ? this.id.hashCode() : 0;
 	}

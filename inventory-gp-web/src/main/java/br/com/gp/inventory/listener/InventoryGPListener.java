@@ -23,7 +23,7 @@ import br.com.gp.inventory.utils.TeamPositionProperties;
  * Web application lifecycle listener.
  * @author bruno.conrado
  */
-public class TeamPositionListener implements ServletContextListener {
+public class InventoryGPListener implements ServletContextListener {
 
 	ServletContext ctx;
 
@@ -56,7 +56,7 @@ public class TeamPositionListener implements ServletContextListener {
 
 			Logger.getLogger().info("Location is:" + ctx.getRealPath("/"));
 			Logger.getLogger().info("Log can be found at " + Messages.getMessage("system.loggingPath"));
-			Logger.getLogger().info("Archive started");
+			Logger.getLogger().info("inventory-gp started");
 
 		} catch (Exception e) {
 			Logger.getLogger().fatal("Error to trying system initialize.", e);

@@ -43,7 +43,7 @@
 
 	<listener>
 		<description>ServletContextListener</description>
-		<listener-class>br.com.gp.inventory.listener.TeamPositionListener</listener-class>
+		<listener-class>br.com.gp.inventory.listener.InventoryGPListener</listener-class>
 	</listener>
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>

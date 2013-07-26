@@ -11,16 +11,18 @@
 		<h:form prependId="false">
 			  		
 			<p:tabView id="tvInventoryList" style="height: 400px;"> 
-				<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
-				<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
 				
 				<p:tab id="tabInventoryList" title="#{msg.resolve('tab.inventory.list')}">
+					<p:growl id="glMessages" showDetail="false" autoUpdate="true" closable="true"/>
+					<p:messages id="messages" showDetail="false" autoUpdate="true" closable="true" />
+					
+					
 					<p:spacer width="20" height="15"/>
 				
 					<h:panelGroup id="pgroupInventorySearch"> 
 						<h:panelGrid columns="2" cellpadding="5" cellspacing="5">
 								<h:outputLabel value="#{msg.resolve('label.name')}" for="txtName"/>
-								<p:inputText id="txtName" value="" size="40"/>
+								<p:inputText id="txtName" size="40"/>
 						</h:panelGrid>
 						<h:panelGrid columns="7" cellpadding="3" cellspacing="5">
 				 				<h:outputLabel value="#{msg.resolve('label.start')}" for="txtStart">
@@ -45,15 +47,14 @@
 						<p:spacer width="20" height="20"/>
 						
 						<h:panelGrid style="position: relative; right: 2%; left:87%;" columns="1" cellspacing="2">
-							<p:commandLink title="#{msg.resolve('label.search')}" process="@this"
-											actionListener="#{inventoryListBean.exportHtml()}" >
-										<h:graphicImage name="busca.png" library="images"/>
+							<p:commandLink title="#{msg.resolve('label.report')}" process="@this"
+											actionListener="#{inventoryListBean.exportHtml()}" update="messages, tvInventoryList:glMessages">
+										<h:graphicImage name="download.png" library="images"/>
 							</p:commandLink>
 						</h:panelGrid>
 								
 						<p:dataTable widgetVar="dgInventories" id="dgInventories" selection="#{inventoryListBean.inventoryReport}" rowKey="#{inventory.code}" 
 								selectionMode="single" style="width: 90%;" var="inventory" value="#{inventoryListBean.inventories}" 
-								
 								emptyMessage="#{msg.resolve('data.table.empty')}"  rows="5" paginator="true" paginatorAlwaysVisible="false"
 								paginatorTemplate="{FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}" paginatorPosition="bottom">
 						
@@ -89,15 +90,18 @@
 								
 								<p:spacer width="3" height="2"/> 
 					        
-					            <p:commandLink title="#{msg.resolve('label.report')}"  actionListener="#{inventoryListBean.createHtmlText()}" 
-					            		oncomplete="preparedHtmlCompleteHandle(xhr, status, args);" >
+					            <p:commandLink id="lnkReport" title="#{msg.resolve('label.report')}"  actionListener="#{inventoryListBean.createHtmlText()}" 
+					            		oncomplete="preparedHtmlCompleteHandle(xhr, status, args)" ajax="true" process="@this">
 									<h:graphicImage name="versao.png" library="images"/>
 									<f:setPropertyActionListener target="#{inventoryListBean.inventorySelected}" value="#{inventory}"/>
 								</p:commandLink>
+								 <p:overlayPanel id="chartPanel" for="lnkReport" hideEffect="fade">
+								 	<p:inputTextarea value="#{inventory.htmlText}" cols="80" rows="30" autoResize="false"/> 
+							     </p:overlayPanel>  
 					        </p:column>  
 						</p:dataTable> 
 						
-						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.inventory')}" 
+						<p:confirmDialog widgetVar="cdlgDeleteConfirm" message="#{msg.resolve('dialog.message.remove.inventory')}"  
 									header="#{msg.resolve('dialog.header.remove.inventory')}" severity="alert">
 			                <h:panelGrid style="position: relative; right: 2%; left:62%;" columns="2" cellspacing="2">
 			                
@@ -110,11 +114,12 @@
 			            </p:confirmDialog>
 					</h:panelGroup>
 					
-					<p:dialog id="dlReportId" widgetVar="dlReport" modal="true" height="500" width="600" draggable="false">  
-					   	<h:panelGroup>
-							<p:outputPanel columns="1" cellpadding="5" cellspacing="5" id="pgReport" >
+					<p:dialog id="dlReportId" widgetVar="dlReport" modal="true" height="500" width="600" draggable="false" appendToBody="true">  
+						<p:ajax process="@this" update="tvInventoryList:pgReport" listener="#{inventoryListBean.createHtmlText()}"/>
+					   	<h:panelGroup id="pgReport">
+							<p:outputPanel columns="1" cellpadding="5" cellspacing="5">
 								<h:outputText value="#{inventoryListBean.textHtml}" />
-								<h:outputLabel value="#{inventoryListBean.inventoryReport.id}" />
+								<h:outputLabel value="#{inventoryListBean.inventoryReport.code}" />
 							</p:outputPanel>
 						</h:panelGroup>
 					</p:dialog>
@@ -126,8 +131,10 @@
 	
 	 <ui:define name="script">       
         function preparedHtmlCompleteHandle(xhr, status, args) {     
+        console.log(args);
 	        if(args.isOpenReport) {
-	        	dlReport.show();
+	        	console.log("pronto!!");
+	        	//dlReport.show();
 	        }
         }
     </ui:define>
